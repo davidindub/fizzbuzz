@@ -1,108 +1,140 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
 
-Welcome USER_NAME,
+# FizzBuzz
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+[Link to Live Site](https://www.davidindub.com/fizzbuzz)
 
-You can safely delete this README.md file, or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **September 1, 2021**
 
-## Gitpod Reminders
+## Introduction
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
+- [Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz) is a word game for children to teach them about division.
+- It is also a common challenge for beginner computer programmers to write a program that will output the correct sequence according to the rules.
+- The project is a version of game that can be played in the browser.
 
-`python3 -m http.server`
+## Rules
 
-A blue button should appear to click: _Make Public_,
+- The user counts upwards from 1.
+- If the number is divisible by **3** they must select **"Fizz"**
+- If the number is divisible by **5** they must select **"Buzz"**
+- If the number is divisible by **15** they must select **"FizzBuzz"**
 
-Another blue button should appear to click: _Open Browser_.
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+## User Stories
 
-A blue button should appear to click: _Make Public_,
+- As a parent, I want a simple friendly game so my child can practice division.
+- As a maths enthusiast, I want a more difficult game to challenge myself.
 
-Another blue button should appear to click: _Open Browser_.
+## UX  
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
+ As I sketched out my wireframes, I liked the idea of the game having a hand drawn look with bold lines and soft colours.
 
-To log into the Heroku toolbelt CLI:
+### Colour Scheme
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+ 
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you so do not share it. If you accidentally make it public then you can create a new one with _Regenerate API Key_.
+### Typography
 
-------
 
-## Release History
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+### Wireframes
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+  I sketched my wireframes on paper and on an iPad using Concepts as I had recently completed the Udemy course [Sketching for UX Designers](https://www.udemy.com/share/101Zi03@dvXU0Ao_hYLw14VYm-w9uAFuMOpq-Xw2zw-m4U8GxK5v_ac9Qo-mX_OvZVINv60EgQ==/)
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+## Features 
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Existing Features
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+- __Navigation Bar__
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
+  - Preferences 
+  - Statistics
+  - How to Play
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
+***
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+__Game Area__
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+***
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+__Footer__ 
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
+***
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+__Favicon__
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
 
-------
+  - A favicon and icon for iOS/Android home screen bookmarks is included with the project's logo.
 
-## FAQ about the uptime script
+__Meta Data for Social Media__
 
-**Why have you added this script?**
+  - Metadata was included in the `<head>` of each page to include a thumbnail of the site when shared on social media, and improve SEO.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+***
 
-**How will this affect me?**
+### Features Left to Implement
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
+## Technologies Used
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
+- [HTML](https://en.wikipedia.org/wiki/HTML) for the content of the pages, which are all static .html files. I used semantic elements where available to help assistive technologies and improve SEO.
+- [CSS](https://en.wikipedia.org/wiki/CSS) for styling the pages and creating the responsive design.
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+  - __CSS Variables__ were used to store the color pallete and fonts used, and then referenced in the styles. This improved readability and could be useful in future for changing colors, for example building a dark mode.
 
-**So….?**
+- [Git](https://git-scm.com/) for version control.
+- [GitHub](https://github.com/) for storing the repository online during development.
+- [GitPod](https://gitpod.io/) as a cloud based IDE.
+- [Font Awesome](https://fontawesome.com/) for icons used in the project.
+- [Google Fonts](https://fonts.google.com/) for the two fonts used on the project.
+- [Eagle](https://en.eagle.cool/) for organising my images locally.
+- [Pixelmator Pro](https://www.pixelmator.com/pro/) for resizing and converting images.
+- [favicon.io](https://favicon.io/favicon-generator/) to make a favicon for site.
+- [Meta Tags](https://metatags.io/) to prepare the Meta tags for social media share previews.
+- [Polypane](https://polypane.app/) for testing responsiveness on different viewports at the same time.
+- [Google Chrome](https://www.google.com/intl/en_ie/chrome/), [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/) and [Safari](https://www.apple.com/safari/) for testing on macOS Monterey, Windows 10, iOS 15, iPadOS 15 and Android 10.
+- [ColorSlurp](https://colorslurp.com/) for picking my color palette and testing for perfect accessibility.
+- [Concepts](https://concepts.app/en/) for sketching on an iPad.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
 
-**Can I opt out?**
+## Testing 
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+## Deployment
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+The site was deployed to GitHub pages. The steps to deploy are as follows: 
+  - In the [GitHub repository](https://github.com/davidindub/fizzbuzz), navigate to the Settings tab 
+  - From the source section drop-down menu, select the **Main** Branch, then click "Save".
+  - The page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment.
 
-**Anything more?**
+The live link can be found [here](https://www.davidindub.com/fizzbuzz)
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+### Local Deployment
+The steps to deploy are as follows: 
+  - In the GitHub repository, navigate to the Settings tab 
+  - From the source section drop-down menu, select Main Branch
+  - Once the main branch has been selected, the page will be automatically refreshed with a detailed ribbon display to indicate the successful deployment. 
 
----
+In order to make a local copy of this project, you can clone it. In your IDE Terminal, type the following command to clone my repository:
 
-Happy coding!
+- `git clone https://github.com/davidindub/fizzbuzz.git`
+
+Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/davidindub/fizzbuzz)
+
+
+## Credits 
+
+### Content 
+
+- [Wikipedia](https://en.wikipedia.org/wiki/Fizz_buzz) for the entry on the rules of Fizz Buzz.
+- I used [Dribble](https://dribbble.com/) to research designs to pick my color palette.
+- I used the [MDN Web Docs](https://developer.mozilla.org/en-US/) for help with data attributes in HTML.
+- I read [W3 Schools](https://www.w3schools.com/) for information on semantic HTML and Accessibility guidelines. 
+
+### Media
+
+
+### Acknowledgements
+
+- Thank you to my CI Mentor [Tim Nelson](https://github.com/TravelTimN) for his help and suggestions.
+- Thanks to my partner David for his constant support on my journey to a new career.
