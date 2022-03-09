@@ -1,0 +1,54 @@
+/* Resets some of the user stylesheet default rules */
+html {
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    text-align: center;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body,
+header,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+    margin: 0;
+}
+
+/* Global Element Styles */
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select,
+time {
+    font: inherit;
+}
+
+#countdown-timer {
+    font-size: 5rem;
+}
+
+.btn-game {
+    background-color: lightgreen;
+    height: 20vw;
+    width: 20vw;
+    font-size: 2rem;
+}
