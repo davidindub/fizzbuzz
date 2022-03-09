@@ -15,13 +15,24 @@ function checkNumber(num) {
     else return num;
 }
 
+/** Handles a game over */
 function handleGameOver() {
     gameOver = true;
     alert(`Game over! You counted to ${currentNum}`);
+
+    // Pop up Modal with score/highscore
+
+    handleGameReset();
+}
+
+/** Resets the game */
+function handleGameReset(){
+    gameOver = false;
     currentNum = 1;
     updateNumBtn()
 }
 
+/** Updates the number on the button */
 function updateNumBtn() {
     btnNum.innerText = currentNum;
 }
@@ -64,8 +75,7 @@ function handleKeyPress(event) {
 
 /** Handles game input */
 function handleInput(input) {
-    console.log(`Input was ${input}`);
-    console.log(`checking ${input} against ${checkNumber(currentNum)}`)
+    console.log(`checking input ${input} against answer ${checkNumber(currentNum)}`)
 
     if (input === checkNumber(currentNum)) {
         currentNum += 1;
