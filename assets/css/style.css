@@ -1,8 +1,17 @@
+:root {
+    --color-one: rgba(249, 140, 141, 1);
+    --color-two: rgba(80, 192, 233, 1);
+    --color-three: rgba(249, 217, 102, 1);
+    --color-four: rgba(73, 176, 170, 1);
+    --color-black: rgba(0, 0, 0, 1);
+}
+
 /* Resets some of the user stylesheet default rules */
 html {
     box-sizing: border-box;
     scroll-behavior: smooth;
     text-align: center;
+    font-family: sans-serif;
 }
 
 *,
@@ -51,4 +60,23 @@ time {
     height: 20vw;
     width: 20vw;
     font-size: 2rem;
+    border-radius: 10%;
+    border: var(--color-black) solid 2px;
+}
+
+.btn-game[data-game-btn="number"] {
+    font-size: 6rem;
+    background-color: var(--color-one)
+}
+
+.btn-game[data-game-btn="fizz"] {
+    background-color: var(--color-two);
+}
+
+.btn-game[data-game-btn="buzz"] {
+    background-color: var(--color-three);
+}
+
+.btn-game[data-game-btn="fizzbuzz"] {
+    background-color: var(--color-four);
 }
