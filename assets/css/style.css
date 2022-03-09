@@ -1,9 +1,10 @@
 :root {
-    --color-one: rgba(249, 140, 141, 1);
-    --color-two: rgba(80, 192, 233, 1);
-    --color-three: rgba(249, 217, 102, 1);
-    --color-four: rgba(73, 176, 170, 1);
-    --color-black: rgba(0, 0, 0, 1);
+    --color-background: rgba(215, 237, 236, 1);
+    --color-one: rgba(249, 140, 141, 0.8);
+    --color-two: rgba(80, 192, 233, 0.8);
+    --color-three: rgba(249, 217, 102, 0.8);
+    --color-four: rgba(73, 176, 170, 0.8);
+    --color-black: rgba(0, 0, 0, 0.8);
 }
 
 /* Resets some of the user stylesheet default rules */
@@ -12,6 +13,7 @@ html {
     scroll-behavior: smooth;
     text-align: center;
     font-family: sans-serif;
+    background-color: var(--color-background);
 }
 
 *,
@@ -46,27 +48,32 @@ img {
 input,
 button,
 textarea,
-select,
-time {
+select {
     font: inherit;
 }
 
+h1 {
+    font-family: 'Bungee', cursive;
+    font-size: 3rem;
+}
+
 #countdown-timer {
-    font-size: 5rem;
+    font-size: 3rem;
 }
 
 .btn-game {
-    background-color: lightgreen;
-    height: 20vw;
-    width: 20vw;
+    font-family: 'Bungee', cursive;
+    height: 150px;
+    width: 150px;
     font-size: 2rem;
-    border-radius: 10%;
-    border: var(--color-black) solid 2px;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border: var(--color-black) solid 5px;
+    margin: 10px;
 }
 
 .btn-game[data-game-btn="number"] {
     font-size: 6rem;
-    background-color: var(--color-one)
+    background-color: var(--color-one);
 }
 
 .btn-game[data-game-btn="fizz"] {

@@ -10,13 +10,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bungee&display=swap" rel="stylesheet">
 
     <title>Fizz Buzz</title>
 </head>
 
 <body>
 
-    <h1>FizzBuzz Game</h1>
+    <h1>FizzBuzz</h1>
     <nav>
         <ul>
             <li><a href="#preferences">Preferences</a></li>
@@ -31,11 +34,12 @@
         </ul>
     </nav>
 
+    <!-- A time limit countdown on making a selection, maybe 5 seconds -->
+    <!-- Animate timer with CSS -->
+    <div id="countdown-timer">Timer</div>
+    <br><br>
+
     <main>
-        <!-- A time limit countdown on making a selection, maybe 5 seconds -->
-        <!-- Animate timer with CSS -->
-        <span id="countdown-timer">5</span>
-        <hr>
 
         <!-- Buttons to play the game with, can be clicked/tapped or use arrow keys -->
         <button class="btn-game" id="btn-num" data-game-btn="number">1</button>
@@ -43,7 +47,7 @@
         <button class="btn-game" data-game-btn="fizz">Fizz</button>
         <button class="btn-game" data-game-btn="buzz">Buzz</button>
         <br>
-        <button class="btn-game" data-game-btn="fizzbuzz">FizzBuzz</button>
+        <button class="btn-game" data-game-btn="fizzbuzz">Fizz<br>Buzz</button>
 
     </main>
 
