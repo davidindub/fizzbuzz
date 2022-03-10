@@ -22,14 +22,14 @@
     <h1>FizzBuzz</h1>
     <nav>
         <ul>
-            <li><a href="#preferences">Preferences</a></li>
+            <li><a href="#preferences" id="linkPreferences">Preferences</a></li>
             <!-- A hard mode with random numbers? -->
             <!-- Option to turn off Timer? -->
             <!-- Dark Mode? -->
             <!-- High Contrast Mode? -->
-            <li><a href="#stats">Statistics</a></li>
+            <li><a href="#stats" id="linkStats" >Statistics</a></li>
             <!-- High Scores, separate list for hard mode if implemented -->
-            <li><a href="#help">How To Play</a></li>
+            <li><a href="#howtoplay" id="linkHowToPlay" >How To Play</a></li>
             <!-- Rules of FizzBuzz -->
         </ul>
     </nav>
@@ -52,9 +52,19 @@
 
     </main>
 
+    <!-- A Preferences Modal -->
+    <!-- A statistics modal -->
 
     <!-- A modal to appear on first visit explaining the rules of FizzBuzz -->
+    <div id="modalHowToPlay" class="modal">
 
+        <!-- Modal content -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>How to Play</h2>
+            <p>Rules of how to play go here</p>
+        </div>
+    </div>
 
     <script src="assets/js/script.js"></script>
 
