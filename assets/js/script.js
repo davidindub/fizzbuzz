@@ -4,6 +4,7 @@ let gameOver = false;
 const btnNum = document.getElementById("btn-num");
 let currentNum = 1;
 btnNum.innerText = currentNum;
+const lastAnswerDisplay = document.getElementById("lastAnswerDisplay");
 
 /** Checks whether a number is a fizz, buzz, or fizzbuzz, otherwise returns the number */
 function checkNumber(num) {
@@ -107,30 +108,37 @@ document.addEventListener("keydown", handleKeyPress);
 // Modals
 
 // Get the modal
+const navItems = document.getElementsByClassName("nav-item");
 const modalHowToPlay = document.getElementById("modalHowToPlay");
-
-// Get the button that opens the modal
-const linkHowToPlay = document.getElementById("linkHowToPlay");
+const modals = document.getElementsByClassName("modal");
 
 // Get the <span> element that closes the modal
-let closeSpan = document.getElementsByClassName("close")[0];
+let closeSpans = document.getElementsByClassName("close");
 
-// When the user clicks on the button, open the modal
-linkHowToPlay.addEventListener("click", () => {
-    modalHowToPlay.style.display = "block";
-})
+for (let navItem of navItems) {
+    navItem.addEventListener("click", launchModal)
+}
 
-// const navItems = document.getElementsByTagName("nav")
-// console.log(navItems);
+function launchModal() {
+    let linkClicked = this.dataset.link;
+    modals[this.dataset.link].style.display = "block";
+
+}
 
 // When the user clicks on <span> (x), close the modal
-closeSpan.onclick = function () {
-    modalHowToPlay.style.display = "none";
+for (let closeSpan of closeSpans) {
+    closeSpan.addEventListener("click", () => {
+        for (let modal of modals) {
+            modal.style.display = "none";
+        }
+    })
 }
 
 // When the user clicks anywhere outside of the modal, close it
 window.addEventListener("click", (e) => {
-    if (e.target == modalHowToPlay) {
-        modalHowToPlay.style.display = "none";
+    if (e.target.classList[0] === "modal") {
+        for (let modal of modals) {
+            modal.style.display = "none";
+        }
     }
-}) 
+})
