@@ -1,5 +1,6 @@
 :root {
     --color-background: rgba(215, 237, 236, 1);
+    --color-header: rgba(254, 254, 254, 0.8);
     --color-one: rgba(249, 140, 141, 0.8);
     --color-two: rgba(80, 192, 233, 0.8);
     --color-three: rgba(249, 217, 102, 0.8);
@@ -52,17 +53,29 @@ select {
     font: inherit;
 }
 
+header {
+    background-color: var(--color-header);
+    margin-bottom: 0.5rem;
+    border-bottom: var(--color-black) solid 5px;
+}
+
 h1 {
     font-family: 'Bungee', cursive;
-    font-size: 3rem;
+    font-size: 2rem;
 }
 
 #countdown-timer {
     font-size: 3rem;
 }
 
-#lastAnswerCorrect {
-    font-size: 4rem;
+#lastAnswerDisplay {
+    font-size: 1rem;
+    background-color: #fefefe;
+    padding: 1rem;
+    margin: 1rem;
+    display: inline-block;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border: var(--color-black) solid 5px;
 }
 
 .btn-game {

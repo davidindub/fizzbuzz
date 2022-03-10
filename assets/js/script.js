@@ -16,7 +16,6 @@ function checkNumber(num) {
     if (typeof num != "number") return TypeError("Expects a number");
 
     num = parseInt(num);
-
     if (num % 15 === 0) return "fizzbuzz";
     if (num % 5 === 0) return "buzz";
     if (num % 3 === 0) return "fizz";
@@ -26,9 +25,11 @@ function checkNumber(num) {
 /** Handles a game over */
 function handleGameOver() {
     gameState.gameOver = true;
-    lastAnswerDisplay.innerHTML = "🚫";;
+    lastAnswerDisplay.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
+    lastAnswerDisplay.style.backgroundColor = "rgba(249, 140, 141, 1)";
 
-    // Pop up Modal with score/highscore
+    // Stats modal appears after 2 seconds
+    setTimeout(() => {modals[1].style.display = "block";}, 2000)
 
     handleGameReset();
 }
@@ -37,6 +38,7 @@ function handleGameOver() {
 function handleGameReset() {
     gameState.gameOver = false;
     gameState.currentNum = 1;
+    gameState.currentScore = 0;
     updateNumBtn()
 }
 
@@ -71,7 +73,7 @@ function handleKeyPress(event) {
             handleInput("buzz");
             break;
         case "ArrowUp":
-            handleInput(currentNum);
+            handleInput(gameState.currentNum);
             break;
         case "ArrowDown":
             handleInput("fizzbuzz");
@@ -94,6 +96,7 @@ function handleInput(input) {
 
     if (isInputCorrect(input)) {
         gameState.currentNum += 1;
+        gameState.currentScore += 1;
         updateNumBtn()
         lastAnswerDisplay.innerHTML = "👍";
     } else handleGameOver();

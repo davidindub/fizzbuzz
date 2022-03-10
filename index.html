@@ -19,7 +19,9 @@
 
 <body>
 
-    <h1>FizzBuzz</h1>
+    <header>
+        <h1>FizzBuzz</h1>
+    </header>
     <nav>
         <ul>
             <li><a href="#preferences" data-link="0" class="nav-item">Preferences</a></li>
@@ -38,6 +40,7 @@
     <!-- Animate timer with CSS -->
     <div id="countdown-timer">Timer</div>
     <br><br>
+    <span id="lastAnswerDisplay">Select an option to start the game...</span>
 
     <main>
 
@@ -45,7 +48,6 @@
         <button class="btn-game" id="btn-num" data-game-btn="number">1</button>
         <br>
         <button class="btn-game" data-game-btn="fizz">Fizz</button>
-        <span id="lastAnswerDisplay"></span>
         <button class="btn-game" data-game-btn="buzz">Buzz</button>
         <br>
         <button class="btn-game" data-game-btn="fizzbuzz">Fizz<br>Buzz</button>
@@ -53,7 +55,7 @@
     </main>
 
     <!-- A Preferences Modal -->
-    <div id="modalHowToPlay" class="modal">
+    <div class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Preferences</h2>
@@ -61,15 +63,16 @@
         </div>
     </div>
     <!-- A statistics modal -->
-    <div id="modalHowToPlay" class="modal">
+    <div class="modal">
         <div class="modal-content">
             <span class="close">&times;</span>
             <h2>Statistics</h2>
             <p>stats go here</p>
+            <!-- Games Played, High Score, Hard Mode High Score, Share Button -->
         </div>
     </div>
     <!-- A modal to appear on first visit explaining the rules of FizzBuzz -->
-    <div id="modalHowToPlay" class="modal">
+    <div class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">

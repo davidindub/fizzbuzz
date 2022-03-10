@@ -26,6 +26,10 @@
 
 - As a parent, I want a simple friendly game so my child can practice division.
 - As a maths enthusiast, I want a more difficult game to challenge myself.
+- I want to be able to share my high score with a friend
+- I want to be able to play the game with my keyboard instead of clicking
+- As I use dark mode user, I want the game to recognise my preference.
+- As I have visual difficulties, I would like a high contrast mode.
 
 ## UX  
 
