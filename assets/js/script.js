@@ -1,10 +1,15 @@
 /* jshint esversion: 8 */
 
-let gameOver = false;
 const btnNum = document.getElementById("btn-num");
-let currentNum = 1;
-btnNum.innerText = currentNum;
 const lastAnswerDisplay = document.getElementById("lastAnswerDisplay");
+
+const gameState = {
+    gameOver: false,
+    currentScore: 0,
+    currentNum: 1,
+}
+
+btnNum.innerText = gameState.currentNum;
 
 /** Checks whether a number is a fizz, buzz, or fizzbuzz, otherwise returns the number */
 function checkNumber(num) {
@@ -20,8 +25,8 @@ function checkNumber(num) {
 
 /** Handles a game over */
 function handleGameOver() {
-    gameOver = true;
-    alert(`Game over! You counted to ${currentNum}`);
+    gameState.gameOver = true;
+    lastAnswerDisplay.innerHTML = "🚫";;
 
     // Pop up Modal with score/highscore
 
@@ -30,14 +35,14 @@ function handleGameOver() {
 
 /** Resets the game */
 function handleGameReset() {
-    gameOver = false;
-    currentNum = 1;
+    gameState.gameOver = false;
+    gameState.currentNum = 1;
     updateNumBtn()
 }
 
 /** Updates the number on the button */
 function updateNumBtn() {
-    btnNum.innerText = currentNum;
+    btnNum.innerText = gameState.currentNum;
 }
 
 // Tests
@@ -50,7 +55,7 @@ function updateNumBtn() {
 /** Handles clicks on the game buttons */
 function handleClick() {
     if (this.dataset.gameBtn === "number") {
-        handleInput(currentNum);
+        handleInput(gameState.currentNum);
     } else {
         handleInput(this.dataset.gameBtn);
     }
@@ -78,23 +83,21 @@ function handleKeyPress(event) {
 
 /** Checks if the input matches the expected result */
 function isInputCorrect(input) {
-    if (input === checkNumber(currentNum)) {
+    if (input === checkNumber(gameState.currentNum)) {
         return true;
     } else return false;
 }
 
 /** Handles game input */
 function handleInput(input) {
-    console.log(`checking input ${input} against answer ${checkNumber(currentNum)}`)
+    console.log(`checking input ${input} against answer ${checkNumber(gameState.currentNum)}`)
 
     if (isInputCorrect(input)) {
-        currentNum += 1;
+        gameState.currentNum += 1;
         updateNumBtn()
         lastAnswerDisplay.innerHTML = "👍";
     } else handleGameOver();
 }
-
-
 
 /** Add click event listeners for game buttons and key presses */
 const gameButtons = document.getElementsByClassName("btn-game");
@@ -109,11 +112,8 @@ document.addEventListener("keydown", handleKeyPress);
 
 // Get the modal
 const navItems = document.getElementsByClassName("nav-item");
-const modalHowToPlay = document.getElementById("modalHowToPlay");
 const modals = document.getElementsByClassName("modal");
-
-// Get the <span> element that closes the modal
-let closeSpans = document.getElementsByClassName("close");
+const closeSpans = document.getElementsByClassName("close");
 
 for (let navItem of navItems) {
     navItem.addEventListener("click", launchModal)
@@ -122,7 +122,6 @@ for (let navItem of navItems) {
 function launchModal() {
     let linkClicked = this.dataset.link;
     modals[this.dataset.link].style.display = "block";
-
 }
 
 // When the user clicks on <span> (x), close the modal
@@ -134,11 +133,11 @@ for (let closeSpan of closeSpans) {
     })
 }
 
-// When the user clicks anywhere outside of the modal, close it
-window.addEventListener("click", (e) => {
-    if (e.target.classList[0] === "modal") {
-        for (let modal of modals) {
+// Close modal when the user clicks anywhere outside of the modal
+for (let modal of modals) {
+    modal.addEventListener("click", (e) => {
+        if (e.target.classList.contains("modal")) {
             modal.style.display = "none";
         }
-    }
-})
+    })
+}
