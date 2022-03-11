@@ -49,15 +49,32 @@ img {
 input,
 button,
 textarea,
-select {
+select,
+nav a {
     font: inherit;
+    color: inherit;
+    text-decoration: none;
 }
 
 header {
     background-color: var(--color-header);
     margin-bottom: 0.5rem;
     border-bottom: var(--color-black) solid 5px;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
 }
+
+nav {
+    display: flex;
+    align-items: center;
+}
+
+nav ul li {
+    display: inline;
+    list-style: none;
+}
+
 
 h1 {
     font-family: 'Bungee', cursive;
@@ -85,7 +102,7 @@ h1 {
     font-size: 2rem;
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     border: var(--color-black) solid 5px;
-    margin: 10px;
+    margin: 3px;
 }
 
 .btn-game[data-game-btn="number"] {
