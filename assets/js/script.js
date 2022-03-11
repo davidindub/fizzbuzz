@@ -2,6 +2,7 @@
 
 const btnNum = document.getElementById("btn-num");
 const lastAnswerDisplay = document.getElementById("lastAnswerDisplay");
+const highScoreDisplay = document.getElementById("high-score-display");
 
 const gameState = {
     gameOver: false,
@@ -28,10 +29,40 @@ function handleGameOver() {
     lastAnswerDisplay.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
     lastAnswerDisplay.style.backgroundColor = "rgba(249, 140, 141, 1)";
 
-    // Stats modal appears after 2 seconds
-    setTimeout(() => {modals[1].style.display = "block";}, 2000)
+    logHighScore();
+
+    // Stats modal appears after 3 seconds
+    setTimeout(() => {modals[1].style.display = "block";}, 3000)
 
     handleGameReset();
+}
+
+//** Logs High Score */
+function logHighScore() {
+
+    // let today = new Date();
+    let finalScore = gameState.currentScore
+    let savedHighScore = window.localStorage.getItem("highscore");
+
+    // const scoreTableEntry = {
+    //     score: gameState.currentScore,
+    //     dateRecorded: {
+    //         date: today.getDate(),
+    //         month: today.getMonth(),
+    //         year: today.getFullYear()
+    //     }
+    // }
+
+    // window.localStorage.setItem("highscore", JSON.stringify(scoreTableEntry));
+
+    // JSON.parse(window.localStorage.getItem("highscore"))
+
+    if (finalScore > savedHighScore) {
+        savedHighScore = gameState.currentScore;
+    }
+
+    highScoreDisplay.innerHTML = savedHighScore;
+
 }
 
 /** Resets the game */

@@ -171,3 +171,9 @@ h1 {
     text-decoration: none;
     cursor: pointer;
 }
+
+#help-controls {
+    list-style: none;
+    text-align: left;
+}
+
