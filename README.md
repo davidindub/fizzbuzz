@@ -92,7 +92,7 @@ __Meta Data for Social Media__
 - [Git](https://git-scm.com/) for version control.
 - [GitHub](https://github.com/) for storing the repository online during development.
 - [GitPod](https://gitpod.io/) as a cloud based IDE.
-- [Font Awesome](https://fontawesome.com/) for icons used in the project.
+- [Bootstrap Icons](https://icons.getbootstrap.com/) for icons used in the project.
 - [Google Fonts](https://fonts.google.com/) for the two fonts used on the project.
 - [Eagle](https://en.eagle.cool/) for organising my images locally.
 - [Pixelmator Pro](https://www.pixelmator.com/pro/) for resizing and converting images.
