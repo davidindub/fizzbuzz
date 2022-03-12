@@ -173,9 +173,15 @@ for (let navItem of navItems) {
     navItem.addEventListener("click", launchModal)
 }
 
+/** Launch a modal */
 function launchModal() {
     let linkClicked = this.dataset.link;
     modals[this.dataset.link].style.display = "block";
+}
+
+/** Check if user is a first time visitor, if so show rules */
+if (localStorage.length === 0) {
+    modals[2].style.display = "block";
 }
 
 // When the user clicks on <span> (x), close the modal

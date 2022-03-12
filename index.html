@@ -34,7 +34,7 @@
                         </svg>
                     </a>
                 </li>
-    
+
                 <!-- Statistics Link -->
                 <li>
                     <a href="#stats" aria-label="Statistics" data-link="1" class="nav-item">
@@ -83,7 +83,6 @@
         <div class="modal-content">
             <span class="close" aria-label="Close Preferences.">&times;</span>
             <h2>Preferences</h2>
-            <p>Settings and preferences</p>
             <label for="hard-mode">Hard Mode</label>
             <input type="checkbox" name="hard-mode" id="hard-mode">
             <!-- Option to turn off Timer? -->
@@ -96,9 +95,11 @@
         <div class="modal-content">
             <span class="close" aria-label="Close Statistics.">&times;</span>
             <h2>Statistics</h2>
-            <p>High Score is: <span id="high-score-display"></span> set on <span id="high-score-date-display"></span></p>
+            <p>High Score is: <span id="high-score-display"></span> set on <span id="high-score-date-display"></span>
+            </p>
             <hr>
-            <p>Hard Mode High Score is: <span id="high-score-hard-display"></span> set on <span id="high-score-hard-date-display"></span></p>
+            <p>Hard Mode High Score is: <span id="high-score-hard-display"></span> set on <span
+                    id="high-score-hard-date-display"></span></p>
             <hr>
             <p>Total games played: <span id="games-played-display"></span></p>
             <!-- Games Played, High Score, Hard Mode High Score, Share Button -->
@@ -111,35 +112,55 @@
         <div class="modal-content">
             <span class="close" aria-label="Close How to Play.">&times;</span>
             <h2>How to Play</h2>
-            <p>Rules of how to play go here</p>
+            <p>Counting upwards from 1...</p>
+            <p>If the number is divisible by three choose <strong>Fizz</strong>.
+                <br>
+                If it is divisible by five choose <strong>Buzz</strong>.
+                <br>
+                If it is divisible by fifteen choose <strong>FizzBuzz</strong>.
+                <br>
+                Other wise select the Number</p>
             <br><br>
+            <p>In Hard Mode numbers are non-sequential.</p>
             <hr>
-            <p>You can use your keyboard's arrow keys to play:
+            <p>You can click, tap, or use your keyboard's arrow keys to play:
                 <br><br>
                 <ul id="help-controls">
                     <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z"/>
-                          </svg>
-                          Say the number
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-arrow-up-square" viewBox="0 0 16 16">
+                            <title>Up Arrow</title>
+                            <path fill-rule="evenodd"
+                                d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
+                        </svg>
+                        Number
                     </li>
                     <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-                          </svg>
-                          Fizz
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                            <title>Left Arrow</title>
+                            <path fill-rule="evenodd"
+                                d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
+                        </svg>
+                        Fizz
                     </li>
                     <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
-                          </svg>
-                          Buzz
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-arrow-right-square" viewBox="0 0 16 16">
+                            <title>Right Arrow</title>
+                            <path fill-rule="evenodd"
+                                d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
+                        </svg>
+                        Buzz
                     </li>
                     <li>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
-                            <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z"/>
-                          </svg>
-                          FizzBuzz
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                            class="bi bi-arrow-down-square" viewBox="0 0 16 16">
+                            <title>Down Arrow</title>
+                            <path fill-rule="evenodd"
+                                d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />
+                        </svg>
+                        FizzBuzz
                     </li>
                 </ul>
             </p>
