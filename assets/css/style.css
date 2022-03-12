@@ -1,12 +1,26 @@
 :root {
-    --color-background: rgba(215, 237, 236, 1);
-    --color-header: rgba(254, 254, 254, 0.8);
-    --color-one: rgba(249, 140, 141, 0.8);
-    --color-two: rgba(80, 192, 233, 0.8);
-    --color-three: rgba(249, 217, 102, 0.8);
-    --color-four: rgba(73, 176, 170, 0.8);
-    --color-black: rgba(0, 0, 0, 0.8);
+    --color-background: rgb(215, 237, 236);
+    --color-header: rgba(255, 255, 255, 0.8);
+    --color-modal: rgb(255, 255, 255);
+    --color-one: rgb(242,159,160);
+    --color-two: rgb(107,201,234);
+    --color-three: rgb(242,221,129);
+    --color-four: rgb(101,188,183);
+    --color-black: rgb(43,47,47);
 }
+
+@media (prefers-color-scheme: dark) {
+    :root {
+    --color-background: rgb(18, 18, 18);
+    --color-header: rgb(18, 18, 18);
+    --color-modal: rgb(18, 18, 18);
+    --color-black: rgb(208,208,208);
+    --color-one: rgb(157,91,92);
+    --color-two: rgb(55,122,147);
+    --color-three: rgb(150, 96, 26);
+    --color-four: rgb(51,113,109);
+    }
+  }
 
 /* Resets some of the user stylesheet default rules */
 html {
@@ -63,6 +77,7 @@ header {
     display: flex;
     justify-content: space-between;
     padding: 0 1rem;
+    color: var(--color-black);
 }
 
 nav {
@@ -82,12 +97,14 @@ h1 {
 }
 
 #countdown-timer {
+    color: var(--color-black);
     font-size: 3rem;
 }
 
 #lastAnswerDisplay {
     font-size: 1rem;
-    background-color: #fefefe;
+    background-color: var(--color-header);
+    color: var(--color-black);
     padding: 1rem;
     margin: 1rem;
     display: inline-block;
@@ -97,6 +114,7 @@ h1 {
 
 .btn-game {
     font-family: 'Bungee', cursive;
+    color: var(--color-black);
     height: 150px;
     width: 150px;
     font-size: 2rem;
@@ -148,11 +166,13 @@ h1 {
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    color: var(--color-black);
+    background-color: var(--color-modal);
     margin: 15% auto;
     /* 15% from the top and centered */
     padding: 20px;
-    border: 1px solid #888;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border: var(--color-black) solid 5px;
     width: 80%;
     /* Could be more or less, depending on screen size */
 }

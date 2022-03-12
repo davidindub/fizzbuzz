@@ -31,8 +31,7 @@ function checkNumber(num) {
 /** Handles a game over */
 function handleGameOver() {
     gameState.gameOver = true;
-    lastAnswerDisplay.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
-    lastAnswerDisplay.style.backgroundColor = "rgba(249, 140, 141, 1)";
+    lastAnswerDisplay.innerHTML = `Game Over❗️ Your score was ${gameState.currentScore}.`;
 
     updateGamesPlayed();
     logHighScore();
