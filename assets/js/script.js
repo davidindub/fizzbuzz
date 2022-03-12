@@ -37,9 +37,9 @@ function handleGameOver() {
     logHighScore();
 
     // Stats modal appears after 3 seconds
-    // setTimeout(() => {
-    //     modals[1].style.display = "block";
-    // }, 3000)
+    setTimeout(() => {
+        modals[1].style.display = "block";
+    }, 3000)
 
     handleGameReset();
 }
@@ -131,7 +131,7 @@ function isInputCorrect(input) {
 
 /** Handles game input */
 function handleInput(input) {
-    console.log(`checking input ${input} against answer ${checkNumber(gameState.currentNum)}`)
+    // console.log(`checking input ${input} against answer ${checkNumber(gameState.currentNum)}`)
 
     if (isInputCorrect(input)) {
 
@@ -180,9 +180,13 @@ function launchModal() {
 }
 
 /** Check if user is a first time visitor, if so show rules */
-if (localStorage.length === 0) {
-    modals[2].style.display = "block";
-}
+window.addEventListener("load", () => {
+    if (localStorage.length === 0) {
+        modals[2].style.display = "block";
+    }
+}, {
+    once: true
+})
 
 // When the user clicks on <span> (x), close the modal
 for (let closeSpan of closeSpans) {
@@ -201,3 +205,12 @@ for (let modal of modals) {
         }
     })
 }
+
+document.getElementById("btn-share").addEventListener("click", () => {
+    let shareMsg =
+        `My top score is ${localStorage.getItem("highscore")} on FizzBuzz! Play at https://www.davidindub.com/fizzbuzz/`;
+
+    document.getElementById("btn-share").innerHTML = `Copied to clipboard!`
+    navigator.clipboard.writeText(shareMsg);
+
+})

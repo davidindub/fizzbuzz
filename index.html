@@ -26,7 +26,7 @@
             <ul>
                 <!-- Preferences Link -->
                 <li>
-                    <a href="#preferences" aria-label="Preferences" data-link="0" class="nav-item">
+                    <a href="#" aria-label="Preferences" data-link="0" class="nav-item">
                         <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor"
                             class="bi bi-gear-fill" viewBox="0 0 16 16">
                             <path
@@ -37,7 +37,7 @@
 
                 <!-- Statistics Link -->
                 <li>
-                    <a href="#stats" aria-label="Statistics" data-link="1" class="nav-item">
+                    <a href="#" aria-label="Statistics" data-link="1" class="nav-item">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                             fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
                             <path
@@ -47,7 +47,7 @@
                 </li>
                 <!-- Rules Link -->
                 <li>
-                    <a href="#howtoplay" aria-label="How To Play" data-link="2" class="nav-item">
+                    <a href="#" aria-label="How To Play" data-link="2" class="nav-item">
                         <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
                             fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
                             <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
@@ -62,7 +62,7 @@
 
     <!-- A time limit countdown on making a selection, maybe 5 seconds -->
     <!-- Animate timer with CSS -->
-    <div id="countdown-timer">Timer</div>
+    <div id="countdown-timer"></div>
     <br><br>
     <span id="lastAnswerDisplay">Start counting from 1...</span>
 
@@ -102,7 +102,13 @@
                     id="high-score-hard-date-display"></span></p>
             <hr>
             <p>Total games played: <span id="games-played-display"></span></p>
-            <!-- Games Played, High Score, Hard Mode High Score, Share Button -->
+            <button id="btn-share" class="btn-share">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-share-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+                </svg>
+                Share Stats</button>
         </div>
     </div>
     <!-- A modal to appear on first visit explaining the rules of FizzBuzz -->
@@ -119,7 +125,7 @@
                 <br>
                 If it is divisible by fifteen choose <strong>FizzBuzz</strong>.
                 <br>
-                Other wise select the Number</p>
+                Otherwise select the Number</p>
             <br><br>
             <p>In Hard Mode numbers are non-sequential.</p>
             <hr>
