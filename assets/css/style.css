@@ -71,6 +71,22 @@ nav a {
     text-decoration: none;
 }
 
+table {
+    border: 3px solid var(--color-black);
+    padding: 0.2rem;
+    text-align: center;
+}
+
+th, td {
+    padding: 0.3rem;
+}
+
+table {
+    width: 100%;
+    /* border-collapse: collapse; */
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
 header {
     background-color: var(--color-header);
     margin-bottom: 0.5rem;

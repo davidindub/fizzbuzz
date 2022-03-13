@@ -95,11 +95,32 @@
         <div class="modal-content">
             <span class="close" aria-label="Close Statistics.">&times;</span>
             <h2>Statistics</h2>
-            <p>High Score is: <span id="high-score-display"></span> set on <span id="high-score-date-display"></span>
+            <!-- <p>High Score is: <span id="high-score-display"></span> set on <span id="high-score-date-display"></span>
             </p>
             <hr>
             <p>Hard Mode High Score is: <span id="high-score-hard-display"></span> set on <span
-                    id="high-score-hard-date-display"></span></p>
+                    id="high-score-hard-date-display"></span></p> -->
+            <table id="scoreboard">
+                <thead>
+                    <tr>
+                        <th>Mode</th>
+                        <th>Score</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Regular</td>
+                        <td id="high-score-display"></td>
+                        <td id="high-score-date-display"></td>
+                    </tr>
+                    <tr>
+                        <td>Hard</td>
+                        <td id="high-score-hard-display"></td>
+                        <td id="high-score-hard-date-display"></td>
+                    </tr>
+                </tbody>
+            </table>
             <hr>
             <p>Total games played: <span id="games-played-display"></span></p>
             <button id="btn-share" class="btn-share">

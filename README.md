@@ -137,7 +137,7 @@ Alternatively, if using Gitpod, you can click below to create your own workspace
 - [Wikipedia](https://en.wikipedia.org/wiki/Fizz_buzz) for the entry on the rules of Fizz Buzz.
 - I used [Dribble](https://dribbble.com/) to research designs to pick my color palette.
 - I used the [MDN Web Docs](https://developer.mozilla.org/en-US/) for help with data attributes in HTML.
-- I read [W3 Schools](https://www.w3schools.com/) for information on semantic HTML and Accessibility guidelines. 
+- I read [W3 Schools](https://www.w3schools.com/howto/howto_css_modals.asp/) for information on how to make tool tips and modals, and adapted code from their examples.
 
 ### Media
 

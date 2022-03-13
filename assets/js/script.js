@@ -2,11 +2,12 @@
 
 const btnNum = document.getElementById("btn-num");
 const lastAnswerDisplay = document.getElementById("lastAnswerDisplay");
-const statsGamesPlayedDisplay = document.getElementById("games-played-display");
-const highScoreDisplay = document.getElementById("high-score-display");
-const highScoreDateDisplay = document.getElementById("high-score-date-display");
-const highScoreHardModeDisplay = document.getElementById("high-score-hard-display");
-const highScoreHardModeDateDisplay = document.getElementById("high-score-hard-date-display");
+const shareButtonText = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+class="bi bi-share-fill" viewBox="0 0 16 16">
+<path
+    d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+</svg>
+Share Stats`;
 
 const gameState = {
     gameOver: false,
@@ -14,6 +15,16 @@ const gameState = {
     currentScore: 0,
     currentNum: 1,
 }
+
+const statsDisplay = {
+    regularScore: document.getElementById("scoreboard").rows[1].cells[1],
+    regularDate: document.getElementById("scoreboard").rows[1].cells[2],
+    hardScore: document.getElementById("scoreboard").rows[2].cells[1],
+    hardDate: document.getElementById("scoreboard").rows[2].cells[2],
+    gamesPlayed: document.getElementById("games-played-display")
+}
+
+updateStatsDisplay();
 
 btnNum.innerText = gameState.currentNum;
 
@@ -31,25 +42,27 @@ function checkNumber(num) {
 /** Handles a game over */
 function handleGameOver() {
     gameState.gameOver = true;
-    lastAnswerDisplay.innerHTML = `Game Over❗️ Your score was ${gameState.currentScore}.`;
+    lastAnswerDisplay.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
 
     updateGamesPlayed();
     logHighScore();
 
-    // Stats modal appears after 3 seconds
+    // Stats modal appears after 2 seconds
     setTimeout(() => {
         modals[1].style.display = "block";
-    }, 3000)
+    }, 2000)
 
     handleGameReset();
 }
 
+/** Increment the number of games played */
 function updateGamesPlayed() {
     let gamesPlayed = localStorage.getItem("gamesPlayed");
     gamesPlayed ? gamesPlayed = parseInt(gamesPlayed) : localStorage.setItem("gamesPlayed", 0);
     gamesPlayed += 1;
-    statsGamesPlayedDisplay.innerHTML = gamesPlayed;
     localStorage.setItem("gamesPlayed", gamesPlayed);
+
+    updateStatsDisplay();
 }
 
 //** Logs High Score */
@@ -67,10 +80,17 @@ function logHighScore() {
         localStorage.setItem("highscoreDateHardMode", today.toDateString());
     }
 
-    highScoreDisplay.innerHTML = `${localStorage.getItem("highscore")}`;
-    highScoreDateDisplay.innerHTML = `${localStorage.getItem("highscoreDate")}`
-    highScoreHardModeDisplay.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
-    highScoreHardModeDateDisplay.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
+    updateStatsDisplay();
+}
+
+/** Updates the values on the stats modal */
+function updateStatsDisplay() {
+    document.getElementById("btn-share").innerHTML = shareButtonText;
+    statsDisplay.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
+    statsDisplay.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
+    statsDisplay.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
+    statsDisplay.hardDate.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
+    statsDisplay.gamesPlayed.innerHTML = `${localStorage.getItem("gamesPlayed")}`;
 }
 
 /** Resets the game */
@@ -206,11 +226,18 @@ for (let modal of modals) {
     })
 }
 
+/** Share Button for Highscores */
 document.getElementById("btn-share").addEventListener("click", () => {
     let shareMsg =
         `My top score is ${localStorage.getItem("highscore")} on FizzBuzz! Play at https://www.davidindub.com/fizzbuzz/`;
 
+    // Copies the high score to users clipboard
     document.getElementById("btn-share").innerHTML = `Copied to clipboard!`
     navigator.clipboard.writeText(shareMsg);
+
+    // Revert back to previous text after 1.5 sec
+    setTimeout(() => {
+        document.getElementById("btn-share").innerHTML = shareButtonText;
+    }, 1500)
 
 })
