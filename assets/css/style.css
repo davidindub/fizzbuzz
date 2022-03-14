@@ -2,26 +2,27 @@
     --color-background: rgb(215, 237, 236);
     --color-header: rgba(255, 255, 255, 0.8);
     --color-modal: rgb(255, 255, 255);
-    --color-one: rgb(242,159,160);
-    --color-two: rgb(107,201,234);
-    --color-three: rgb(242,221,129);
-    --color-four: rgb(101,188,183);
-    --color-black: rgb(43,47,47);
+    --color-one: rgb(242, 159, 160);
+    --color-two: rgb(107, 201, 234);
+    --color-three: rgb(242, 221, 129);
+    --color-four: rgb(101, 188, 183);
+    --color-black: rgb(43, 47, 47);
     --transition-effect: all ease-in-out 0.3s;
+    --border-wavy: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-    --color-background: rgb(18, 18, 18);
-    --color-header: rgb(18, 18, 18);
-    --color-modal: rgb(18, 18, 18);
-    --color-black: rgb(208,208,208);
-    --color-one: rgb(157,91,92);
-    --color-two: rgb(55,122,147);
-    --color-three: rgb(150, 96, 26);
-    --color-four: rgb(51,113,109);
+        --color-background: rgb(18, 18, 18);
+        --color-header: rgb(18, 18, 18);
+        --color-modal: rgb(18, 18, 18);
+        --color-black: rgb(208, 208, 208);
+        --color-one: rgb(157, 91, 92);
+        --color-two: rgb(55, 122, 147);
+        --color-three: rgb(150, 96, 26);
+        --color-four: rgb(51, 113, 109);
     }
-  }
+}
 
 /* Resets some of the user stylesheet default rules */
 html {
@@ -56,11 +57,6 @@ dd {
 
 /* Global Element Styles */
 
-img {
-    max-width: 100%;
-    display: block;
-}
-
 input,
 button,
 textarea,
@@ -77,13 +73,13 @@ table {
     text-align: center;
 }
 
-th, td {
+th,
+td {
     padding: 0.3rem;
 }
 
 table {
     width: 100%;
-    /* border-collapse: collapse; */
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
@@ -120,14 +116,15 @@ h1 {
     font-size: 3rem;
 }
 
-#lastAnswerDisplay, .btn-share {
+#lastAnswerDisplay,
+.btn-share {
     font-size: 1rem;
     background-color: var(--color-header);
     color: var(--color-black);
     padding: 1rem;
     margin: 1rem;
     display: inline-block;
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border-radius: var(--border-wavy);
     border: var(--color-black) solid 5px;
 }
 
@@ -150,8 +147,8 @@ h1 {
     height: 150px;
     width: 150px;
     font-size: 2rem;
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
     border: var(--color-black) solid 5px;
+    border-radius: var(--border-wavy);
     margin: 3px;
 }
 
@@ -197,7 +194,7 @@ h1 {
     margin: 15% auto;
     padding: 20px;
     text-align: left;
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+    border-radius: var(--border-wavy);
     border: var(--color-black) solid 5px;
     width: 80%;
     max-width: 500px;
@@ -232,4 +229,3 @@ h1 {
     text-align: left;
     padding-right: 3rem;
 }
-

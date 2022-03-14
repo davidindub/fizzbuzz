@@ -24,6 +24,18 @@ const statsDisplay = {
     gamesPlayed: document.getElementById("games-played-display")
 }
 
+
+/** Updates the values on the stats modal */
+function updateStatsDisplay() {
+    document.getElementById("btn-share").innerHTML = shareButtonText;
+    statsDisplay.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
+    statsDisplay.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
+    statsDisplay.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
+    statsDisplay.hardDate.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
+    statsDisplay.gamesPlayed.innerHTML = `${localStorage.getItem("gamesPlayed")}`;
+}
+
+
 updateStatsDisplay();
 
 btnNum.innerText = gameState.currentNum;
@@ -81,16 +93,6 @@ function logHighScore() {
     }
 
     updateStatsDisplay();
-}
-
-/** Updates the values on the stats modal */
-function updateStatsDisplay() {
-    document.getElementById("btn-share").innerHTML = shareButtonText;
-    statsDisplay.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
-    statsDisplay.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
-    statsDisplay.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
-    statsDisplay.hardDate.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
-    statsDisplay.gamesPlayed.innerHTML = `${localStorage.getItem("gamesPlayed")}`;
 }
 
 /** Resets the game */
