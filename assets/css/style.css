@@ -175,6 +175,7 @@ h1 {
 .modal {
     display: none;
     position: fixed;
+    overflow: hidden;
     z-index: 1;
     left: 0;
     top: 0;
@@ -183,7 +184,7 @@ h1 {
     overflow: auto;
     background-color: rgb(0, 0, 0);
     /* Fallback color */
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0, 0, 0, 0.6);
     /* Black w/ opacity */
 }
 

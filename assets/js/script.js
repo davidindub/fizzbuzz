@@ -135,6 +135,11 @@ function handleKeyPress(event) {
         case "ArrowDown":
             handleInput("fizzbuzz");
             break;
+        case "Escape":
+            for (let modal of modals) {
+                modal.style.display = "none";
+            }
+            break
         default:
             return
     }
