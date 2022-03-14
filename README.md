@@ -74,7 +74,7 @@ __Accessibility__
 
 __Favicon__
 
-
+![The favicon for the project](/assets/images/favicon/apple-touch-icon.png)
   - A favicon and icon for iOS/Android home screen bookmarks is included with the project's logo.
 
 __Meta Data for Social Media__
