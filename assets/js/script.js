@@ -1,7 +1,5 @@
 /* jshint esversion: 8 */
 
-const btnNum = document.getElementById("btn-num");
-const lastAnswerDisplay = document.getElementById("lastAnswerDisplay");
 const shareButtonText = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 class="bi bi-share-fill" viewBox="0 0 16 16">
 <path
@@ -10,10 +8,16 @@ class="bi bi-share-fill" viewBox="0 0 16 16">
 Share Stats`;
 
 const gameState = {
-    gameOver: false,
+    isGameOver: false,
     hardMode: false,
     currentScore: 0,
     currentNum: 1,
+    reset: function () {
+        this.isGameOver = false;
+        this.currentNum = 1;
+        this.currentScore = 0;
+        gameDisplay.update()
+    }
 }
 
 const statsDisplay = {
@@ -21,24 +25,27 @@ const statsDisplay = {
     regularDate: document.getElementById("scoreboard").rows[1].cells[2],
     hardScore: document.getElementById("scoreboard").rows[2].cells[1],
     hardDate: document.getElementById("scoreboard").rows[2].cells[2],
-    gamesPlayed: document.getElementById("games-played-display")
+    gamesPlayed: document.getElementById("games-played-display"),
+    update: function () {
+        document.getElementById("btn-share").innerHTML = shareButtonText;
+        this.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
+        this.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
+        this.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
+        this.hardDate.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
+        this.gamesPlayed.innerHTML = `${localStorage.getItem("gamesPlayed")}`;
+    }
 }
 
-
-/** Updates the values on the stats modal */
-function updateStatsDisplay() {
-    document.getElementById("btn-share").innerHTML = shareButtonText;
-    statsDisplay.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
-    statsDisplay.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
-    statsDisplay.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
-    statsDisplay.hardDate.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
-    statsDisplay.gamesPlayed.innerHTML = `${localStorage.getItem("gamesPlayed")}`;
+const gameDisplay = {
+    btnNum: document.getElementById("btn-num"),
+    lastAnswer: document.getElementById("lastAnswerDisplay"),
+    update: function () {
+        this.btnNum.innerText = gameState.currentNum;
+    }
 }
 
-
-updateStatsDisplay();
-
-btnNum.innerText = gameState.currentNum;
+statsDisplay.update();
+gameDisplay.update();
 
 /** Checks whether a number is a fizz, buzz, or fizzbuzz, otherwise returns the number */
 function checkNumber(num) {
@@ -53,18 +60,18 @@ function checkNumber(num) {
 
 /** Handles a game over */
 function handleGameOver() {
-    gameState.gameOver = true;
-    lastAnswerDisplay.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
+    gameState.isGameOver = true;
+    gameDisplay.lastAnswer.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
 
     updateGamesPlayed();
     logHighScore();
 
-    // Stats modal appears after 2 seconds
-    setTimeout(() => {
-        modals[1].style.display = "block";
-    }, 2000)
+    // // Stats modal appears after 2 seconds
+    // setTimeout(() => {
+    //     modals[1].style.display = "block";
+    // }, 2000)
 
-    handleGameReset();
+    gameState.reset();
 }
 
 /** Increment the number of games played */
@@ -74,7 +81,7 @@ function updateGamesPlayed() {
     gamesPlayed += 1;
     localStorage.setItem("gamesPlayed", gamesPlayed);
 
-    updateStatsDisplay();
+    statsDisplay.update();
 }
 
 //** Logs High Score */
@@ -92,21 +99,10 @@ function logHighScore() {
         localStorage.setItem("highscoreDateHardMode", today.toDateString());
     }
 
-    updateStatsDisplay();
+    statsDisplay.update();
 }
 
-/** Resets the game */
-function handleGameReset() {
-    gameState.gameOver = false;
-    gameState.currentNum = 1;
-    gameState.currentScore = 0;
-    updateNumBtn()
-}
 
-/** Updates the number on the button */
-function updateNumBtn() {
-    btnNum.innerText = gameState.currentNum;
-}
 
 // Tests
 // console.log(`Check 3: Expected result is FIZZ, actual result is ${checkNumber(3)} `)
@@ -165,8 +161,8 @@ function handleInput(input) {
         }
 
         gameState.currentScore += 1;
-        updateNumBtn()
-        lastAnswerDisplay.innerHTML = "👍";
+        gameDisplay.update()
+        gameDisplay.lastAnswer.innerHTML = "👍";
     } else handleGameOver();
 }
 
@@ -193,13 +189,13 @@ const closeSpans = document.getElementsByClassName("close");
 
 for (let navItem of navItems) {
     navItem.addEventListener("click", launchModal)
-}
+};
 
 /** Launch a modal */
 function launchModal() {
     let linkClicked = this.dataset.link;
     modals[this.dataset.link].style.display = "block";
-}
+};
 
 /** Check if user is a first time visitor, if so show rules */
 window.addEventListener("load", () => {
@@ -208,7 +204,7 @@ window.addEventListener("load", () => {
     }
 }, {
     once: true
-})
+});
 
 // When the user clicks on <span> (x), close the modal
 for (let closeSpan of closeSpans) {
@@ -217,7 +213,7 @@ for (let closeSpan of closeSpans) {
             modal.style.display = "none";
         }
     })
-}
+};
 
 // Close modal when the user clicks anywhere outside of the modal
 for (let modal of modals) {
@@ -226,7 +222,7 @@ for (let modal of modals) {
             modal.style.display = "none";
         }
     })
-}
+};
 
 /** Share Button for Highscores */
 document.getElementById("btn-share").addEventListener("click", () => {
