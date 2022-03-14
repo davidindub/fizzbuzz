@@ -49,10 +49,16 @@ const prefsDisplay = {
 }
 
 const gameDisplay = {
+    buttons: document.getElementsByClassName("btn-game"),
     btnNum: document.getElementById("btn-num"),
     lastAnswer: document.getElementById("lastAnswerDisplay"),
     update: function () {
         this.btnNum.innerText = gameState.currentNum;
+    },
+    toggleDisable: function () {
+        for (let button of this.buttons) {
+            button.disabled = !button.disabled;
+        }
     }
 }
 
@@ -73,16 +79,17 @@ function checkNumber(num) {
 
 /** Handles a game over */
 function handleGameOver() {
+    gameDisplay.toggleDisable();
     gameState.isGameOver = true;
     gameDisplay.lastAnswer.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
 
     updateGamesPlayed();
     logHighScore();
 
-    // // Stats modal appears after 2 seconds
-    // setTimeout(() => {
-    //     modals[1].style.display = "block";
-    // }, 2000)
+    // Stats modal appears after 2 seconds
+    setTimeout(() => {
+        modals[1].style.display = "block";
+    }, 2000)
 
     gameState.reset();
 }
@@ -123,6 +130,35 @@ function resetStats() {
     localStorage.setItem("gamesPlayed", 0);
 }
 
+/** Timer Constructor */
+class Timer {
+    constructor() {
+        this.timerDisplay = document.getElementById("timer");
+    }
+
+    run() {
+        let secs = 5;
+        setInterval(() => {
+            if (secs == 0) {
+                this.stop();
+            } else {
+                this.timerDisplay.value -= 20;
+                secs -= 1;
+                console.log(secs);
+            }
+        }, 1000);
+    }
+
+    stop() {
+        clearInterval(this.run);
+    }
+
+    reset() {
+        this.timerDisplay.value = 100;
+    }
+}
+
+const timer1 = new Timer();
 
 
 // Tests
@@ -175,8 +211,6 @@ function isInputCorrect(input) {
 
 /** Handles game input */
 function handleInput(input) {
-    // console.log(`checking input ${input} against answer ${checkNumber(gameState.currentNum)}`)
-
     if (isInputCorrect(input)) {
 
         if (!gameState.hardMode) {
@@ -193,9 +227,7 @@ function handleInput(input) {
 }
 
 /** Add click event listeners for game buttons and key presses */
-const gameButtons = document.getElementsByClassName("btn-game");
-
-for (button of gameButtons) {
+for (button of gameDisplay.buttons) {
     button.addEventListener("click", handleClick);
 }
 
@@ -205,6 +237,11 @@ prefsDisplay.hardMode.addEventListener("change", () => {
     gameState.hardMode = !gameState.hardMode;
     prefsDisplay.disable(prefsDisplay.hardMode);
     console.log(`hard mode set to ${gameState.hardMode}`);
+})
+
+statsDisplay.clearStats.addEventListener("click", () => {
+    resetStats();
+    statsDisplay.update();
 })
 
 // Modals
@@ -250,11 +287,6 @@ for (let modal of modals) {
         }
     })
 };
-
-statsDisplay.clearStats.addEventListener("click", () => {
-    resetStats();
-    statsDisplay.update();
-})
 
 /** Share Button for Highscores */
 document.getElementById("btn-share").addEventListener("click", () => {
