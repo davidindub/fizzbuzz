@@ -64,7 +64,10 @@ __Game Area__
 
 ***
 
-__Footer__ 
+__Accessibility__
+
+  - Keyboard controls are available so the game can be played without using a mouse on computers.
+  - `aria-live` is used to annouce the number on screen when playing the game, allowing be played using a screen reader.
 
 
 ***

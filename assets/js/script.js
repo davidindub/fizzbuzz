@@ -220,7 +220,6 @@ for (let navItem of navItems) {
 
 /** Launch a modal */
 function launchModal() {
-    // let linkClicked = this.dataset.link;
     modals[this.dataset.link].style.display = "block";
 };
 
@@ -260,7 +259,7 @@ statsDisplay.clearStats.addEventListener("click", () => {
 /** Share Button for Highscores */
 document.getElementById("btn-share").addEventListener("click", () => {
     let shareMsg =
-        `My top score is ${localStorage.getItem("highscore")} on FizzBuzz! Play at https://www.davidindub.com/fizzbuzz/`;
+        `My highscore is ${localStorage.getItem("highscore")}, and ${localStorage.getItem("highscoreHardMode")} in Hard Mode on FizzBuzz! Play at https://www.davidindub.com/fizzbuzz/`;
 
     // Copies the high score to users clipboard
     document.getElementById("btn-share").innerHTML = `Copied to clipboard!`
