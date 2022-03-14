@@ -16,7 +16,8 @@ const gameState = {
         this.isGameOver = false;
         this.currentNum = 1;
         this.currentScore = 0;
-        gameDisplay.update()
+        gameDisplay.update();
+        prefsDisplay.enable(prefsDisplay.hardMode);
     }
 }
 
@@ -26,6 +27,7 @@ const statsDisplay = {
     hardScore: document.getElementById("scoreboard").rows[2].cells[1],
     hardDate: document.getElementById("scoreboard").rows[2].cells[2],
     gamesPlayed: document.getElementById("games-played-display"),
+    clearStats: document.getElementById("btn-clear-stats"),
     update: function () {
         document.getElementById("btn-share").innerHTML = shareButtonText;
         this.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
@@ -33,6 +35,16 @@ const statsDisplay = {
         this.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
         this.hardDate.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
         this.gamesPlayed.innerHTML = `${localStorage.getItem("gamesPlayed")}`;
+    }
+}
+
+const prefsDisplay = {
+    hardMode: document.getElementById("hard-mode"),
+    disable: function (btn) {
+        btn.disabled = true;
+    },
+    enable: function (btn) {
+        btn.disabled = false;
     }
 }
 
@@ -46,6 +58,7 @@ const gameDisplay = {
 
 statsDisplay.update();
 gameDisplay.update();
+
 
 /** Checks whether a number is a fizz, buzz, or fizzbuzz, otherwise returns the number */
 function checkNumber(num) {
@@ -100,6 +113,14 @@ function logHighScore() {
     }
 
     statsDisplay.update();
+}
+
+function resetStats() {
+    localStorage.setItem("highscore", 0);
+    localStorage.setItem("highscoreDate", "-");
+    localStorage.setItem("highscoreHardMode", 0);
+    localStorage.setItem("highscoreDateHardMode", "-");
+    localStorage.setItem("gamesPlayed", 0);
 }
 
 
@@ -180,8 +201,9 @@ for (button of gameButtons) {
 
 document.addEventListener("keydown", handleKeyPress);
 
-document.addEventListener("change", () => {
+prefsDisplay.hardMode.addEventListener("change", () => {
     gameState.hardMode = !gameState.hardMode;
+    prefsDisplay.disable(prefsDisplay.hardMode);
     console.log(`hard mode set to ${gameState.hardMode}`);
 })
 
@@ -198,13 +220,14 @@ for (let navItem of navItems) {
 
 /** Launch a modal */
 function launchModal() {
-    let linkClicked = this.dataset.link;
+    // let linkClicked = this.dataset.link;
     modals[this.dataset.link].style.display = "block";
 };
 
 /** Check if user is a first time visitor, if so show rules */
 window.addEventListener("load", () => {
     if (localStorage.length === 0) {
+        resetStats();
         modals[2].style.display = "block";
     }
 }, {
@@ -228,6 +251,11 @@ for (let modal of modals) {
         }
     })
 };
+
+statsDisplay.clearStats.addEventListener("click", () => {
+    resetStats();
+    statsDisplay.update();
+})
 
 /** Share Button for Highscores */
 document.getElementById("btn-share").addEventListener("click", () => {

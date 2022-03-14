@@ -79,27 +79,24 @@
     </main>
 
     <!-- A Preferences Modal -->
-    <div class="modal">
+    <aside class="modal">
         <div class="modal-content">
             <span class="close" aria-label="Close Preferences.">&times;</span>
             <h2>Preferences</h2>
             <label for="hard-mode">Hard Mode</label>
             <input type="checkbox" name="hard-mode" id="hard-mode">
+            <br>
+            <small>(Non sequential random numbers!)</small>
             <!-- Option to turn off Timer? -->
             <!-- Dark Mode? -->
             <!-- High Contrast Mode? -->
         </div>
-    </div>
+    </aside>
     <!-- A statistics modal -->
-    <div class="modal">
+    <aside class="modal">
         <div class="modal-content">
             <span class="close" aria-label="Close Statistics.">&times;</span>
             <h2>Statistics</h2>
-            <!-- <p>High Score is: <span id="high-score-display"></span> set on <span id="high-score-date-display"></span>
-            </p>
-            <hr>
-            <p>Hard Mode High Score is: <span id="high-score-hard-display"></span> set on <span
-                    id="high-score-hard-date-display"></span></p> -->
             <table id="scoreboard">
                 <thead>
                     <tr>
@@ -123,17 +120,18 @@
             </table>
             <hr>
             <p>Total games played: <span id="games-played-display"></span></p>
-            <button id="btn-share" class="btn-share">
+            <button id="btn-share" class="btn-stats btn-share">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-share-fill" viewBox="0 0 16 16">
-                    <path
-                        d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-                </svg>
-                Share Stats</button>
+                class="bi bi-share-fill" viewBox="0 0 16 16">
+                <path
+                d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+            </svg>
+            Share Stats</button>
+            <button id="btn-clear-stats" class="btn-stats">Clear All Stats</button>
         </div>
-    </div>
+    </aside>
     <!-- A modal to appear on first visit explaining the rules of FizzBuzz -->
-    <div class="modal">
+    <aside class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
@@ -192,7 +190,7 @@
                 </ul>
             </p>
         </div>
-    </div>
+    </aside>
 
     <script src="assets/js/script.js"></script>
 

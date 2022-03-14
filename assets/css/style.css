@@ -117,7 +117,7 @@ h1 {
 }
 
 #lastAnswerDisplay,
-.btn-share {
+.btn-stats {
     font-size: 1rem;
     background-color: var(--color-header);
     color: var(--color-black);
@@ -128,17 +128,21 @@ h1 {
     border: var(--color-black) solid 5px;
 }
 
-.btn-share {
+.btn-stats {
     width: 80%;
     transition: var(--transition-effect);
 }
 
-.btn-share svg {
+#btn-share svg {
     margin: 0 0.5rem;
 }
 
-.btn-share:hover {
+#btn-share:hover {
     background-color: var(--color-two);
+}
+
+#btn-clear-stats:hover {
+    background-color: var(--color-one);
 }
 
 .btn-game {
