@@ -22,14 +22,14 @@ const gameState = {
 }
 
 const statsDisplay = {
-    regularScore: document.getElementById("scoreboard").rows[1].cells[1],
-    regularDate: document.getElementById("scoreboard").rows[1].cells[2],
-    hardScore: document.getElementById("scoreboard").rows[2].cells[1],
-    hardDate: document.getElementById("scoreboard").rows[2].cells[2],
-    gamesPlayed: document.getElementById("games-played-display"),
-    clearStats: document.getElementById("btn-clear-stats"),
+    regularScore: document.querySelector("#scoreboard").rows[1].cells[1],
+    regularDate: document.querySelector("#scoreboard").rows[1].cells[2],
+    hardScore: document.querySelector("#scoreboard").rows[2].cells[1],
+    hardDate: document.querySelector("#scoreboard").rows[2].cells[2],
+    gamesPlayed: document.querySelector("#games-played-display"),
+    clearStats: document.querySelector("#btn-clear-stats"),
     update: function () {
-        document.getElementById("btn-share").innerHTML = shareButtonText;
+        document.querySelector("#btn-share").innerHTML = shareButtonText;
         this.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
         this.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
         this.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
@@ -39,7 +39,7 @@ const statsDisplay = {
 }
 
 const prefsDisplay = {
-    hardMode: document.getElementById("hard-mode"),
+    hardMode: document.querySelector("#hard-mode"),
     disable: function (btn) {
         btn.disabled = true;
     },
@@ -49,9 +49,9 @@ const prefsDisplay = {
 }
 
 const gameDisplay = {
-    buttons: document.getElementsByClassName("btn-game"),
-    btnNum: document.getElementById("btn-num"),
-    lastAnswer: document.getElementById("lastAnswerDisplay"),
+    buttons: document.querySelectorAll(".btn-game"),
+    btnNum: document.querySelector("#btn-num"),
+    lastAnswer: document.querySelector("#lastAnswerDisplay"),
     update: function () {
         this.btnNum.innerText = gameState.currentNum;
     },
@@ -83,8 +83,8 @@ function handleGameOver() {
     gameState.isGameOver = true;
     gameDisplay.lastAnswer.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
 
-    updateGamesPlayed();
-    logHighScore();
+    statsStorage.updateGamesPlayed();
+    statsStorage.logHighScore();
 
     // Stats modal appears after 2 seconds
     setTimeout(() => {
@@ -94,56 +94,55 @@ function handleGameOver() {
     gameState.reset();
 }
 
-/** Increment the number of games played */
-function updateGamesPlayed() {
-    let gamesPlayed = localStorage.getItem("gamesPlayed");
-    gamesPlayed ? gamesPlayed = parseInt(gamesPlayed) : localStorage.setItem("gamesPlayed", 0);
-    gamesPlayed += 1;
-    localStorage.setItem("gamesPlayed", gamesPlayed);
+/** Handles Stats in Local Storage */
+const statsStorage = {
+    logHighScore: function () {
+        let finalScore = gameState.currentScore;
+        let today = new Date();
 
-    statsDisplay.update();
-}
-
-//** Logs High Score */
-function logHighScore() {
-    let finalScore = gameState.currentScore;
-    let today = new Date();
-
-    if (!gameState.hardMode) {
-        if (finalScore > localStorage.getItem("highscore")) {
-            localStorage.setItem("highscore", finalScore);
-            localStorage.setItem("highscoreDate", today.toDateString());
+        if (!gameState.hardMode) {
+            if (finalScore > localStorage.getItem("highscore")) {
+                localStorage.setItem("highscore", finalScore);
+                localStorage.setItem("highscoreDate", today.toDateString());
+            }
+        } else if (finalScore > localStorage.getItem("highscoreHardMode")) {
+            localStorage.setItem("highscoreHardMode", finalScore);
+            localStorage.setItem("highscoreDateHardMode", today.toDateString());
         }
-    } else if (finalScore > localStorage.getItem("highscoreHardMode")) {
-        localStorage.setItem("highscoreHardMode", finalScore);
-        localStorage.setItem("highscoreDateHardMode", today.toDateString());
+
+        statsDisplay.update();
+    },
+    resetStats: function () {
+        localStorage.setItem("highscore", 0);
+        localStorage.setItem("highscoreDate", "-");
+        localStorage.setItem("highscoreHardMode", 0);
+        localStorage.setItem("highscoreDateHardMode", "-");
+        localStorage.setItem("gamesPlayed", 0);
+    },
+    updateGamesPlayed: function() {
+        let gamesPlayed = localStorage.getItem("gamesPlayed");
+        gamesPlayed ? gamesPlayed = parseInt(gamesPlayed) : localStorage.setItem("gamesPlayed", 0);
+        gamesPlayed += 1;
+        localStorage.setItem("gamesPlayed", gamesPlayed);
+    
+        statsDisplay.update();
     }
-
-    statsDisplay.update();
 }
 
-function resetStats() {
-    localStorage.setItem("highscore", 0);
-    localStorage.setItem("highscoreDate", "-");
-    localStorage.setItem("highscoreHardMode", 0);
-    localStorage.setItem("highscoreDateHardMode", "-");
-    localStorage.setItem("gamesPlayed", 0);
-}
-
-/** Timer Constructor */
+/** Timer Class */
 class Timer {
     constructor() {
-        this.timerDisplay = document.getElementById("timer");
+        this.secs = 5;
+        this.timerDisplay = document.querySelector("#timer");
     }
 
     run() {
-        let secs = 5;
         setInterval(() => {
-            if (secs == 0) {
+            if (this.secs == 0) {
                 this.stop();
             } else {
                 this.timerDisplay.value -= 20;
-                secs -= 1;
+                this.secs -= 1;
                 console.log(secs);
             }
         }, 1000);
@@ -157,8 +156,6 @@ class Timer {
         this.timerDisplay.value = 100;
     }
 }
-
-const timer1 = new Timer();
 
 
 // Tests
@@ -240,16 +237,16 @@ prefsDisplay.hardMode.addEventListener("change", () => {
 })
 
 statsDisplay.clearStats.addEventListener("click", () => {
-    resetStats();
+    statsStorage.resetStats();
     statsDisplay.update();
 })
 
 // Modals
 
 // Get the modal
-const navItems = document.getElementsByClassName("nav-item");
-const modals = document.getElementsByClassName("modal");
-const closeSpans = document.getElementsByClassName("close");
+const navItems = document.querySelectorAll(".nav-item");
+const modals = document.querySelectorAll(".modal");
+const closeSpans = document.querySelectorAll(".close");
 
 for (let navItem of navItems) {
     navItem.addEventListener("click", launchModal)
@@ -263,7 +260,7 @@ function launchModal() {
 /** Check if user is a first time visitor, if so show rules */
 window.addEventListener("load", () => {
     if (localStorage.length === 0) {
-        resetStats();
+        statsStorage.resetStats();
         modals[2].style.display = "block";
     }
 }, {
@@ -289,17 +286,17 @@ for (let modal of modals) {
 };
 
 /** Share Button for Highscores */
-document.getElementById("btn-share").addEventListener("click", () => {
+document.querySelector("#btn-share").addEventListener("click", () => {
     let shareMsg =
         `My highscore is ${localStorage.getItem("highscore")}, and ${localStorage.getItem("highscoreHardMode")} in Hard Mode on FizzBuzz! Play at https://www.davidindub.com/fizzbuzz/`;
 
     // Copies the high score to users clipboard
-    document.getElementById("btn-share").innerHTML = `Copied to clipboard!`
+    document.querySelector("#btn-share").innerHTML = `Copied to clipboard!`
     navigator.clipboard.writeText(shareMsg);
 
     // Revert back to previous text after 1.5 sec
     setTimeout(() => {
-        document.getElementById("btn-share").innerHTML = shareButtonText;
+        document.querySelector("#btn-share").innerHTML = shareButtonText;
     }, 1500)
 
 })
