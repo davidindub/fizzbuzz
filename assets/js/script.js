@@ -1,12 +1,5 @@
 /* jshint esversion: 8 */
 
-const shareButtonText = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-class="bi bi-share-fill" viewBox="0 0 16 16">
-<path
-    d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-</svg>
-Share Stats`;
-
 const gameState = {
     isGameOver: false,
     hardMode: false,
@@ -29,7 +22,6 @@ const statsDisplay = {
     gamesPlayed: document.querySelector("#games-played-display"),
     clearStats: document.querySelector("#btn-clear-stats"),
     update: function () {
-        document.querySelector("#btn-share").innerHTML = shareButtonText;
         this.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
         this.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
         this.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
@@ -157,14 +149,6 @@ class Timer {
     }
 }
 
-
-// Tests
-// console.log(`Check 3: Expected result is FIZZ, actual result is ${checkNumber(3)} `)
-// console.log(`Check 5: Expected result is BUZZ, actual result is ${checkNumber(5)} `)
-// console.log(`Check 7: Expected result is 7, actual result is ${checkNumber(7)} `)
-// console.log(`Check 15: Expected result is FIZZBUZZ, actual result is ${checkNumber(15)} `)
-// console.log(`Check "string": Expected result is TypeError, actual result is ${checkNumber("string")} `)
-
 /** Handles clicks on the game buttons */
 function handleClick() {
     if (this.dataset.gameBtn === "number") {
@@ -233,7 +217,6 @@ document.addEventListener("keydown", handleKeyPress);
 prefsDisplay.hardMode.addEventListener("change", () => {
     gameState.hardMode = !gameState.hardMode;
     prefsDisplay.disable(prefsDisplay.hardMode);
-    console.log(`hard mode set to ${gameState.hardMode}`);
 })
 
 statsDisplay.clearStats.addEventListener("click", () => {
@@ -287,6 +270,8 @@ for (let modal of modals) {
 
 /** Share Button for Highscores */
 document.querySelector("#btn-share").addEventListener("click", () => {
+    let shareButtonText = document.querySelector("#btn-share").innerHTML;
+
     let shareMsg =
         `My highscore is ${localStorage.getItem("highscore")}, and ${localStorage.getItem("highscoreHardMode")} in Hard Mode on FizzBuzz! Play at https://www.davidindub.com/fizzbuzz/`;
 
