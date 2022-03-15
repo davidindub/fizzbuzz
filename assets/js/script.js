@@ -31,7 +31,8 @@ const statsDisplay = {
 }
 
 const prefsDisplay = {
-    hardMode: document.querySelector("#hard-mode"),
+    toggles: document.querySelectorAll(".prefs-check"),
+    hardMode: document.querySelector("#prefs-hard-mode"),
     disable: function (btn) {
         btn.disabled = true;
     },
@@ -54,8 +55,47 @@ const gameDisplay = {
     }
 }
 
+/** Timer Class */
+class Timer {
+    constructor() {
+        this.isTimeUp = false;
+        this.isTimerRunning;
+        this.secs = 5;
+        this.timerDisplay = document.querySelector("#timer");
+    }
+
+    run() {
+        this.interval = setInterval(() => {
+            if (this.secs == 0) {
+                this.timeup();
+
+            } else {
+                this.timerDisplay.value -= 20;
+                this.secs -= 1;
+                console.log(this.secs);
+            }
+        }, 1000);
+    }
+
+    timeup() {
+        clearInterval(this.interval);
+        this.secs = 0;
+        this.timerDisplay.value = 0;
+        this.isTimeUp = true;
+        console.log("Timer Stopped!")
+    }
+
+    reset() {
+        this.secs = 5;
+        this.timerDisplay.value = 100;
+        this.isTimeUp = false;
+    }
+}
+
+/** Game Set Up */
 statsDisplay.update();
 gameDisplay.update();
+let timer = new Timer();
 
 
 /** Checks whether a number is a fizz, buzz, or fizzbuzz, otherwise returns the number */
@@ -71,6 +111,7 @@ function checkNumber(num) {
 
 /** Handles a game over */
 function handleGameOver() {
+    timer.timeup();
     gameDisplay.toggleDisable();
     gameState.isGameOver = true;
     gameDisplay.lastAnswer.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
@@ -80,7 +121,7 @@ function handleGameOver() {
 
     // Stats modal appears after 2 seconds
     setTimeout(() => {
-        modals[1].style.display = "block";
+        modalDisplay.modals[1].style.display = "block";
     }, 2000)
 
     gameState.reset();
@@ -121,34 +162,6 @@ const statsStorage = {
     }
 }
 
-/** Timer Class */
-class Timer {
-    constructor() {
-        this.secs = 5;
-        this.timerDisplay = document.querySelector("#timer");
-    }
-
-    run() {
-        setInterval(() => {
-            if (this.secs == 0) {
-                this.stop();
-            } else {
-                this.timerDisplay.value -= 20;
-                this.secs -= 1;
-                console.log(secs);
-            }
-        }, 1000);
-    }
-
-    stop() {
-        clearInterval(this.run);
-    }
-
-    reset() {
-        this.timerDisplay.value = 100;
-    }
-}
-
 /** Handles clicks on the game buttons */
 function handleClick() {
     if (this.dataset.gameBtn === "number") {
@@ -174,7 +187,7 @@ function handleKeyPress(event) {
             handleInput("fizzbuzz");
             break;
         case "Escape":
-            for (let modal of modals) {
+            for (let modal of modalDisplay.modals) {
                 modal.style.display = "none";
             }
             break
@@ -192,14 +205,19 @@ function isInputCorrect(input) {
 
 /** Handles game input */
 function handleInput(input) {
+    if (input === 1) {
+        timer.run();
+    };
     if (isInputCorrect(input)) {
 
         if (!gameState.hardMode) {
             gameState.currentNum += 1;
         } else {
-            let randomNum = Math.floor(Math.random() * 300);
+            let randomNum = Math.floor(Math.random() * 999);
             gameState.currentNum = randomNum;
-        }
+        };
+
+        timer.reset();
 
         gameState.currentScore += 1;
         gameDisplay.update()
@@ -214,10 +232,21 @@ for (button of gameDisplay.buttons) {
 
 document.addEventListener("keydown", handleKeyPress);
 
-prefsDisplay.hardMode.addEventListener("change", () => {
-    gameState.hardMode = !gameState.hardMode;
-    prefsDisplay.disable(prefsDisplay.hardMode);
-})
+for (let prefToggle of prefsDisplay.toggles) {
+    prefToggle.addEventListener("change", (e) => {
+        switch(e.target.id) {
+            case "prefs-hard-mode":
+                gameState.hardMode = !gameState.hardMode;
+                prefsDisplay.disable(prefsDisplay.hardMode);
+                break;
+            case "prefs-dark-mode":
+                console.log("toggle dark mode")
+                break;
+            default:
+                break;
+        }
+    })
+}
 
 statsDisplay.clearStats.addEventListener("click", () => {
     statsStorage.resetStats();
@@ -226,18 +255,19 @@ statsDisplay.clearStats.addEventListener("click", () => {
 
 // Modals
 
-// Get the modal
-const navItems = document.querySelectorAll(".nav-item");
-const modals = document.querySelectorAll(".modal");
-const closeSpans = document.querySelectorAll(".close");
+const modalDisplay = {
+    navItems: document.querySelectorAll(".nav-item"),
+    modals: document.querySelectorAll(".modal"),
+    closeBtns: document.querySelectorAll(".close"),
+}
 
-for (let navItem of navItems) {
+for (let navItem of modalDisplay.navItems) {
     navItem.addEventListener("click", launchModal)
 };
 
 /** Launch a modal */
 function launchModal() {
-    modals[this.dataset.link].style.display = "block";
+    modalDisplay.modals[this.dataset.link].style.display = "block";
 };
 
 /** Check if user is a first time visitor, if so show rules */
@@ -251,16 +281,16 @@ window.addEventListener("load", () => {
 });
 
 // When the user clicks on <span> (x), close the modal
-for (let closeSpan of closeSpans) {
-    closeSpan.addEventListener("click", () => {
-        for (let modal of modals) {
+for (let closeBtn of modalDisplay.closeBtns) {
+    closeBtn.addEventListener("click", () => {
+        for (let modal of modalDisplay.modals) {
             modal.style.display = "none";
         }
     })
 };
 
 // Close modal when the user clicks anywhere outside of the modal
-for (let modal of modals) {
+for (let modal of modalDisplay.modals) {
     modal.addEventListener("click", (e) => {
         if (e.target.classList.contains("modal")) {
             modal.style.display = "none";
