@@ -86,7 +86,6 @@ const gameDisplay = {
         this.btnNum.innerText = gameState.currentNum;
     },
     newGame: function () {
-        console.log("hello");
         this.lastAnswer.innerHTML = "Start counting from 1...";
         this.btnNum.innerText = gameState.currentNum;
     },
@@ -114,7 +113,6 @@ class Timer {
             } else {
                 this.timerDisplay.value -= 20;
                 this.secs -= 1;
-                console.log(this.secs);
             }
         }, 1000);
     }
@@ -124,7 +122,6 @@ class Timer {
         this.secs = 0;
         this.timerDisplay.value = 0;
         this.isTimeUp = true;
-        console.log("Timer Stopped!")
     }
 
     reset() {

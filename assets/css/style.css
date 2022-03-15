@@ -7,7 +7,8 @@
     --color-three: rgb(242, 221, 129);
     --color-four: rgb(101, 188, 183);
     --color-black: rgb(43, 47, 47);
-    --transition-effect: all ease-in-out 0.3s;
+    --transition-hover: all ease-in-out 0.3s;
+    --transition-theme: color 1s ease, background-color 1s ease;
     --border-wavy: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
@@ -30,7 +31,9 @@ html {
     scroll-behavior: smooth;
     text-align: center;
     font-family: sans-serif;
+    color: var(--color-black);
     background-color: var(--color-background);
+    transition: var(--transition-theme);
 }
 
 *,
@@ -130,7 +133,7 @@ h1 {
 
 .btn-stats {
     width: 80%;
-    transition: var(--transition-effect);
+    transition: var(--transition-hover);
 }
 
 #btn-share svg {
@@ -187,9 +190,8 @@ h1 {
     height: 100%;
     overflow: auto;
     background-color: rgb(0, 0, 0);
-    /* Fallback color */
     background-color: rgba(0, 0, 0, 0.6);
-    /* Black w/ opacity */
+    transition: var(--transition-hover);
 }
 
 /* Modal Content/Box */
@@ -203,6 +205,7 @@ h1 {
     border: var(--color-black) solid 5px;
     width: 80%;
     max-width: 500px;
+    transition: var(--transition-hover);
 }
 
 .modal-content h2 {
@@ -219,7 +222,7 @@ h1 {
     float: right;
     font-size: 3rem;
     font-weight: bold;
-    transition: var(--transition-effect);
+    transition: var(--transition-hover);
 }
 
 .close:hover,
