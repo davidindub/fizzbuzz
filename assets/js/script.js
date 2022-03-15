@@ -14,6 +14,43 @@ const gameState = {
     }
 }
 
+const theme = {
+    selected: this.light,
+    root: document.querySelector(":root"),
+    dark: {
+        "--color-background": "rgb(18, 18, 18)",
+        "--color-header": "rgb(18, 18, 18",
+        "--color-modal": "rgb(18, 18, 18)",
+        "--color-black": "rgb(208, 208, 208)",
+        "--color-one": "rgb(157, 91, 92)",
+        "--color-two": "rgb(55, 122, 147)",
+        "--color-three": "rgb(150, 96, 26)",
+        "--color-four": "rgb(51, 113, 109)"
+    },
+    light: {
+        "--color-background": "rgb(215, 237, 236)",
+        "--color-header": "rgba(255, 255, 255, 0.8)",
+        "--color-modal": "rgb(255, 255, 255)",
+        "--color-one": "rgb(242, 159, 160)",
+        "--color-two": "rgb(107, 201, 234)",
+        "--color-three": "rgb(242, 221, 129)",
+        "--color-four": "rgb(101, 188, 183)",
+        "--color-black": "rgb(43, 47, 47)",
+    },
+    toggle: function () {
+        if (prefsDisplay.toggles[1].checked === true) {
+            this.selected = this.dark;
+        } else {
+            this.selected = this.light;
+        }
+
+        for (let [key, value] of Object.entries(this.selected)) {
+            this.root.style.setProperty(key, value);
+        }
+    }
+}
+
+
 const statsDisplay = {
     regularScore: document.querySelector("#scoreboard").rows[1].cells[1],
     regularDate: document.querySelector("#scoreboard").rows[1].cells[2],
@@ -157,12 +194,12 @@ const statsStorage = {
         localStorage.setItem("highscoreDateHardMode", "-");
         localStorage.setItem("gamesPlayed", 0);
     },
-    updateGamesPlayed: function() {
+    updateGamesPlayed: function () {
         let gamesPlayed = localStorage.getItem("gamesPlayed");
         gamesPlayed ? gamesPlayed = parseInt(gamesPlayed) : localStorage.setItem("gamesPlayed", 0);
         gamesPlayed += 1;
         localStorage.setItem("gamesPlayed", gamesPlayed);
-    
+
         statsDisplay.update();
     }
 }
@@ -240,13 +277,13 @@ document.addEventListener("keydown", handleKeyPress);
 
 for (let prefToggle of prefsDisplay.toggles) {
     prefToggle.addEventListener("change", (e) => {
-        switch(e.target.id) {
+        switch (e.target.id) {
             case "prefs-hard-mode":
                 gameState.hardMode = !gameState.hardMode;
                 prefsDisplay.disable(prefsDisplay.hardMode);
                 break;
             case "prefs-dark-mode":
-                console.log("toggle dark mode")
+                theme.toggle();
                 break;
             default:
                 break;

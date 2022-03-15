@@ -11,7 +11,7 @@
     --border-wavy: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
     :root {
         --color-background: rgb(18, 18, 18);
         --color-header: rgb(18, 18, 18);
@@ -22,7 +22,7 @@
         --color-three: rgb(150, 96, 26);
         --color-four: rgb(51, 113, 109);
     }
-}
+} */
 
 /* Resets some of the user stylesheet default rules */
 html {
