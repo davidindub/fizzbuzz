@@ -101,7 +101,7 @@ class Timer {
     constructor() {
         this.isTimeUp = false;
         this.isTimerRunning;
-        this.secs = 5;
+        this.secs = 5000;
         this.timerDisplay = document.querySelector("#timer");
     }
 
@@ -111,10 +111,11 @@ class Timer {
                 this.timeup();
 
             } else {
-                this.timerDisplay.value -= 20;
-                this.secs -= 1;
+                this.timerDisplay.value -= 4;
+                this.secs -= 200;
+                console.log(this.timerDisplay.value);
             }
-        }, 1000);
+        }, 200);
     }
 
     timeup() {
@@ -125,7 +126,7 @@ class Timer {
     }
 
     reset() {
-        this.secs = 5;
+        this.secs = 5000;
         this.timerDisplay.value = 100;
         this.isTimeUp = false;
     }
