@@ -5,11 +5,11 @@ const gameState = {
     hardMode: false,
     currentScore: 0,
     currentNum: 1,
-    reset: function () {
+    newGame: function () {
         this.isGameOver = false;
         this.currentNum = 1;
         this.currentScore = 0;
-        gameDisplay.update();
+        gameDisplay.newGame();
         prefsDisplay.enable(prefsDisplay.hardMode);
     }
 }
@@ -46,6 +46,11 @@ const gameDisplay = {
     btnNum: document.querySelector("#btn-num"),
     lastAnswer: document.querySelector("#lastAnswerDisplay"),
     update: function () {
+        this.btnNum.innerText = gameState.currentNum;
+    },
+    newGame: function () {
+        console.log("hello");
+        this.lastAnswer.innerHTML = "Start counting from 1...";
         this.btnNum.innerText = gameState.currentNum;
     },
     toggleDisable: function () {
@@ -124,7 +129,7 @@ function handleGameOver() {
         modalDisplay.modals[1].style.display = "block";
     }, 2000)
 
-    gameState.reset();
+    // gameState.reset();
 }
 
 /** Handles Stats in Local Storage */
@@ -173,6 +178,7 @@ function handleClick() {
 
 /** Handles arrow key presses */
 function handleKeyPress(event) {
+    if (gameState.isGameOver) return;
     switch (event.code) {
         case "ArrowLeft":
             handleInput("fizz");
@@ -288,6 +294,13 @@ for (let closeBtn of modalDisplay.closeBtns) {
         }
     })
 };
+
+
+modalDisplay.closeBtns[1].addEventListener("click", () => {
+    if (gameState.isGameOver) {
+        gameState.newGame();
+    }
+})
 
 // Close modal when the user clicks anywhere outside of the modal
 for (let modal of modalDisplay.modals) {
