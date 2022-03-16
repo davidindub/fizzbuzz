@@ -97,15 +97,17 @@
             <label for="prefs-hard-mode">Hard Mode</label>
             <input type="checkbox" name="prefs-hard-mode" id="prefs-hard-mode" class="prefs-check">
             <br>
-            <small>(Non sequential random numbers!)</small>
+            <small>(Non sequential random numbers! Select before beginning a new game.)</small>
             <hr>
             <label for="prefs-dark-mode">Dark Mode</label>
             <input type="checkbox" name="prefs-dark-mode" id="prefs-dark-mode" class="prefs-check">
             <br>
             <small>Auto set based on your computer preferences.</small>
-            <!-- Option to turn off Timer? -->
-            <!-- Dark Mode? -->
-            <!-- High Contrast Mode? -->
+            <hr>
+            <label for="prefs-timer">Timer</label>
+            <input type="checkbox" name="prefs-timer" id="prefs-timer" class="prefs-check" checked="true">
+            <br>
+            <small>Toggle the timer for answering.</small>
         </div>
     </aside>
     <!-- A statistics modal -->
@@ -160,8 +162,10 @@
                 <br>
                 If it is divisible by fifteen choose <strong>FizzBuzz</strong>.
                 <br>
-                Otherwise select the Number</p>
-            <br><br>
+                Otherwise select the Number.</p>
+            <br>
+            <p>You only have five seconds to answer!</p>
+            <br>
             <p>In Hard Mode numbers are non-sequential.</p>
             <hr>
             <p>You can click, tap, or use your keyboard's arrow keys to play:

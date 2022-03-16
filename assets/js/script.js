@@ -3,6 +3,7 @@
 const gameState = {
     isGameOver: false,
     hardMode: false,
+    isTimerOn: true,
     currentScore: 0,
     currentNum: 1,
     newGame: function () {
@@ -22,11 +23,11 @@ const statsDisplay = {
     gamesPlayed: document.querySelector("#games-played-display"),
     clearStats: document.querySelector("#btn-clear-stats"),
     update: function () {
-        this.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
-        this.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
-        this.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
-        this.hardDate.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
-        this.gamesPlayed.innerHTML = `${localStorage.getItem("gamesPlayed")}`;
+        this.regularScore.innerText = `${localStorage.getItem("highscore")}`;
+        this.regularDate.innerText = `${localStorage.getItem("highscoreDate")}`
+        this.hardScore.innerText = `${localStorage.getItem("highscoreHardMode")}`;
+        this.hardDate.innerText = `${localStorage.getItem("highscoreDateHardMode")}`;
+        this.gamesPlayed.innerText = `${localStorage.getItem("gamesPlayed")}`;
     }
 }
 
@@ -34,6 +35,7 @@ const prefsDisplay = {
     toggles: document.querySelectorAll(".prefs-check"),
     btnHardMode: document.querySelector("#prefs-hard-mode"),
     btnDarkMode: document.querySelector("#prefs-dark-mode"),
+    btnTimer: document.querySelector("#prefs-timer"),
     disable: function (btn) {
        btn.disabled = true;
     },
@@ -58,7 +60,7 @@ const gameDisplay = {
         this.btnNum.innerText = gameState.currentNum;
     },
     newGame: function () {
-        this.lastAnswer.innerHTML = "Start counting from 1...";
+        this.lastAnswer.innerText = "Start counting from 1...";
         this.btnNum.innerText = gameState.currentNum;
     },
     toggleDisable: function () {
@@ -93,7 +95,6 @@ const theme = {
         "--color-black": "rgb(43, 47, 47)",
     },
     checkUserOSPref: function () {
-        console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             prefsDisplay.btnDarkMode.checked = true;
             this.selected = this.dark;
@@ -115,7 +116,6 @@ const theme = {
 class Timer {
     constructor() {
         this.isTimeUp = false;
-        this.isTimerRunning;
         this.secs = 5000;
         this.timerDisplay = document.querySelector("#timer");
     }
@@ -166,10 +166,12 @@ function checkNumber(num) {
 
 /** Handles a game over */
 function handleGameOver() {
-    timer.timeup();
+    if (gameState.isTimerOn) {
+        timer.timeup();
+    }
     gameDisplay.toggleDisable();
     gameState.isGameOver = true;
-    gameDisplay.lastAnswer.innerHTML = `Game Over! Your score was ${gameState.currentScore}.`;
+    gameDisplay.lastAnswer.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
 
     statsStorage.updateGamesPlayed();
     statsStorage.logHighScore();
@@ -261,7 +263,7 @@ function isInputCorrect(input) {
 
 /** Handles game input */
 function handleInput(input) {
-    if (input === 1) {
+    if (input === 1 && gameState.isTimerOn) {
         timer.run();
     };
     if (isInputCorrect(input)) {
@@ -273,11 +275,14 @@ function handleInput(input) {
             gameState.currentNum = randomNum;
         };
 
-        timer.reset();
+        if (gameState.isTimerOn) {
+            timer.reset();
+        }
 
         gameState.currentScore += 1;
         gameDisplay.update()
-        gameDisplay.lastAnswer.innerHTML = "👍";
+        gameDisplay.lastAnswer.innerText = "👍";
+        
     } else handleGameOver();
 }
 
@@ -298,12 +303,16 @@ for (let prefToggle of prefsDisplay.toggles) {
             case "prefs-dark-mode":
                 prefsDisplay.darkMode();
                 break;
+            case "prefs-timer":
+                gameState.isTimerOn = !gameState.isTimerOn;
+                console.log(gameState.isTimerOn);
             default:
                 break;
         }
     })
 }
 
+/** Event Listener to clear stats in localstorage */
 statsDisplay.clearStats.addEventListener("click", () => {
     statsStorage.resetStats();
     statsDisplay.update();
@@ -345,7 +354,7 @@ for (let closeBtn of modalDisplay.closeBtns) {
     })
 };
 
-
+/** Reset Game State when user closes the stats modal after a game over */
 modalDisplay.closeBtns[1].addEventListener("click", () => {
     if (gameState.isGameOver) {
         gameState.newGame();
