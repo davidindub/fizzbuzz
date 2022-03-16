@@ -10,9 +10,64 @@ const gameState = {
         this.currentNum = 1;
         this.currentScore = 0;
         gameDisplay.newGame();
-        prefsDisplay.enable(prefsDisplay.hardMode);
+        prefsDisplay.enable(prefsDisplay.btnHardMode);
     }
 }
+
+const statsDisplay = {
+    regularScore: document.querySelector("#scoreboard").rows[1].cells[1],
+    regularDate: document.querySelector("#scoreboard").rows[1].cells[2],
+    hardScore: document.querySelector("#scoreboard").rows[2].cells[1],
+    hardDate: document.querySelector("#scoreboard").rows[2].cells[2],
+    gamesPlayed: document.querySelector("#games-played-display"),
+    clearStats: document.querySelector("#btn-clear-stats"),
+    update: function () {
+        this.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
+        this.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
+        this.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
+        this.hardDate.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
+        this.gamesPlayed.innerHTML = `${localStorage.getItem("gamesPlayed")}`;
+    }
+}
+
+const prefsDisplay = {
+    toggles: document.querySelectorAll(".prefs-check"),
+    btnHardMode: document.querySelector("#prefs-hard-mode"),
+    btnDarkMode: document.querySelector("#prefs-dark-mode"),
+    disable: function (btn) {
+       btn.disabled = true;
+    },
+    enable: function (btn) {
+       btn.disabled = false;
+    },
+    darkMode: function () {
+        if (this.btnDarkMode.checked === true) {
+            theme.selected = theme.dark;
+        } else {
+            theme.selected = theme.light;
+        }
+        theme.changeTheme();
+}
+}
+
+const gameDisplay = {
+    buttons: document.querySelectorAll(".btn-game"),
+    btnNum: document.querySelector("#btn-num"),
+    lastAnswer: document.querySelector("#lastAnswerDisplay"),
+    update: function () {
+        this.btnNum.innerText = gameState.currentNum;
+    },
+    newGame: function () {
+        this.lastAnswer.innerHTML = "Start counting from 1...";
+        this.btnNum.innerText = gameState.currentNum;
+    },
+    toggleDisable: function () {
+        for (let button of this.buttons) {
+            button.disabled = !button.disabled;
+        }
+    }
+}
+
 
 const theme = {
     selected: this.light,
@@ -37,64 +92,24 @@ const theme = {
         "--color-four": "rgb(101, 188, 183)",
         "--color-black": "rgb(43, 47, 47)",
     },
-    toggle: function () {
-        if (prefsDisplay.toggles[1].checked === true) {
+    checkUserOSPref: function () {
+        console.log(window.matchMedia('(prefers-color-scheme: dark)').matches);
+        if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            prefsDisplay.btnDarkMode.checked = true;
             this.selected = this.dark;
         } else {
+            prefsDisplay.btnDarkMode.checked = false;
             this.selected = this.light;
         }
-
+        this.changeTheme();
+    },
+    changeTheme: function () {
         for (let [key, value] of Object.entries(this.selected)) {
             this.root.style.setProperty(key, value);
         }
     }
 }
 
-
-const statsDisplay = {
-    regularScore: document.querySelector("#scoreboard").rows[1].cells[1],
-    regularDate: document.querySelector("#scoreboard").rows[1].cells[2],
-    hardScore: document.querySelector("#scoreboard").rows[2].cells[1],
-    hardDate: document.querySelector("#scoreboard").rows[2].cells[2],
-    gamesPlayed: document.querySelector("#games-played-display"),
-    clearStats: document.querySelector("#btn-clear-stats"),
-    update: function () {
-        this.regularScore.innerHTML = `${localStorage.getItem("highscore")}`;
-        this.regularDate.innerHTML = `${localStorage.getItem("highscoreDate")}`
-        this.hardScore.innerHTML = `${localStorage.getItem("highscoreHardMode")}`;
-        this.hardDate.innerHTML = `${localStorage.getItem("highscoreDateHardMode")}`;
-        this.gamesPlayed.innerHTML = `${localStorage.getItem("gamesPlayed")}`;
-    }
-}
-
-const prefsDisplay = {
-    toggles: document.querySelectorAll(".prefs-check"),
-    hardMode: document.querySelector("#prefs-hard-mode"),
-    disable: function (btn) {
-        btn.disabled = true;
-    },
-    enable: function (btn) {
-        btn.disabled = false;
-    }
-}
-
-const gameDisplay = {
-    buttons: document.querySelectorAll(".btn-game"),
-    btnNum: document.querySelector("#btn-num"),
-    lastAnswer: document.querySelector("#lastAnswerDisplay"),
-    update: function () {
-        this.btnNum.innerText = gameState.currentNum;
-    },
-    newGame: function () {
-        this.lastAnswer.innerHTML = "Start counting from 1...";
-        this.btnNum.innerText = gameState.currentNum;
-    },
-    toggleDisable: function () {
-        for (let button of this.buttons) {
-            button.disabled = !button.disabled;
-        }
-    }
-}
 
 /** Timer Class */
 class Timer {
@@ -113,7 +128,6 @@ class Timer {
             } else {
                 this.timerDisplay.value -= 4;
                 this.secs -= 200;
-                console.log(this.timerDisplay.value);
             }
         }, 200);
     }
@@ -133,6 +147,7 @@ class Timer {
 }
 
 /** Game Set Up */
+theme.checkUserOSPref();
 statsDisplay.update();
 gameDisplay.update();
 let timer = new Timer();
@@ -278,10 +293,10 @@ for (let prefToggle of prefsDisplay.toggles) {
         switch (e.target.id) {
             case "prefs-hard-mode":
                 gameState.hardMode = !gameState.hardMode;
-                prefsDisplay.disable(prefsDisplay.hardMode);
+                prefsDisplay.disable(prefsDisplay.btnHardMode);
                 break;
             case "prefs-dark-mode":
-                theme.toggle();
+                prefsDisplay.darkMode();
                 break;
             default:
                 break;

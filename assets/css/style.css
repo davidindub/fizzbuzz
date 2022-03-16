@@ -66,7 +66,7 @@ textarea,
 select,
 nav a {
     font: inherit;
-    color: inherit;
+    color: var(--color-black);
     text-decoration: none;
 }
 
@@ -105,6 +105,7 @@ nav ul li {
     display: inline;
     list-style: none;
     padding: 0 0.1rem;
+    color: var(--color-black);
 }
 
 
@@ -205,7 +206,7 @@ h1 {
     border: var(--color-black) solid 5px;
     width: 80%;
     max-width: 500px;
-    transition: var(--transition-hover);
+    transition: var(--transition-theme);
 }
 
 .modal-content h2 {
