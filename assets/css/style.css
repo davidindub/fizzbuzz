@@ -1,6 +1,6 @@
 :root {
     --color-background: rgb(215, 237, 236);
-    --color-header: rgba(255, 255, 255, 0.8);
+    --color-header: rgb(255, 255, 255);
     --color-modal: rgb(255, 255, 255);
     --color-one: rgb(242, 159, 160);
     --color-two: rgb(107, 201, 234);
@@ -25,7 +25,6 @@
     }
 } */
 
-/* Resets some of the user stylesheet default rules */
 html {
     box-sizing: border-box;
     scroll-behavior: smooth;
@@ -33,7 +32,6 @@ html {
     font-family: sans-serif;
     color: var(--color-black);
     background-color: var(--color-background);
-    transition: var(--transition-theme);
 }
 
 *,
@@ -58,8 +56,6 @@ dd {
     margin: 0;
 }
 
-/* Global Element Styles */
-
 input,
 button,
 textarea,
@@ -70,30 +66,20 @@ nav a {
     text-decoration: none;
 }
 
-table {
-    border: 3px solid var(--color-black);
-    padding: 0.2rem;
-    text-align: center;
-}
-
-th,
-td {
-    padding: 0.3rem;
-}
-
-table {
-    width: 100%;
-    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
-}
-
 header {
     background-color: var(--color-header);
     margin-bottom: 0.5rem;
     border-bottom: var(--color-black) solid 0.3rem;
+    color: var(--color-black);
+    transition: var(--transition-theme);
+}
+
+.header-container {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 1.2rem;
-    color: var(--color-black);
+    margin: 0 auto;
+    max-width: 600px;
 }
 
 nav {
@@ -108,32 +94,54 @@ nav ul li {
     color: var(--color-black);
 }
 
-
 h1 {
     font-family: 'Bungee', cursive;
     font-size: 2rem;
     cursor: default;
 }
 
-#countdown-timer {
-    color: var(--color-black);
-    font-size: 3rem;
+#timer {
+    padding: 1rem 0;
 }
 
-#lastAnswerDisplay,
+label[for=timer] {
+    display: none;
+}
+
+#last-answer-display,
 .btn-stats {
     font-size: 1rem;
     background-color: var(--color-header);
     color: var(--color-black);
     padding: 1rem;
     margin: 1rem;
-    display: inline-block;
     border-radius: var(--border-wavy);
     border: var(--color-black) solid 5px;
 }
 
+#scoreboard {
+    font-size: 0.8rem;
+    border: 3px solid var(--color-black);
+    table-layout: fixed;
+    padding: 0.2rem;
+    text-align: center;
+    width: 100%;
+    border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+
+#scoreboard th,
+#scoreboard td {
+    padding: 0.3rem;
+    width: 30%;
+}
+
+#stats-btns {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .btn-stats {
-    width: 80%;
     transition: var(--transition-hover);
 }
 
@@ -152,8 +160,8 @@ h1 {
 .btn-game {
     font-family: 'Bungee', cursive;
     color: var(--color-black);
-    height: 150px;
-    width: 150px;
+    height: 9rem;
+    width: 9rem;
     font-size: 2rem;
     border: var(--color-black) solid 5px;
     border-radius: var(--border-wavy);
@@ -192,7 +200,7 @@ h1 {
     overflow: auto;
     background-color: rgb(0, 0, 0);
     background-color: rgba(0, 0, 0, 0.6);
-    transition: var(--transition-hover);
+    transition: var(--transition-theme);
 }
 
 /* Modal Content/Box */
@@ -200,7 +208,7 @@ h1 {
     color: var(--color-black);
     background-color: var(--color-modal);
     margin: 15% auto;
-    padding: 20px;
+    padding: 1.2rem;
     text-align: left;
     border-radius: var(--border-wavy);
     border: var(--color-black) solid 5px;
@@ -237,4 +245,16 @@ h1 {
     list-style: none;
     text-align: left;
     padding-right: 3rem;
+}
+
+@media screen and (min-width: 425px) {
+    #scoreboard {
+        font-size: 1rem;
+    }
+
+    .btn-game {
+        height: 12rem;
+        width: 12rem;
+        font-size: 3rem;
+    }
 }

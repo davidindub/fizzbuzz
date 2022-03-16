@@ -55,7 +55,7 @@ const prefsDisplay = {
 const gameDisplay = {
     buttons: document.querySelectorAll(".btn-game"),
     btnNum: document.querySelector("#btn-num"),
-    lastAnswer: document.querySelector("#lastAnswerDisplay"),
+    lastAnswer: document.querySelector("#last-answer-display"),
     update: function () {
         this.btnNum.innerText = gameState.currentNum;
     },
@@ -86,7 +86,7 @@ const theme = {
     },
     light: {
         "--color-background": "rgb(215, 237, 236)",
-        "--color-header": "rgba(255, 255, 255, 0.8)",
+        "--color-header": "rgb(255, 255, 255)",
         "--color-modal": "rgb(255, 255, 255)",
         "--color-one": "rgb(242, 159, 160)",
         "--color-two": "rgb(107, 201, 234)",
@@ -193,11 +193,11 @@ const statsStorage = {
         if (!gameState.hardMode) {
             if (finalScore > localStorage.getItem("highscore")) {
                 localStorage.setItem("highscore", finalScore);
-                localStorage.setItem("highscoreDate", today.toDateString());
+                localStorage.setItem("highscoreDate", today.toLocaleDateString('en-GB'));
             }
         } else if (finalScore > localStorage.getItem("highscoreHardMode")) {
             localStorage.setItem("highscoreHardMode", finalScore);
-            localStorage.setItem("highscoreDateHardMode", today.toDateString());
+            localStorage.setItem("highscoreDateHardMode", today.toLocaleDateString('en-GB'));
         }
 
         statsDisplay.update();

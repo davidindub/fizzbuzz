@@ -29,53 +29,52 @@
 <body>
 
     <header>
-        <h1>FizzBuzz</h1>
+        <div class="header-container">
+            <h1>FizzBuzz</h1>
+            <nav>
+                <ul>
+                    <!-- Preferences Link -->
+                    <li>
+                        <a href="#" aria-label="Preferences" data-link="0" class="nav-item">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
+                            </svg>
+                        </a>
+                    </li>
 
-        <nav>
-            <ul>
-                <!-- Preferences Link -->
-                <li>
-                    <a href="#" aria-label="Preferences" data-link="0" class="nav-item">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                            fill="currentColor" class="bi bi-gear-fill" viewBox="0 0 16 16">
-                            <path
-                                d="M9.405 1.05c-.413-1.4-2.397-1.4-2.81 0l-.1.34a1.464 1.464 0 0 1-2.105.872l-.31-.17c-1.283-.698-2.686.705-1.987 1.987l.169.311c.446.82.023 1.841-.872 2.105l-.34.1c-1.4.413-1.4 2.397 0 2.81l.34.1a1.464 1.464 0 0 1 .872 2.105l-.17.31c-.698 1.283.705 2.686 1.987 1.987l.311-.169a1.464 1.464 0 0 1 2.105.872l.1.34c.413 1.4 2.397 1.4 2.81 0l.1-.34a1.464 1.464 0 0 1 2.105-.872l.31.17c1.283.698 2.686-.705 1.987-1.987l-.169-.311a1.464 1.464 0 0 1 .872-2.105l.34-.1c1.4-.413 1.4-2.397 0-2.81l-.34-.1a1.464 1.464 0 0 1-.872-2.105l.17-.31c.698-1.283-.705-2.686-1.987-1.987l-.311.169a1.464 1.464 0 0 1-2.105-.872l-.1-.34zM8 10.93a2.929 2.929 0 1 1 0-5.86 2.929 2.929 0 0 1 0 5.858z" />
-                        </svg>
-                    </a>
-                </li>
-
-                <!-- Statistics Link -->
-                <li>
-                    <a href="#" aria-label="Statistics" data-link="1" class="nav-item">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                            fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
-                            <path
-                                d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
-                        </svg>
-                    </a>
-                </li>
-                <!-- Rules Link -->
-                <li>
-                    <a href="#" aria-label="How To Play" data-link="2" class="nav-item">
-                        <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
-                            fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                            <path
-                                d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
-                        </svg>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+                    <!-- Statistics Link -->
+                    <li>
+                        <a href="#" aria-label="Statistics" data-link="1" class="nav-item">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                fill="currentColor" class="bi bi-bar-chart" viewBox="0 0 16 16">
+                                <path
+                                    d="M4 11H2v3h2v-3zm5-4H7v7h2V7zm5-5v12h-2V2h2zm-2-1a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h2a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-2zM6 7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7zm-5 4a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3z" />
+                            </svg>
+                        </a>
+                    </li>
+                    <!-- Rules Link -->
+                    <li>
+                        <a href="#" aria-label="How To Play" data-link="2" class="nav-item">
+                            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="30" height="30"
+                                fill="currentColor" class="bi bi-question-circle" viewBox="0 0 16 16">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path
+                                    d="M5.255 5.786a.237.237 0 0 0 .241.247h.825c.138 0 .248-.113.266-.25.09-.656.54-1.134 1.342-1.134.686 0 1.314.343 1.314 1.168 0 .635-.374.927-.965 1.371-.673.489-1.206 1.06-1.168 1.987l.003.217a.25.25 0 0 0 .25.246h.811a.25.25 0 0 0 .25-.25v-.105c0-.718.273-.927 1.01-1.486.609-.463 1.244-.977 1.244-2.056 0-1.511-1.276-2.241-2.673-2.241-1.267 0-2.655.59-2.75 2.286zm1.557 5.763c0 .533.425.927 1.01.927.609 0 1.028-.394 1.028-.927 0-.552-.42-.94-1.029-.94-.584 0-1.009.388-1.009.94z" />
+                            </svg>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
     </header>
 
     <main>
-        <!-- A time limit countdown on making a selection, maybe 5 seconds -->
-        <!-- Animate timer with CSS -->
         <br><br>
-        <span id="lastAnswerDisplay">Start counting from 1...</span>
+        <span id="last-answer-display">Start counting from 1...</span>
         <br><br>
-        <label for="file">Time Left:</label>
+        <label id="timer-label" for="timer">Time Left:</label>
         <br>
         <progress id="timer" value="100" max="100">5 secs</progress>
         <br><br>
@@ -92,7 +91,7 @@
     <!-- A Preferences Modal -->
     <aside class="modal" role="dialog" aria-labelledby="modal-prefs-title">
         <div class="modal-content">
-            <span class="close" aria-label="Close Preferences.">&times;</span>
+            <span class="close" aria-label="Close">&times;</span>
             <h2 id="modal-prefs-title">Preferences</h2>
             <label for="prefs-hard-mode">Hard Mode</label>
             <input type="checkbox" name="prefs-hard-mode" id="prefs-hard-mode" class="prefs-check">
@@ -113,7 +112,7 @@
     <!-- A statistics modal -->
     <aside class="modal" role="dialog" aria-labelledby="modal-stats-title">
         <div class="modal-content">
-            <span class="close" aria-label="Close Statistics.">&times;</span>
+            <span class="close" aria-label="Close">&times;</span>
             <h2 id="modal-stats-title">Statistics</h2>
             <table id="scoreboard">
                 <thead>
@@ -138,31 +137,37 @@
             </table>
             <hr>
             <p>Total games played: <span id="games-played-display"></span></p>
-            <button id="btn-share" class="btn-stats btn-share">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                    class="bi bi-share-fill" viewBox="0 0 16 16">
-                    <path
-                        d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
-                </svg>
-                Share Stats</button>
-            <button id="btn-clear-stats" class="btn-stats">Clear All Stats</button>
+            <hr>
+            <div id="stats-btns">
+                <button id="btn-share" class="btn-stats btn-share">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                        class="bi bi-share-fill" viewBox="0 0 16 16">
+                        <path
+                            d="M11 2.5a2.5 2.5 0 1 1 .603 1.628l-6.718 3.12a2.499 2.499 0 0 1 0 1.504l6.718 3.12a2.5 2.5 0 1 1-.488.876l-6.718-3.12a2.5 2.5 0 1 1 0-3.256l6.718-3.12A2.5 2.5 0 0 1 11 2.5z" />
+                    </svg>
+                    Share Stats</button>
+                <button id="btn-clear-stats" class="btn-stats">Clear All Stats</button>
+            </div>
         </div>
     </aside>
+
     <!-- A modal to appear on first visit explaining the rules of FizzBuzz -->
-    <aside class="modal" role="dialog" aria-labelledby="">
+    <aside class="modal" role="dialog" aria-labelledby="modal-rules-title" aria-describedby="modal-rules-text">
 
         <!-- Modal content -->
-        <div class="modal-content" id="modal-rules-title">
-            <span class="close" aria-label="Close How to Play.">&times;</span>
+        <div class="modal-content">
+            <span class="close" aria-label="Close">&times;</span>
             <h2 id="modal-rules-title">How to Play</h2>
-            <p>Counting upwards from 1...</p>
-            <p>If the number is divisible by three choose <strong>Fizz</strong>.
+            <p id="modal-rules-text">Counting upwards from 1...
+                <br>
+                If the number is divisible by three choose <strong>Fizz</strong>.
                 <br>
                 If it is divisible by five choose <strong>Buzz</strong>.
                 <br>
                 If it is divisible by fifteen choose <strong>FizzBuzz</strong>.
                 <br>
-                Otherwise select the Number.</p>
+                Otherwise select the Number.
+            </p>
             <br>
             <p>You only have five seconds to answer!</p>
             <br>
