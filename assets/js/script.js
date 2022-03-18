@@ -11,6 +11,7 @@ const gameState = {
         this.currentNum = 1;
         this.currentScore = 0;
         gameDisplay.newGame();
+        gameDisplay.toggleDisable();
         prefsDisplay.enable(prefsDisplay.btnHardMode);
     }
 }
@@ -115,34 +116,35 @@ const theme = {
 /** Timer Class */
 class Timer {
     constructor() {
-        this.isTimeUp = false;
+        this.interval = null;
         this.secs = 5000;
         this.timerDisplay = document.querySelector("#timer");
     }
 
-    run() {
+    start() {
         this.interval = setInterval(() => {
-            if (this.secs == 0) {
-                this.timeup();
+            this.timerDisplay.value -= 4;
+            this.secs -= 200;
 
-            } else {
-                this.timerDisplay.value -= 4;
-                this.secs -= 200;
+            if (this.secs === 0) {
+                handleGameOver();
+                this.timeup();
             }
+            
         }, 200);
     }
 
     timeup() {
         clearInterval(this.interval);
+        this.interval = null;
         this.secs = 0;
         this.timerDisplay.value = 0;
-        this.isTimeUp = true;
     }
 
     reset() {
+        this.interval = null;
         this.secs = 5000;
         this.timerDisplay.value = 100;
-        this.isTimeUp = false;
     }
 }
 
@@ -166,9 +168,10 @@ function checkNumber(num) {
 
 /** Handles a game over */
 function handleGameOver() {
-    if (gameState.isTimerOn) {
+    if (timer.secs !== 0) {
         timer.timeup();
     }
+
     gameDisplay.toggleDisable();
     gameState.isGameOver = true;
     gameDisplay.lastAnswer.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
@@ -264,7 +267,7 @@ function isInputCorrect(input) {
 /** Handles game input */
 function handleInput(input) {
     if (input === 1 && gameState.isTimerOn) {
-        timer.run();
+        timer.start();
     };
     if (isInputCorrect(input)) {
 

@@ -100,6 +100,23 @@ h1 {
     cursor: default;
 }
 
+p {
+    font-size: 0.9rem
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:hover {
+    color: var(--color-two);
+}
+
+hr {
+    border: 1px dashed var(--color-black);
+}
+
 #timer {
     padding: 1rem 0;
 }
@@ -248,6 +265,9 @@ label[for=timer] {
 }
 
 @media screen and (min-width: 425px) {
+    p {
+        font-size: 1rem;
+    }
     #scoreboard {
         font-size: 1rem;
     }

@@ -77,6 +77,24 @@ __Favicon__
 ![The favicon for the project](/assets/images/favicon/apple-touch-icon.png)
   - A favicon and icon for iOS/Android home screen bookmarks is included with the project's logo.
 
+__Dark Mode__
+
+Initially I implemented a Dark Mode using CSS Media Queries to check if the user had dark mode enabled on their device.
+```css @media (prefers-color-scheme: dark) {
+    :root {
+        --color-background: rgb(18, 18, 18);
+        --color-header: rgb(18, 18, 18);
+        --color-modal: rgb(18, 18, 18);
+        --color-black: rgb(208, 208, 208);
+        --color-one: rgb(157, 91, 92);
+        --color-two: rgb(55, 122, 147);
+        --color-three: rgb(150, 96, 26);
+        --color-four: rgb(51, 113, 109);
+    }
+```
+
+However I later decided I wanted the user to be able to change the theme manually, so I refactored the code to swap the CSS Variables with JavaScript when the user toggled the setting in the Preferences Pane, and checked their device setting using JS instead of a media query.
+
 __Meta Data for Social Media__
 
   - Metadata was included in the `<head>` of each page to include a thumbnail of the site when shared on social media, and improve SEO.
