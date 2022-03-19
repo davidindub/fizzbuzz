@@ -45,11 +45,11 @@ const prefsDisplay = {
     },
     darkMode: function () {
         if (this.btnDarkMode.checked === true) {
-            theme.selected = theme.dark;
+            localStorage.setItem("darkMode", true);
         } else {
-            theme.selected = theme.light;
+            localStorage.setItem("darkMode", false);
         }
-        theme.changeTheme();
+        theme.update();
 }
 }
 
@@ -71,47 +71,27 @@ const gameDisplay = {
     }
 }
 
-
+/** Dark Mode */
 const theme = {
-    selected: this.light,
     root: document.querySelector(":root"),
-    dark: {
-        "--color-background": "rgb(18, 18, 18)",
-        "--color-header": "rgb(18, 18, 18",
-        "--color-modal": "rgb(18, 18, 18)",
-        "--color-black": "rgb(208, 208, 208)",
-        "--color-one": "rgb(157, 91, 92)",
-        "--color-two": "rgb(55, 122, 147)",
-        "--color-three": "rgb(150, 96, 26)",
-        "--color-four": "rgb(51, 113, 109)"
-    },
-    light: {
-        "--color-background": "rgb(215, 237, 236)",
-        "--color-header": "rgb(255, 255, 255)",
-        "--color-modal": "rgb(255, 255, 255)",
-        "--color-one": "rgb(242, 159, 160)",
-        "--color-two": "rgb(107, 201, 234)",
-        "--color-three": "rgb(242, 221, 129)",
-        "--color-four": "rgb(101, 188, 183)",
-        "--color-black": "rgb(43, 47, 47)",
-    },
     checkUserOSPref: function () {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            localStorage.setItem("darkMode", true);
+        } else {
+            localStorage.setItem("darkMode", false);
+        }
+        this.update();
+    },
+    update: function () {
+        if (localStorage.getItem("darkMode") === "true") {
             prefsDisplay.btnDarkMode.checked = true;
-            this.selected = this.dark;
+            this.root.id = "dark";
         } else {
             prefsDisplay.btnDarkMode.checked = false;
-            this.selected = this.light;
-        }
-        this.changeTheme();
-    },
-    changeTheme: function () {
-        for (let [key, value] of Object.entries(this.selected)) {
-            this.root.style.setProperty(key, value);
+            this.root.removeAttribute("id");
         }
     }
 }
-
 
 /** Timer Class */
 class Timer {
@@ -149,7 +129,7 @@ class Timer {
 }
 
 /** Game Set Up */
-theme.checkUserOSPref();
+theme.update();
 statsDisplay.update();
 gameDisplay.update();
 let timer = new Timer();
@@ -338,11 +318,14 @@ function launchModal() {
     modalDisplay.modals[this.dataset.link].style.display = "block";
 };
 
-/** Check if user is a first time visitor, if so show rules */
+/** Check if user is a first time visitor, if so show rules and check for system dark mode preference */
 window.addEventListener("load", () => {
     if (localStorage.length === 0) {
         statsStorage.resetStats();
         modals[2].style.display = "block";
+    }
+    if (localStorage.getItem("darkMode") === null) {
+        theme.checkUserOSPref();
     }
 }, {
     once: true

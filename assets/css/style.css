@@ -12,18 +12,16 @@
     --border-wavy: 255px 15px 225px 15px/15px 225px 15px 255px;
 }
 
-/* @media (prefers-color-scheme: dark) {
-    :root {
-        --color-background: rgb(18, 18, 18);
-        --color-header: rgb(18, 18, 18);
-        --color-modal: rgb(18, 18, 18);
-        --color-black: rgb(208, 208, 208);
-        --color-one: rgb(157, 91, 92);
-        --color-two: rgb(55, 122, 147);
-        --color-three: rgb(150, 96, 26);
-        --color-four: rgb(51, 113, 109);
-    }
-} */
+#dark {
+    --color-background: rgb(18, 18, 18);
+    --color-header: rgb(18, 18, 18);
+    --color-modal: rgb(18, 18, 18);
+    --color-black: rgb(208, 208, 208);
+    --color-one: rgb(157, 91, 92);
+    --color-two: rgb(55, 122, 147);
+    --color-three: rgb(150, 96, 26);
+    --color-four: rgb(51, 113, 109);
+}
 
 html {
     box-sizing: border-box;
@@ -180,7 +178,7 @@ label[for=timer] {
     height: 9rem;
     width: 9rem;
     font-size: 2rem;
-    border: var(--color-black) solid 5px;
+    border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
     margin: 3px;
 }
