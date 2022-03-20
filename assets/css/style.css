@@ -181,6 +181,11 @@ label[for=timer] {
     border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
     margin: 3px;
+    transition: all ease-in-out 0.1s;
+}
+
+.btn-game:hover {
+    border: var(--color-black) dotted 0.4rem;
 }
 
 .btn-game[data-game-btn="number"] {
@@ -240,6 +245,80 @@ label[for=timer] {
     margin: 1rem 0;
 }
 
+/* Preferences Toggles */
+.prefs-label {
+    display: inline-flex;
+    align-items: center;
+    margin: 0.3rem 0;
+}
+
+.prefs-label .prefs-toggle {
+    position: relative;
+    cursor: pointer;
+    padding-right: 0.8rem;
+}
+
+.prefs-label [type=checkbox] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Default States */
+
+.prefs-label .prefs-toggle::before,
+.prefs-label .prefs-toggle::after {
+    content: '';
+    display: block;
+    margin: 0 0.2;
+    transition: all 100ms cubic-bezier(0.4, 0.0, 0.2, 1);
+    background: rgb(208, 208, 208);
+}
+
+.prefs-label .prefs-toggle::before {
+    height: 1.3em;
+    width: 3em;
+    border-radius: 0.65em;
+    opacity: 0.6;
+}
+
+.prefs-label .prefs-toggle::after {
+    position: absolute;
+    top: 50%;
+    transform: translate(0, -50%);
+    height: 1.7em;
+    width: 1.7em;
+    border-radius: 50%;
+    box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2), 0 0 2px rgba(0, 0, 0, 0.4);
+}
+
+/* special states */
+.prefs-label [type=checkbox]:focus+.prefs-toggle {
+    outline: var(--color-two) solid 1px;
+    box-shadow: 0 0 0.5rem var(--color-four);
+}
+
+.prefs-label [type=checkbox]:disabled+.prefs-toggle {
+    cursor: not-allowed;
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
+.prefs-label [type=checkbox]:disabled+.prefs-toggle::after {
+    box-shadow: none;
+}
+
+/* checked states */
+
+.prefs-label [type=checkbox]:checked+.prefs-toggle::before,
+.prefs-label [type=checkbox]:checked+.prefs-toggle::after {
+    background: var(--color-four);
+}
+
+.prefs-label [type=checkbox]:checked+.prefs-toggle::after {
+    transform: translate(calc(3em - 100%), -50%);
+}
+
 /* The Close Button */
 .close {
     color: #aaa;
@@ -266,6 +345,7 @@ label[for=timer] {
     p {
         font-size: 1rem;
     }
+
     #scoreboard {
         font-size: 1rem;
     }
