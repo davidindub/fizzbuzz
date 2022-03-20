@@ -10,6 +10,8 @@
     --transition-hover: all ease-in-out 0.3s;
     --transition-theme: color 1s ease, background-color 1s ease;
     --border-wavy: 255px 15px 225px 15px/15px 225px 15px 255px;
+    --font-headings: "Bungee", sans-serif;
+    --font-secondary: "Roboto", sans-serif;
 }
 
 #dark {
@@ -27,7 +29,7 @@ html {
     box-sizing: border-box;
     scroll-behavior: smooth;
     text-align: center;
-    font-family: sans-serif;
+    font-family: var(--font-secondary);
     color: var(--color-black);
     background-color: var(--color-background);
 }
@@ -52,7 +54,6 @@ blockquote,
 dl,
 dd {
     margin: 0;
-    font-family: 'Roboto', sans-serif;
 }
 
 input,
@@ -71,12 +72,13 @@ header {
     border-bottom: var(--color-black) solid 0.3rem;
     color: var(--color-black);
     transition: var(--transition-theme);
+    margin-bottom: 2.5rem;
+    padding: 0.5rem 1.2rem;
 }
 
 .header-container {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 1.2rem;
     margin: 0 auto;
     max-width: 600px;
 }
@@ -94,7 +96,7 @@ nav ul li {
 }
 
 h1 {
-    font-family: 'Bungee', sans-serif;
+    font-family: var(--font-headings);
     font-size: 2rem;
     cursor: default;
 }
@@ -117,7 +119,7 @@ hr {
 }
 
 #timer {
-    padding: 1rem 0;
+    /* padding: 1rem 0; */
 }
 
 label[for=timer] {
@@ -174,7 +176,7 @@ label[for=timer] {
 }
 
 .btn-game {
-    font-family: 'Bungee', sans-serif;
+    font-family: var(--font-headings);
     color: var(--color-black);
     height: 9rem;
     width: 9rem;
@@ -240,13 +242,18 @@ label[for=timer] {
 
 .modal-content h2 {
     padding-bottom: 1rem;
+    font-family: var(--font-headings);
 }
 
 .modal-content hr {
     margin: 1rem 0;
 }
 
-/* Preferences Toggles */
+/* Preferences Modal */
+.prefs-text {
+    font-size: smaller;
+}
+
 .prefs-label {
     display: inline-flex;
     align-items: center;
