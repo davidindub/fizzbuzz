@@ -52,6 +52,7 @@ blockquote,
 dl,
 dd {
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 input,
@@ -93,7 +94,7 @@ nav ul li {
 }
 
 h1 {
-    font-family: 'Bungee', cursive;
+    font-family: 'Bungee', sans-serif;
     font-size: 2rem;
     cursor: default;
 }
@@ -173,7 +174,7 @@ label[for=timer] {
 }
 
 .btn-game {
-    font-family: 'Bungee', cursive;
+    font-family: 'Bungee', sans-serif;
     color: var(--color-black);
     height: 9rem;
     width: 9rem;
