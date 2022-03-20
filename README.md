@@ -6,7 +6,7 @@
 
 ## Introduction
 
-- [Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz) is a word game for children to teach them about division.
+- [Fizz Buzz](https://en.wikipedia.org/wiki/Fizz_buzz) is a word game about division.
 - It is also a common challenge for beginner computer programmers to write a program that will output the correct sequence according to the rules.
 - The project is a version of game that can be played in the browser.
 
@@ -16,10 +16,12 @@
 - If the number is divisible by **3** they must select **"Fizz"**
 - If the number is divisible by **5** they must select **"Buzz"**
 - If the number is divisible by **15** they must select **"FizzBuzz"**
+- You only have 5 Seconds to answer each time, so think quick!
 
-## Top Secret Combination for Testing!
-
-1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, Fizz Buzz, 16, 17, Fizz, 19, Buzz, Fizz, 22, 23, Fizz, Buzz, 26, Fizz, 28, 29, Fizz Buzz, 31, 32, Fizz, 34, Buzz, Fizz, ...
+<details>
+<summary>Top Secret Combination for Testing!</summary>
+<p>1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz, 11, Fizz, 13, 14, Fizz Buzz, 16, 17, Fizz, 19, Buzz, Fizz, 22, 23, Fizz, Buzz, 26, Fizz, 28, 29, Fizz Buzz, 31, 32, Fizz, 34, Buzz, Fizz… good luck!</p>
+</details>
 
 
 ## User Stories
@@ -33,19 +35,22 @@
 
 ## UX  
 
- As I sketched out my wireframes, I liked the idea of the game having a hand drawn look with bold lines and soft colours.
+ As I sketched out my wireframes, I liked the idea of the game having a hand drawn look with bold lines and soft colours. I was also reminded of the game [Snipperclips](https://www.nintendo.com/store/products/snipperclips-cut-it-out-together-switch/) and its friendly paper-like style.
 
 ### Colour Scheme
 
+I based the colour scheme on the primary colours - Blue (Fizz) + Yellow (Buzz) = Green (FizzBuzz).
+
+For Dark Mode the yellow colour was adjusted the differently the the others to maintain readability with grey text.
  
 
 ### Typography
 
-
+I used a blocky display font [Bungee](https://fonts.google.com/specimen/Bungee?query=bungee) for the logo, headings and game buttons, and a sans-serif font [Roboto](https://fonts.google.com/specimen/Roboto) for the rest of the text. Both fonts were freely available from Google Fonts.
 
 ### Wireframes
 
-  I sketched my wireframes on paper and on an iPad using Concepts as I had recently completed the Udemy course [Sketching for UX Designers](https://www.udemy.com/share/101Zi03@dvXU0Ao_hYLw14VYm-w9uAFuMOpq-Xw2zw-m4U8GxK5v_ac9Qo-mX_OvZVINv60EgQ==/)
+I sketched my wireframes on an iPad using Concepts as I had recently completed the Udemy course [Sketching for UX Designers](https://www.udemy.com/share/101Zi03@dvXU0Ao_hYLw14VYm-w9uAFuMOpq-Xw2zw-m4U8GxK5v_ac9Qo-mX_OvZVINv60EgQ==/)
 
 ## Features 
 
@@ -61,14 +66,27 @@
 
 __Game Area__
 
+ - There are four buttons for the potential options in the game. These can be tapped or clicked, or the keyboard's arrow keys can be used in the same layout as the buttons to play. The buttons are large on smaller screens to make them easy to tap, and slightly smaller on larger screens where the user may be using a mouse to click.
+
+
+***
+
+__Modal__
+
+- The game preferences, highscores and rules can all be found in modals overlayed ontop of the game, to keep a simple single page layout.
+
+- The HTML [`<dialog>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) doesn't have wide enough support yet to use (Safari only started supporting it in a new release while I was building this project), so I adapted a modal from [W3Schools](https://www.w3schools.com/howto/howto_css_modals.asp) to have three different modals and improved accessibility and used newer JS features than the example modal.
 
 ***
 
 __Accessibility__
 
-  - Keyboard controls are available so the game can be played without using a mouse on computers.
+  - Keyboard controls are available so the game can be played without using a mouse on computers and modals can be closed with the Esc key.
   - `aria-live` is used to annouce the number on screen when playing the game, allowing be played using a screen reader.
-
+  - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) was used to test the text and background colours.
+  - The game's timer can be turned off in system preferences for those who wish.
+  - All SVG images are appropriately labelled for screen reader use.
+  - The game was tested using the VoiceOver screen reader on macOS.
 
 ***
 
@@ -77,23 +95,24 @@ __Favicon__
 ![The favicon for the project](/assets/images/favicon/apple-touch-icon.png)
   - A favicon and icon for iOS/Android home screen bookmarks is included with the project's logo.
 
+__Dark Mode & Timer__
+
+- The user can choose a hard mode with random numbers under 1000, and toggle on and off the timer to change the game's difficulty. These preferences are rest to FizzBuzz standard rules on each visit.
+
 __Dark Mode__
 
-Initially I implemented a Dark Mode using CSS Media Queries to check if the user had dark mode enabled on their device.
-```css @media (prefers-color-scheme: dark) {
-    :root {
-        --color-background: rgb(18, 18, 18);
-        --color-header: rgb(18, 18, 18);
-        --color-modal: rgb(18, 18, 18);
-        --color-black: rgb(208, 208, 208);
-        --color-one: rgb(157, 91, 92);
-        --color-two: rgb(55, 122, 147);
-        --color-three: rgb(150, 96, 26);
-        --color-four: rgb(51, 113, 109);
-    }
-```
+- The first time the user visits the site, their OS system preference for Dark Mode is checked, and the game will display appropriately.
+- The user can switch between Light and Dark Mode in the Preferences Modal, and their preference will be stored for their next visit so the game can load their preferred theme.
 
-However I later decided I wanted the user to be able to change the theme manually, so I refactored the code to swap the CSS Variables with JavaScript when the user toggled the setting in the Preferences Pane, and checked their device setting using JS instead of a media query.
+__Statistics__
+
+- High Scores are saved for both regular and hard mode, as well as the date they were set on.
+- The total number of games played is also recorded.
+
+- I noted the popularity of users sharing their score on web games such as Wordle, so I implemented a similar simple way to share scores.
+- The Share Scores button copies the user's highscores to their clipboard so they can share it with a friend in the app of their choice.
+
+- The stats are stored in the users localstorage, and can be reset by clicking the Clear All Stats button.
 
 __Meta Data for Social Media__
 
@@ -102,6 +121,10 @@ __Meta Data for Social Media__
 ***
 
 ### Features Left to Implement
+
+- Possible High Contrast Mode.
+- Possible options for variations on the rules of play e.g. divide by 7.
+- Perhaps use HTML dialog element for modal when browser compatibility is more widespread.
 
 ## Technologies Used
 
@@ -112,6 +135,7 @@ __Meta Data for Social Media__
 
 - [Git](https://git-scm.com/) for version control.
 - [GitHub](https://github.com/) for storing the repository online during development.
+- GitHub Projects was invaluable throughout the project and helped me keep track of things to do and bugs to fix - you can see [the project's board here](https://github.com/users/davidindub/projects/2).
 - [GitPod](https://gitpod.io/) as a cloud based IDE.
 - [Bootstrap Icons](https://icons.getbootstrap.com/) for icons used in the project.
 - [Google Fonts](https://fonts.google.com/) for the two fonts used on the project.
@@ -159,6 +183,7 @@ Alternatively, if using Gitpod, you can click below to create your own workspace
 - I used [Dribble](https://dribbble.com/) to research designs to pick my color palette.
 - I used the [MDN Web Docs](https://developer.mozilla.org/en-US/) for help with data attributes in HTML.
 - I read [W3 Schools](https://www.w3schools.com/howto/howto_css_modals.asp/) for information on how to make tool tips and modals, and adapted code from their examples.
+- I used a blog post, [Accessibility first: toggle switches](https://dev.to/link2twenty/accessibility-first-toggle-switches-3obj) for help making accessible toggle buttons for the preferences modal.
 
 ### Media
 
