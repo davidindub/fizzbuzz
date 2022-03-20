@@ -66,12 +66,15 @@ nav a {
     text-decoration: none;
 }
 
-header {
+header, footer {
     background-color: var(--color-header);
-    margin-bottom: 0.5rem;
-    border-bottom: var(--color-black) solid 0.3rem;
     color: var(--color-black);
     transition: var(--transition-theme);
+    padding: 0.5rem 0;
+}
+
+header {
+    border-bottom: var(--color-black) solid 0.3rem;
     margin-bottom: 2.5rem;
     padding: 0.5rem 1.2rem;
 }
@@ -81,6 +84,13 @@ header {
     justify-content: space-between;
     margin: 0 auto;
     max-width: 600px;
+}
+
+footer {
+    border-top: var(--color-black) solid 0.3rem;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
 }
 
 nav {
@@ -119,7 +129,8 @@ hr {
 }
 
 #timer {
-    /* padding: 1rem 0; */
+    padding: 1rem 0;
+    margin: 1rem auto;
 }
 
 label[for=timer] {
@@ -188,7 +199,7 @@ label[for=timer] {
 }
 
 .btn-game:hover {
-    border: var(--color-black) dotted 0.4rem;
+    border: var(--color-black) dashed 0.4rem;
 }
 
 .btn-game[data-game-btn="number"] {
@@ -300,10 +311,8 @@ label[for=timer] {
     box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.2), 0 0 2px rgba(0, 0, 0, 0.4);
 }
 
-/* special states */
 .prefs-label [type=checkbox]:focus+.prefs-toggle {
     outline: var(--color-two) solid 1px;
-    box-shadow: 0 0 0.5rem var(--color-four);
 }
 
 .prefs-label [type=checkbox]:disabled+.prefs-toggle {
@@ -316,8 +325,6 @@ label[for=timer] {
     box-shadow: none;
 }
 
-/* checked states */
-
 .prefs-label [type=checkbox]:checked+.prefs-toggle::before,
 .prefs-label [type=checkbox]:checked+.prefs-toggle::after {
     background: var(--color-four);
@@ -327,7 +334,7 @@ label[for=timer] {
     transform: translate(calc(3em - 100%), -50%);
 }
 
-/* The Close Button */
+/* Modal Close Button */
 .close {
     color: #aaa;
     float: right;
@@ -357,10 +364,12 @@ label[for=timer] {
     #scoreboard {
         font-size: 1rem;
     }
+}
 
+/* Make game buttons slightly smaller on large displays for easier clicking */
+@media screen and (min-width: 1024px) {
     .btn-game {
-        height: 12rem;
-        width: 12rem;
-        font-size: 3rem;
+        height: 8rem;
+        width: 8rem;
     }
 }

@@ -37,12 +37,6 @@ const prefsDisplay = {
     btnHardMode: document.querySelector("#prefs-hard-mode"),
     btnDarkMode: document.querySelector("#prefs-dark-mode"),
     btnTimer: document.querySelector("#prefs-timer"),
-    disable: function (btn) {
-       btn.disabled = true;
-    },
-    enable: function (btn) {
-       btn.disabled = false;
-    },
     darkMode: function () {
         if (this.btnDarkMode.checked === true) {
             localStorage.setItem("darkMode", true);
@@ -69,6 +63,22 @@ const gameDisplay = {
             button.disabled = !button.disabled;
         }
     }
+}
+
+const modalDisplay = {
+    navItems: document.querySelectorAll(".nav-item"),
+    modals: document.querySelectorAll(".modal"),
+    closeBtns: document.querySelectorAll(".close"),
+    addEL: function () {
+        for (let navItem of this.navItems) {
+            navItem.addEventListener("click", launchModal)
+        };
+    },
+    removeEL: function () {
+        for (let navItem of this.navItems) {
+            navItem.removeEventListener("click", launchModal)
+        };
+    },
 }
 
 /** Dark Mode */
@@ -129,6 +139,7 @@ class Timer {
 }
 
 /** Game Set Up */
+modalDisplay.addEL();
 theme.update();
 statsDisplay.update();
 gameDisplay.update();
@@ -152,6 +163,7 @@ function handleGameOver() {
         timer.timeup();
     }
 
+    modalDisplay.addEL()
     gameDisplay.toggleDisable();
     gameState.isGameOver = true;
     gameDisplay.lastAnswer.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
@@ -159,10 +171,10 @@ function handleGameOver() {
     statsStorage.updateGamesPlayed();
     statsStorage.logHighScore();
 
-    // Stats modal appears after 2 seconds
+    // Stats modal appears after 1.5 second
     setTimeout(() => {
         modalDisplay.modals[1].style.display = "block";
-    }, 2000)
+    }, 1500)
 
     // gameState.reset();
 }
@@ -248,6 +260,7 @@ function isInputCorrect(input) {
 function handleInput(input) {
     if (input === 1 && gameState.isTimerOn) {
         timer.start();
+        modalDisplay.removeEL();
     };
     if (isInputCorrect(input)) {
 
@@ -281,14 +294,12 @@ for (let prefToggle of prefsDisplay.toggles) {
         switch (e.target.id) {
             case "prefs-hard-mode":
                 gameState.hardMode = !gameState.hardMode;
-                prefsDisplay.disable(prefsDisplay.btnHardMode);
                 break;
             case "prefs-dark-mode":
                 prefsDisplay.darkMode();
                 break;
             case "prefs-timer":
                 gameState.isTimerOn = !gameState.isTimerOn;
-                console.log(gameState.isTimerOn);
             default:
                 break;
         }
@@ -302,16 +313,6 @@ statsDisplay.clearStats.addEventListener("click", () => {
 })
 
 // Modals
-
-const modalDisplay = {
-    navItems: document.querySelectorAll(".nav-item"),
-    modals: document.querySelectorAll(".modal"),
-    closeBtns: document.querySelectorAll(".close"),
-}
-
-for (let navItem of modalDisplay.navItems) {
-    navItem.addEventListener("click", launchModal)
-};
 
 /** Launch a modal */
 function launchModal() {
