@@ -88,6 +88,11 @@ const modalDisplay = {
     },
 }
 
+const sounds = {
+    gameOver: document.querySelector("#sound-game-over"),
+    rightAnswer: document.querySelector("#sound-right-answer")
+}
+
 /** Dark Mode */
 const theme = {
     root: document.querySelector(":root"),
@@ -169,7 +174,7 @@ function handleGameOver() {
     if (timer.secs !== 0) {
         timer.timeup();
     }
-
+    sounds.gameOver.play();
     modalDisplay.addEL()
     gameDisplay.toggleDisable();
     gameState.isGameOver = true;
@@ -279,9 +284,9 @@ function handleInput(input) {
         if (gameState.isTimerOn) {
             timer.reset();
         }
-
         gameState.currentScore += 1;
         gameDisplay.update()
+        sounds.rightAnswer.play();
         gameDisplay.lastAnswer.innerHTML = "👍";
         
     } else handleGameOver();
