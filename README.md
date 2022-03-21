@@ -39,6 +39,9 @@
 
 ### Colour Scheme
 
+![Light Mode Colour Scheme](documentation/images/colours-light-mode.png)
+![Dark Mode Colour Scheme](documentation/images/colours-dark-mode.png)
+
 I based the colour scheme on the primary colours - Blue (Fizz) + Yellow (Buzz) = Green (FizzBuzz).
 
 For Dark Mode the yellow colour was adjusted the differently the the others to maintain readability with grey text.
@@ -145,7 +148,6 @@ __Meta Data for Social Media__
 - [Meta Tags](https://metatags.io/) to prepare the Meta tags for social media share previews.
 - [Polypane](https://polypane.app/) for testing responsiveness on different viewports at the same time.
 - [Google Chrome](https://www.google.com/intl/en_ie/chrome/), [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/) and [Safari](https://www.apple.com/safari/) for testing on macOS Monterey, Windows 10, iOS 15, iPadOS 15 and Android 10.
-- [ColorSlurp](https://colorslurp.com/) for picking my color palette and testing for perfect accessibility.
 - [Concepts](https://concepts.app/en/) for sketching on an iPad.
 
 
@@ -184,6 +186,7 @@ Alternatively, if using Gitpod, you can click below to create your own workspace
 - I used the [MDN Web Docs](https://developer.mozilla.org/en-US/) for help with data attributes in HTML.
 - I read [W3 Schools](https://www.w3schools.com/howto/howto_css_modals.asp/) for information on how to make tool tips and modals, and adapted code from their examples.
 - I used a blog post, [Accessibility first: toggle switches](https://dev.to/link2twenty/accessibility-first-toggle-switches-3obj) for help making accessible toggle buttons for the preferences modal.
+- For the game's timer I reworked some code I wrote for the project [Calma](https://github.com/GJSayers/calma) from a recent Hackathon I participated in.
 
 ### Media
 
