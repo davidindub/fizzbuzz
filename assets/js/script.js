@@ -1,5 +1,6 @@
 /* jshint esversion: 8 */
 
+/** Keeps track of the game state */
 const gameState = {
     isGameOver: false,
     hardMode: false,
@@ -16,6 +17,7 @@ const gameState = {
     }
 }
 
+/** Statistics Modal Elements */
 const statsDisplay = {
     regularScore: document.querySelector("#scoreboard").rows[1].cells[1],
     regularDate: document.querySelector("#scoreboard").rows[1].cells[2],
@@ -32,6 +34,7 @@ const statsDisplay = {
     }
 }
 
+/** Preferences Modal Elements */
 const prefsDisplay = {
     toggles: document.querySelectorAll(".prefs-check"),
     btnHardMode: document.querySelector("#prefs-hard-mode"),
@@ -47,6 +50,7 @@ const prefsDisplay = {
 }
 }
 
+/** Game Area */
 const gameDisplay = {
     buttons: document.querySelectorAll(".btn-game"),
     btnNum: document.querySelector("#btn-num"),
@@ -65,6 +69,7 @@ const gameDisplay = {
     }
 }
 
+/** Handles Modals */
 const modalDisplay = {
     navItems: document.querySelectorAll(".nav-item"),
     modals: document.querySelectorAll(".modal"),
@@ -177,8 +182,6 @@ function handleGameOver() {
     setTimeout(() => {
         modalDisplay.modals[1].style.display = "block";
     }, 1500)
-
-    // gameState.reset();
 }
 
 /** Handles Stats in Local Storage */
@@ -289,6 +292,7 @@ for (button of gameDisplay.buttons) {
     button.addEventListener("click", handleClick);
 }
 
+/** Event Listener for Key presses  */
 document.addEventListener("keydown", handleKeyPress);
 
 for (let prefToggle of prefsDisplay.toggles) {
@@ -315,7 +319,6 @@ statsDisplay.clearStats.addEventListener("click", () => {
 })
 
 // Modals
-
 /** Launch a modal */
 function launchModal() {
     modalDisplay.modals[this.dataset.link].style.display = "block";
