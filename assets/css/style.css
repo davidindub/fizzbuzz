@@ -258,7 +258,7 @@ label[for=timer] {
 .modal-content {
     color: var(--color-black);
     background-color: var(--color-modal);
-    margin: 15% auto;
+    margin: 10% auto;
     padding: 1.2rem;
     text-align: left;
     border-radius: var(--border-wavy);
