@@ -71,12 +71,14 @@ const modalDisplay = {
     closeBtns: document.querySelectorAll(".close"),
     addEL: function () {
         for (let navItem of this.navItems) {
-            navItem.addEventListener("click", launchModal)
+            navItem.addEventListener("click", launchModal);
+            navItem.classList.remove("nav-item-disabled");
         };
     },
     removeEL: function () {
         for (let navItem of this.navItems) {
-            navItem.removeEventListener("click", launchModal)
+            navItem.removeEventListener("click", launchModal);
+            navItem.classList.add("nav-item-disabled");
         };
     },
 }
@@ -277,7 +279,7 @@ function handleInput(input) {
 
         gameState.currentScore += 1;
         gameDisplay.update()
-        gameDisplay.lastAnswer.innerText = "👍";
+        gameDisplay.lastAnswer.innerHTML = "👍";
         
     } else handleGameOver();
 }

@@ -105,6 +105,23 @@ nav ul li {
     color: var(--color-black);
 }
 
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+  }
+
+/* Disabled nav items while game in progress */
+.nav-item-disabled {
+    cursor: not-allowed;
+    filter: grayscale(100%);
+    opacity: 0.6;
+}
+
 h1 {
     font-family: var(--font-headings);
     font-size: 2rem;
@@ -313,16 +330,6 @@ label[for=timer] {
 
 .prefs-label [type=checkbox]:focus+.prefs-toggle {
     outline: var(--color-two) solid 1px;
-}
-
-.prefs-label [type=checkbox]:disabled+.prefs-toggle {
-    cursor: not-allowed;
-    filter: grayscale(100%);
-    opacity: 0.6;
-}
-
-.prefs-label [type=checkbox]:disabled+.prefs-toggle::after {
-    box-shadow: none;
 }
 
 .prefs-label [type=checkbox]:checked+.prefs-toggle::before,
