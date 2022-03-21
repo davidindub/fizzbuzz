@@ -74,7 +74,7 @@
     <main>
 
         <section id="game-info">
-            <span id="last-answer-display">Start counting from 1...</span>
+            <span id="last-answer-display" aria-live="polite">Start counting from 1...</span>
             <br><br><br>
             <label id="timer-label" for="timer">Time Left:</label>
             <progress id="timer" value="100" max="100">5 secs</progress>
@@ -105,7 +105,7 @@
     <!-- A Preferences Modal -->
     <aside class="modal" role="dialog" aria-labelledby="modal-prefs-title">
         <div class="modal-content">
-            <span class="close" aria-label="Close">&times;</span>
+            <button class="close" aria-label="Close">&times;</button>
             <h2 id="modal-prefs-title">Preferences</h2>
             <label for="prefs-hard-mode" class="prefs-label">
                 <input type="checkbox" name="prefs-hard-mode" id="prefs-hard-mode" class="prefs-check">
@@ -134,7 +134,7 @@
     <!-- A statistics modal -->
     <aside class="modal" role="dialog" aria-labelledby="modal-stats-title">
         <div class="modal-content">
-            <span class="close" aria-label="Close">&times;</span>
+            <button class="close" aria-label="Close">&times;</button>
             <h2 id="modal-stats-title">Statistics</h2>
             <table id="scoreboard">
                 <thead>
@@ -178,7 +178,7 @@
 
         <!-- Modal content -->
         <div class="modal-content">
-            <span class="close" aria-label="Close">&times;</span>
+            <button class="close" aria-label="Close">&times;</button>
             <h2 id="modal-rules-title">How to Play</h2>
             <p id="modal-rules-text">Counting upwards from 1...
                 <br>

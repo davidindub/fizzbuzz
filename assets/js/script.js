@@ -337,27 +337,27 @@ window.addEventListener("load", () => {
     once: true
 });
 
-// When the user clicks on <span> (x), close the modal
+/** When the user clicks on <span> (x), close the modal
+Reset Game State when user closes the stats modal after a game over */
 for (let closeBtn of modalDisplay.closeBtns) {
     closeBtn.addEventListener("click", () => {
         for (let modal of modalDisplay.modals) {
             modal.style.display = "none";
+            if (gameState.isGameOver) {
+                gameState.newGame();
+            }
         }
     })
 };
-
-/** Reset Game State when user closes the stats modal after a game over */
-modalDisplay.closeBtns[1].addEventListener("click", () => {
-    if (gameState.isGameOver) {
-        gameState.newGame();
-    }
-})
 
 // Close modal when the user clicks anywhere outside of the modal
 for (let modal of modalDisplay.modals) {
     modal.addEventListener("click", (e) => {
         if (e.target.classList.contains("modal")) {
             modal.style.display = "none";
+            if (gameState.isGameOver) {
+                gameState.newGame();
+            }
         }
     })
 };

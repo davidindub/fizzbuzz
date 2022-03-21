@@ -166,7 +166,7 @@ label[for=timer] {
 }
 
 #scoreboard {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     border: 3px solid var(--color-black);
     table-layout: fixed;
     padding: 0.2rem;
@@ -195,11 +195,11 @@ label[for=timer] {
     margin: 0 0.5rem;
 }
 
-#btn-share:hover {
+#btn-share:hover, #btn-share:focus {
     background-color: var(--color-two);
 }
 
-#btn-clear-stats:hover {
+#btn-clear-stats:hover, #btn-clear-stats:focus {
     background-color: var(--color-one);
 }
 
@@ -215,7 +215,7 @@ label[for=timer] {
     transition: all ease-in-out 0.1s;
 }
 
-.btn-game:hover {
+.btn-game:hover, .btn-game:focus {
     border: var(--color-black) dashed 0.4rem;
 }
 
@@ -348,6 +348,8 @@ label[for=timer] {
     font-size: 3rem;
     font-weight: bold;
     transition: var(--transition-hover);
+    background-color: inherit;
+    border: none;
 }
 
 .close:hover,
