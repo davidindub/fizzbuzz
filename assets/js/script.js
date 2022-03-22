@@ -7,14 +7,18 @@ const gameState = {
     isTimerOn: true,
     isSoundOn: true,
     currentScore: 0,
-    currentNum: 1,
+    currentNum: 1
+}
+
+const gameController = {
     newGame: function () {
-        this.isGameOver = false;
-        this.currentNum = 1;
-        this.currentScore = 0;
+        gameState.isGameOver = false;
+        gameState.currentNum = 1;
+        gameState.currentScore = 0;
         gameView.newGame();
         gameView.toggleDisable();
         }
+
 }
 
 /** Statistics Modal Elements */
@@ -41,21 +45,47 @@ const prefsView = {
     btnDarkMode: document.querySelector("#prefs-dark-mode"),
     btnTimer: document.querySelector("#prefs-timer"),
     btnSounds: document.querySelector("#prefs-sounds"),
+}
+
+const localStorageController = {
     darkMode: function () {
-        if (this.btnDarkMode.checked === true) {
+        if (prefsView.btnDarkMode.checked === true) {
             localStorage.setItem("darkMode", true);
         } else {
             localStorage.setItem("darkMode", false);
         }
-        theme.update();
+        themeController.update();
     },
     soundEffects: function () {
-        if (this.btnSounds.checked === true) {
+        if (prefsView.btnSounds.checked === true) {
             localStorage.setItem("isSoundOn", true);
         } else {
             localStorage.setItem("isSoundOn", false);
         }
-    }
+    },
+
+}
+
+/** Event Listeners for Preferences Modal */
+for (let prefToggle of prefsView.toggles) {
+    prefToggle.addEventListener("change", (e) => {
+        switch (e.target.id) {
+            case "prefs-hard-mode":
+                gameState.isHardMode = !gameState.isHardMode;
+                break;
+            case "prefs-dark-mode":
+                localStorageController.darkMode();
+                break;
+            case "prefs-timer":
+                gameState.isTimerOn = !gameState.isTimerOn;
+                break;
+            case "prefs-sounds":
+                localStorageController.soundEffects();
+                gameState.isSoundOn = !gameState.isSoundOn;
+            default:
+                break;
+        }
+    })
 }
 
 /** Game Area */
@@ -111,7 +141,7 @@ const sounds = {
 }
 
 /** Dark Mode */
-const theme = {
+const themeController = {
     root: document.querySelector(":root"),
     checkUserOSPref: function () {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -169,7 +199,7 @@ class Timer {
 
 /** Game Set Up */
 modalView.addEL();
-theme.update();
+themeController.update();
 sounds.update();
 statsView.update();
 gameView.update();
@@ -336,27 +366,6 @@ for (button of gameView.buttons) {
 /** Event Listener for Key presses  */
 document.addEventListener("keydown", handleKeyPress);
 
-/** Event Listeners for Preferences Modal */
-for (let prefToggle of prefsView.toggles) {
-    prefToggle.addEventListener("change", (e) => {
-        switch (e.target.id) {
-            case "prefs-hard-mode":
-                gameState.isHardMode = !gameState.isHardMode;
-                break;
-            case "prefs-dark-mode":
-                prefsView.darkMode();
-                break;
-            case "prefs-timer":
-                gameState.isTimerOn = !gameState.isTimerOn;
-                break;
-            case "prefs-sounds":
-                prefsView.soundEffects();
-                gameState.isSoundOn = !gameState.isSoundOn;
-            default:
-                break;
-        }
-    })
-}
 
 /** Preferences Modal - Share Button for Highscores */
 document.querySelector("#btn-share").addEventListener("click", () => {
@@ -397,7 +406,7 @@ window.addEventListener("load", () => {
         statsStorage.resetStats();
     }
     if (localStorage.getItem("darkMode") === null) {
-        theme.checkUserOSPref();
+        themeController.checkUserOSPref();
     }
 }, {
     once: true
@@ -410,7 +419,7 @@ for (let closeBtn of modalView.closeBtns) {
         for (let modal of modalView.modals) {
             modal.style.display = "none";
             if (gameState.isGameOver) {
-                gameState.newGame();
+                gameController.newGame();
             }
         }
     })
@@ -422,7 +431,7 @@ for (let modal of modalView.modals) {
         if (e.target.classList.contains("modal")) {
             modal.style.display = "none";
             if (gameState.isGameOver) {
-                gameState.newGame();
+                gameController.newGame();
             }
         }
     })
