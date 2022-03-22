@@ -5,6 +5,7 @@ const gameState = {
     isGameOver: false,
     hardMode: false,
     isTimerOn: true,
+    isSoundOn: true,
     currentScore: 0,
     currentNum: 1,
     newGame: function () {
@@ -40,11 +41,20 @@ const prefsDisplay = {
     btnHardMode: document.querySelector("#prefs-hard-mode"),
     btnDarkMode: document.querySelector("#prefs-dark-mode"),
     btnTimer: document.querySelector("#prefs-timer"),
+    btnSounds: document.querySelector("#prefs-sounds"),
     darkMode: function () {
         if (this.btnDarkMode.checked === true) {
             localStorage.setItem("darkMode", true);
         } else {
             localStorage.setItem("darkMode", false);
+        }
+        theme.update();
+    },
+    soundEffects: function () {
+        if (this.btnSounds.checked === true) {
+            localStorage.setItem("isSoundOn", true);
+        } else {
+            localStorage.setItem("isSoundOn", false);
         }
         theme.update();
     }
@@ -90,7 +100,16 @@ const modalDisplay = {
 
 const sounds = {
     gameOver: document.querySelector("#sound-game-over"),
-    rightAnswer: document.querySelector("#sound-right-answer")
+    rightAnswer: document.querySelector("#sound-right-answer"),
+    update: function () {
+        if (localStorage.getItem("isSoundOn") === "true") {
+            prefsDisplay.btnSounds.checked = true;
+            gameState.isSoundOn = true;
+        } else {
+            prefsDisplay.soundOn.checked = false;
+            gameState.isSoundOn = false;
+        }
+}
 }
 
 /** Dark Mode */
@@ -153,6 +172,7 @@ class Timer {
 /** Game Set Up */
 modalDisplay.addEL();
 theme.update();
+sounds.update();
 statsDisplay.update();
 gameDisplay.update();
 let timer = new Timer();
@@ -174,7 +194,9 @@ function handleGameOver() {
     if (timer.secs !== 0) {
         timer.timeup();
     }
-    sounds.gameOver.play();
+    if (gameState.isSoundOn) {
+        sounds.gameOver.play();
+    }
     modalDisplay.addEL()
     gameDisplay.toggleDisable();
     gameState.isGameOver = true;
@@ -235,6 +257,11 @@ function handleClick() {
 
 /** Handles arrow key presses */
 function handleKeyPress(event) {
+    if (event.code === "Escape") {
+        for (let modal of modalDisplay.modals) {
+            modal.style.display = "none";
+        }
+    }
     if (gameState.isGameOver) return;
     switch (event.code) {
         case "ArrowLeft":
@@ -249,11 +276,11 @@ function handleKeyPress(event) {
         case "ArrowDown":
             handleInput("fizzbuzz");
             break;
-        case "Escape":
-            for (let modal of modalDisplay.modals) {
-                modal.style.display = "none";
-            }
-            break
+        // case "Escape":
+        //     for (let modal of modalDisplay.modals) {
+        //         modal.style.display = "none";
+        //     }
+        //     break
         default:
             return
     }
@@ -298,8 +325,10 @@ function handleInput(input) {
         gameDisplay.update()
 
         // Play the correct answer sound
+        if (gameState.isSoundOn) {
         sounds.rightAnswer.currentTime = 0;
         sounds.rightAnswer.play();
+        }
 
         gameDisplay.lastAnswer.innerHTML = "👍";
 
@@ -326,6 +355,9 @@ for (let prefToggle of prefsDisplay.toggles) {
                 break;
             case "prefs-timer":
                 gameState.isTimerOn = !gameState.isTimerOn;
+                break;
+            case "prefs-sounds":
+                gameState.isSoundOn = !gameState.isSoundOn;
             default:
                 break;
         }
@@ -367,8 +399,8 @@ function launchModal() {
 /** Check if user is a first time visitor, if so show rules and check for system dark mode preference */
 window.addEventListener("load", () => {
     if (localStorage.length === 0) {
+        modalDisplay.modals[2].style.display = "block";
         statsStorage.resetStats();
-        modals[2].style.display = "block";
     }
     if (localStorage.getItem("darkMode") === null) {
         theme.checkUserOSPref();
