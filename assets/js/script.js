@@ -62,30 +62,7 @@ const localStorageController = {
         } else {
             localStorage.setItem("isSoundOn", false);
         }
-    },
-
-}
-
-/** Event Listeners for Preferences Modal */
-for (let prefToggle of prefsView.toggles) {
-    prefToggle.addEventListener("change", (e) => {
-        switch (e.target.id) {
-            case "prefs-hard-mode":
-                gameState.isHardMode = !gameState.isHardMode;
-                break;
-            case "prefs-dark-mode":
-                localStorageController.darkMode();
-                break;
-            case "prefs-timer":
-                gameState.isTimerOn = !gameState.isTimerOn;
-                break;
-            case "prefs-sounds":
-                localStorageController.soundEffects();
-                gameState.isSoundOn = !gameState.isSoundOn;
-            default:
-                break;
-        }
-    })
+    }
 }
 
 /** Game Area */
@@ -289,6 +266,9 @@ function handleKeyPress(event) {
         for (let modal of modalView.modals) {
             modal.style.display = "none";
         }
+        if (gameState.isGameOver) {
+            gameController.newGame();
+        }
     }
     if (gameState.isGameOver) return;
     switch (event.code) {
@@ -366,6 +346,27 @@ for (button of gameView.buttons) {
 /** Event Listener for Key presses  */
 document.addEventListener("keydown", handleKeyPress);
 
+/** Event Listeners for Preferences Modal */
+for (let prefToggle of prefsView.toggles) {
+    prefToggle.addEventListener("change", (e) => {
+        switch (e.target.id) {
+            case "prefs-hard-mode":
+                gameState.isHardMode = !gameState.isHardMode;
+                break;
+            case "prefs-dark-mode":
+                localStorageController.darkMode();
+                break;
+            case "prefs-timer":
+                gameState.isTimerOn = !gameState.isTimerOn;
+                break;
+            case "prefs-sounds":
+                localStorageController.soundEffects();
+                gameState.isSoundOn = !gameState.isSoundOn;
+            default:
+                break;
+        }
+    })
+}
 
 /** Preferences Modal - Share Button for Highscores */
 document.querySelector("#btn-share").addEventListener("click", () => {
