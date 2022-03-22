@@ -47,7 +47,7 @@ const prefsDisplay = {
             localStorage.setItem("darkMode", false);
         }
         theme.update();
-}
+    }
 }
 
 /** Game Area */
@@ -132,7 +132,7 @@ class Timer {
                 handleGameOver();
                 this.timeup();
             }
-            
+
         }, 200);
     }
 
@@ -268,11 +268,18 @@ function isInputCorrect(input) {
 
 /** Handles game input */
 function handleInput(input) {
+    // Disable the Modal Links while playing
+    modalDisplay.removeEL();
+
+    // Start the timer if timer is toggled on
     if (input === 1 && gameState.isTimerOn) {
         timer.start();
-        modalDisplay.removeEL();
     };
+
     if (isInputCorrect(input)) {
+
+        /** If the input matches the expected result
+         * Increase the number by one, or use a random number under 1000 for Hard Mode */
 
         if (!gameState.hardMode) {
             gameState.currentNum += 1;
@@ -281,14 +288,21 @@ function handleInput(input) {
             gameState.currentNum = randomNum;
         };
 
+        /** Restart the Timer if timer is toggled on */
         if (gameState.isTimerOn) {
             timer.reset();
         }
+
+        /** Increase the Score by 1, Update the game area display */
         gameState.currentScore += 1;
         gameDisplay.update()
+
+        // Play the correct answer sound
+        sounds.rightAnswer.currentTime = 0;
         sounds.rightAnswer.play();
+
         gameDisplay.lastAnswer.innerHTML = "👍";
-        
+
     } else handleGameOver();
 }
 
@@ -300,6 +314,7 @@ for (button of gameDisplay.buttons) {
 /** Event Listener for Key presses  */
 document.addEventListener("keydown", handleKeyPress);
 
+/** Event Listeners for Preferences Modal */
 for (let prefToggle of prefsDisplay.toggles) {
     prefToggle.addEventListener("change", (e) => {
         switch (e.target.id) {
@@ -317,13 +332,33 @@ for (let prefToggle of prefsDisplay.toggles) {
     })
 }
 
-/** Event Listener to clear stats in localstorage */
+/** Preferences Modal - Share Button for Highscores */
+document.querySelector("#btn-share").addEventListener("click", () => {
+    let shareButtonText = document.querySelector("#btn-share").innerHTML;
+
+    let shareMsg =
+        `My highscore is ${localStorage.getItem("highscore")}, and ${localStorage.getItem("highscoreHardMode")} in Hard Mode on FizzBuzz! Play at https://www.davidindub.com/fizzbuzz/`;
+
+    // Copies the high score to users clipboard
+    document.querySelector("#btn-share").innerHTML = `Copied to clipboard!`
+    navigator.clipboard.writeText(shareMsg);
+
+    // Revert back to previous text after 1.5 sec
+    setTimeout(() => {
+        document.querySelector("#btn-share").innerHTML = shareButtonText;
+    }, 1500)
+
+})
+
+/** Preferences Modal - Clear Stats in localstorage */
 statsDisplay.clearStats.addEventListener("click", () => {
     statsStorage.resetStats();
     statsDisplay.update();
 })
 
+
 // Modals
+
 /** Launch a modal */
 function launchModal() {
     modalDisplay.modals[this.dataset.link].style.display = "block";
@@ -366,21 +401,3 @@ for (let modal of modalDisplay.modals) {
         }
     })
 };
-
-/** Share Button for Highscores */
-document.querySelector("#btn-share").addEventListener("click", () => {
-    let shareButtonText = document.querySelector("#btn-share").innerHTML;
-
-    let shareMsg =
-        `My highscore is ${localStorage.getItem("highscore")}, and ${localStorage.getItem("highscoreHardMode")} in Hard Mode on FizzBuzz! Play at https://www.davidindub.com/fizzbuzz/`;
-
-    // Copies the high score to users clipboard
-    document.querySelector("#btn-share").innerHTML = `Copied to clipboard!`
-    navigator.clipboard.writeText(shareMsg);
-
-    // Revert back to previous text after 1.5 sec
-    setTimeout(() => {
-        document.querySelector("#btn-share").innerHTML = shareButtonText;
-    }, 1500)
-
-})
