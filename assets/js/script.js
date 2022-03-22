@@ -14,8 +14,7 @@ const gameState = {
         this.currentScore = 0;
         gameDisplay.newGame();
         gameDisplay.toggleDisable();
-        prefsDisplay.enable(prefsDisplay.btnHardMode);
-    }
+        }
 }
 
 /** Statistics Modal Elements */
@@ -56,7 +55,6 @@ const prefsDisplay = {
         } else {
             localStorage.setItem("isSoundOn", false);
         }
-        theme.update();
     }
 }
 
@@ -106,7 +104,7 @@ const sounds = {
             prefsDisplay.btnSounds.checked = true;
             gameState.isSoundOn = true;
         } else {
-            prefsDisplay.soundOn.checked = false;
+            prefsDisplay.btnSounds.checked = false;
             gameState.isSoundOn = false;
         }
 }
@@ -276,11 +274,6 @@ function handleKeyPress(event) {
         case "ArrowDown":
             handleInput("fizzbuzz");
             break;
-        // case "Escape":
-        //     for (let modal of modalDisplay.modals) {
-        //         modal.style.display = "none";
-        //     }
-        //     break
         default:
             return
     }
@@ -357,6 +350,7 @@ for (let prefToggle of prefsDisplay.toggles) {
                 gameState.isTimerOn = !gameState.isTimerOn;
                 break;
             case "prefs-sounds":
+                prefsDisplay.soundEffects();
                 gameState.isSoundOn = !gameState.isSoundOn;
             default:
                 break;

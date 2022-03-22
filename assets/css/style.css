@@ -10,7 +10,7 @@
     --transition-hover: all ease-in-out 0.3s;
     --transition-theme: color 1s ease, background-color 1s ease;
     --border-wavy: 255px 15px 225px 15px/15px 225px 15px 255px;
-    --font-headings: "Bungee", sans-serif;
+    --font-headings: "Concert One", sans-serif;
     --font-secondary: "Roboto", sans-serif;
 }
 
@@ -213,7 +213,7 @@ label[for=timer] {
     color: var(--color-black);
     height: 9rem;
     width: 9rem;
-    font-size: 2rem;
+    font-size: 2.8rem;
     border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
     margin: 3px;
@@ -274,6 +274,7 @@ label[for=timer] {
 }
 
 .modal-content h2 {
+    font-size: 1.5rem;
     padding-bottom: 1rem;
     font-family: var(--font-headings);
 }
@@ -378,6 +379,10 @@ label[for=timer] {
     #scoreboard {
         font-size: 1rem;
     }
+
+    .modal-content h2 {
+        font-size: 2rem;
+    }
 }
 
 /* Make game buttons slightly smaller on large displays for easier clicking */
@@ -385,5 +390,6 @@ label[for=timer] {
     .btn-game {
         height: 8rem;
         width: 8rem;
+        font-size: 2.5rem;
     }
 }
