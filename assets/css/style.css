@@ -161,9 +161,9 @@ label[for=timer] {
     color: var(--color-black);
     padding: 1rem;
     margin: 1rem;
-    border-radius: 0.3rem;
-    -webkit-border-radius: var(--border-wavy);
     border: var(--color-black) solid 5px;
+    border-radius: var(--border-wavy);
+    -webkit-border-radius: 0.3rem;
 }
 
 #game-btns {

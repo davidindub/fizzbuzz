@@ -3,7 +3,7 @@
 /** Keeps track of the game state */
 const gameState = {
     isGameOver: false,
-    hardMode: false,
+    isHardMode: false,
     isTimerOn: true,
     isSoundOn: true,
     currentScore: 0,
@@ -12,13 +12,13 @@ const gameState = {
         this.isGameOver = false;
         this.currentNum = 1;
         this.currentScore = 0;
-        gameDisplay.newGame();
-        gameDisplay.toggleDisable();
+        gameView.newGame();
+        gameView.toggleDisable();
         }
 }
 
 /** Statistics Modal Elements */
-const statsDisplay = {
+const statsView = {
     regularScore: document.querySelector("#scoreboard").rows[1].cells[1],
     regularDate: document.querySelector("#scoreboard").rows[1].cells[2],
     hardScore: document.querySelector("#scoreboard").rows[2].cells[1],
@@ -35,7 +35,7 @@ const statsDisplay = {
 }
 
 /** Preferences Modal Elements */
-const prefsDisplay = {
+const prefsView = {
     toggles: document.querySelectorAll(".prefs-check"),
     btnHardMode: document.querySelector("#prefs-hard-mode"),
     btnDarkMode: document.querySelector("#prefs-dark-mode"),
@@ -59,7 +59,7 @@ const prefsDisplay = {
 }
 
 /** Game Area */
-const gameDisplay = {
+const gameView = {
     buttons: document.querySelectorAll(".btn-game"),
     btnNum: document.querySelector("#btn-num"),
     lastAnswer: document.querySelector("#last-answer-display"),
@@ -78,7 +78,7 @@ const gameDisplay = {
 }
 
 /** Handles Modals */
-const modalDisplay = {
+const modalView = {
     navItems: document.querySelectorAll(".nav-item"),
     modals: document.querySelectorAll(".modal"),
     closeBtns: document.querySelectorAll(".close"),
@@ -101,10 +101,10 @@ const sounds = {
     rightAnswer: document.querySelector("#sound-right-answer"),
     update: function () {
         if (localStorage.getItem("isSoundOn") === "true") {
-            prefsDisplay.btnSounds.checked = true;
+            prefsView.btnSounds.checked = true;
             gameState.isSoundOn = true;
         } else {
-            prefsDisplay.btnSounds.checked = false;
+            prefsView.btnSounds.checked = false;
             gameState.isSoundOn = false;
         }
 }
@@ -123,10 +123,10 @@ const theme = {
     },
     update: function () {
         if (localStorage.getItem("darkMode") === "true") {
-            prefsDisplay.btnDarkMode.checked = true;
+            prefsView.btnDarkMode.checked = true;
             this.root.id = "dark";
         } else {
-            prefsDisplay.btnDarkMode.checked = false;
+            prefsView.btnDarkMode.checked = false;
             this.root.removeAttribute("id");
         }
     }
@@ -168,11 +168,11 @@ class Timer {
 }
 
 /** Game Set Up */
-modalDisplay.addEL();
+modalView.addEL();
 theme.update();
 sounds.update();
-statsDisplay.update();
-gameDisplay.update();
+statsView.update();
+gameView.update();
 let timer = new Timer();
 
 
@@ -195,17 +195,17 @@ function handleGameOver() {
     if (gameState.isSoundOn) {
         sounds.gameOver.play();
     }
-    modalDisplay.addEL()
-    gameDisplay.toggleDisable();
+    modalView.addEL()
+    gameView.toggleDisable();
     gameState.isGameOver = true;
-    gameDisplay.lastAnswer.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
+    gameView.lastAnswer.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
 
     statsStorage.updateGamesPlayed();
     statsStorage.logHighScore();
 
     // Stats modal appears after 1.5 second
     setTimeout(() => {
-        modalDisplay.modals[1].style.display = "block";
+        modalView.modals[1].style.display = "block";
     }, 1500)
 }
 
@@ -215,7 +215,7 @@ const statsStorage = {
         let finalScore = gameState.currentScore;
         let today = new Date();
 
-        if (!gameState.hardMode) {
+        if (!gameState.isHardMode) {
             if (finalScore > localStorage.getItem("highscore")) {
                 localStorage.setItem("highscore", finalScore);
                 localStorage.setItem("highscoreDate", today.toLocaleDateString('en-GB'));
@@ -225,7 +225,7 @@ const statsStorage = {
             localStorage.setItem("highscoreDateHardMode", today.toLocaleDateString('en-GB'));
         }
 
-        statsDisplay.update();
+        statsView.update();
     },
     resetStats: function () {
         localStorage.setItem("highscore", 0);
@@ -240,7 +240,7 @@ const statsStorage = {
         gamesPlayed += 1;
         localStorage.setItem("gamesPlayed", gamesPlayed);
 
-        statsDisplay.update();
+        statsView.update();
     }
 }
 
@@ -256,7 +256,7 @@ function handleClick() {
 /** Handles arrow key presses */
 function handleKeyPress(event) {
     if (event.code === "Escape") {
-        for (let modal of modalDisplay.modals) {
+        for (let modal of modalView.modals) {
             modal.style.display = "none";
         }
     }
@@ -289,7 +289,7 @@ function isInputCorrect(input) {
 /** Handles game input */
 function handleInput(input) {
     // Disable the Modal Links while playing
-    modalDisplay.removeEL();
+    modalView.removeEL();
 
     // Start the timer if timer is toggled on
     if (input === 1 && gameState.isTimerOn) {
@@ -301,7 +301,7 @@ function handleInput(input) {
         /** If the input matches the expected result
          * Increase the number by one, or use a random number under 1000 for Hard Mode */
 
-        if (!gameState.hardMode) {
+        if (!gameState.isHardMode) {
             gameState.currentNum += 1;
         } else {
             let randomNum = Math.floor(Math.random() * 999);
@@ -315,7 +315,7 @@ function handleInput(input) {
 
         /** Increase the Score by 1, Update the game area display */
         gameState.currentScore += 1;
-        gameDisplay.update()
+        gameView.update()
 
         // Play the correct answer sound
         if (gameState.isSoundOn) {
@@ -323,13 +323,13 @@ function handleInput(input) {
         sounds.rightAnswer.play();
         }
 
-        gameDisplay.lastAnswer.innerHTML = "👍";
+        gameView.lastAnswer.innerHTML = "👍";
 
     } else handleGameOver();
 }
 
 /** Add click event listeners for game buttons and key presses */
-for (button of gameDisplay.buttons) {
+for (button of gameView.buttons) {
     button.addEventListener("click", handleClick);
 }
 
@@ -337,20 +337,20 @@ for (button of gameDisplay.buttons) {
 document.addEventListener("keydown", handleKeyPress);
 
 /** Event Listeners for Preferences Modal */
-for (let prefToggle of prefsDisplay.toggles) {
+for (let prefToggle of prefsView.toggles) {
     prefToggle.addEventListener("change", (e) => {
         switch (e.target.id) {
             case "prefs-hard-mode":
-                gameState.hardMode = !gameState.hardMode;
+                gameState.isHardMode = !gameState.isHardMode;
                 break;
             case "prefs-dark-mode":
-                prefsDisplay.darkMode();
+                prefsView.darkMode();
                 break;
             case "prefs-timer":
                 gameState.isTimerOn = !gameState.isTimerOn;
                 break;
             case "prefs-sounds":
-                prefsDisplay.soundEffects();
+                prefsView.soundEffects();
                 gameState.isSoundOn = !gameState.isSoundOn;
             default:
                 break;
@@ -377,9 +377,9 @@ document.querySelector("#btn-share").addEventListener("click", () => {
 })
 
 /** Preferences Modal - Clear Stats in localstorage */
-statsDisplay.clearStats.addEventListener("click", () => {
+statsView.clearStats.addEventListener("click", () => {
     statsStorage.resetStats();
-    statsDisplay.update();
+    statsView.update();
 })
 
 
@@ -387,13 +387,13 @@ statsDisplay.clearStats.addEventListener("click", () => {
 
 /** Launch a modal */
 function launchModal() {
-    modalDisplay.modals[this.dataset.link].style.display = "block";
+    modalView.modals[this.dataset.link].style.display = "block";
 };
 
 /** Check if user is a first time visitor, if so show rules and check for system dark mode preference */
 window.addEventListener("load", () => {
     if (localStorage.length === 0) {
-        modalDisplay.modals[2].style.display = "block";
+        modalView.modals[2].style.display = "block";
         statsStorage.resetStats();
     }
     if (localStorage.getItem("darkMode") === null) {
@@ -405,9 +405,9 @@ window.addEventListener("load", () => {
 
 /** When the user clicks on <span> (x), close the modal
 Reset Game State when user closes the stats modal after a game over */
-for (let closeBtn of modalDisplay.closeBtns) {
+for (let closeBtn of modalView.closeBtns) {
     closeBtn.addEventListener("click", () => {
-        for (let modal of modalDisplay.modals) {
+        for (let modal of modalView.modals) {
             modal.style.display = "none";
             if (gameState.isGameOver) {
                 gameState.newGame();
@@ -417,7 +417,7 @@ for (let closeBtn of modalDisplay.closeBtns) {
 };
 
 // Close modal when the user clicks anywhere outside of the modal
-for (let modal of modalDisplay.modals) {
+for (let modal of modalView.modals) {
     modal.addEventListener("click", (e) => {
         if (e.target.classList.contains("modal")) {
             modal.style.display = "none";
