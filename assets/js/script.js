@@ -17,7 +17,12 @@ const gameController = {
         gameState.currentScore = 0;
         gameView.newGame();
         gameView.toggleDisable();
+    },
+    modalClosed: function() {
+        if (gameState.isGameOver) {
+            this.newGame();
         }
+    }
 
 }
 
@@ -91,16 +96,26 @@ const modalView = {
     closeBtns: document.querySelectorAll(".close"),
     addEL: function () {
         for (let navItem of this.navItems) {
-            navItem.addEventListener("click", launchModal);
+            navItem.addEventListener("click", this.launchModal);
             navItem.classList.remove("nav-item-disabled");
         };
     },
     removeEL: function () {
-        for (let navItem of this.navItems) {
-            navItem.removeEventListener("click", launchModal);
-            navItem.classList.add("nav-item-disabled");
-        };
+        this.navItems[0].removeEventListener("click", this.launchModal);
+        this.navItems[0].classList.add("nav-item-disabled");
     },
+    hideAll: function () {
+        for (let modal of this.modals) {
+            modal.style.display = "none";
+        }
+        gameController.modalClosed();
+    },
+    showStats: function () {
+        this.modals[1].style.display = "block";
+    },
+    launchModal: function () {
+        modalView.modals[this.dataset.link].style.display = "block";
+    }
 }
 
 const sounds = {
@@ -114,7 +129,7 @@ const sounds = {
             prefsView.btnSounds.checked = false;
             gameState.isSoundOn = false;
         }
-}
+    }
 }
 
 /** Dark Mode */
@@ -212,7 +227,7 @@ function handleGameOver() {
 
     // Stats modal appears after 1.5 second
     setTimeout(() => {
-        modalView.modals[1].style.display = "block";
+        modalView.showStats();
     }, 1500)
 }
 
@@ -263,12 +278,7 @@ function handleClick() {
 /** Handles arrow key presses */
 function handleKeyPress(event) {
     if (event.code === "Escape") {
-        for (let modal of modalView.modals) {
-            modal.style.display = "none";
-        }
-        if (gameState.isGameOver) {
-            gameController.newGame();
-        }
+        modalView.hideAll();
     }
     if (gameState.isGameOver) return;
     switch (event.code) {
@@ -329,8 +339,8 @@ function handleInput(input) {
 
         // Play the correct answer sound
         if (gameState.isSoundOn) {
-        sounds.rightAnswer.currentTime = 0;
-        sounds.rightAnswer.play();
+            sounds.rightAnswer.currentTime = 0;
+            sounds.rightAnswer.play();
         }
 
         gameView.lastAnswer.innerHTML = "👍";
@@ -395,11 +405,6 @@ statsView.clearStats.addEventListener("click", () => {
 
 // Modals
 
-/** Launch a modal */
-function launchModal() {
-    modalView.modals[this.dataset.link].style.display = "block";
-};
-
 /** Check if user is a first time visitor, if so show rules and check for system dark mode preference */
 window.addEventListener("load", () => {
     if (localStorage.length === 0) {
@@ -417,12 +422,7 @@ window.addEventListener("load", () => {
 Reset Game State when user closes the stats modal after a game over */
 for (let closeBtn of modalView.closeBtns) {
     closeBtn.addEventListener("click", () => {
-        for (let modal of modalView.modals) {
-            modal.style.display = "none";
-            if (gameState.isGameOver) {
-                gameController.newGame();
-            }
-        }
+        modalView.hideAll();
     })
 };
 
@@ -430,10 +430,7 @@ for (let closeBtn of modalView.closeBtns) {
 for (let modal of modalView.modals) {
     modal.addEventListener("click", (e) => {
         if (e.target.classList.contains("modal")) {
-            modal.style.display = "none";
-            if (gameState.isGameOver) {
-                gameController.newGame();
-            }
+            modalView.hideAll();
         }
     })
 };
