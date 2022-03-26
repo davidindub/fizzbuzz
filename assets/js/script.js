@@ -100,7 +100,7 @@ const modalView = {
             navItem.classList.remove("nav-item-disabled");
         };
     },
-    removeEL: function () {
+    disablePrefsClick: function () {
         this.navItems[0].removeEventListener("click", this.launchModal);
         this.navItems[0].classList.add("nav-item-disabled");
     },
@@ -177,13 +177,11 @@ class Timer {
 
     timeup() {
         clearInterval(this.interval);
-        this.interval = null;
         this.secs = 0;
         this.timerDisplay.value = 0;
     }
 
     reset() {
-        this.interval = null;
         this.secs = 5000;
         this.timerDisplay.value = 100;
     }
@@ -308,12 +306,13 @@ function isInputCorrect(input) {
 
 /** Handles game input */
 function handleInput(input) {
-    // Disable the Modal Links while playing
-    modalView.removeEL();
 
     // Start the timer if timer is toggled on
     if (input === 1 && gameState.isTimerOn) {
         timer.start();
+
+        // Disable the preferences modal while playing
+        modalView.disablePrefsClick();
     };
 
     if (isInputCorrect(input)) {
