@@ -73,10 +73,9 @@
     <main>
 
         <section id="game-info">
-            <span id="last-answer-display" aria-live="polite">Start counting from 1...</span>
-            <br><br><br>
+            <span id="last-answer-display">Start counting from 1...</span>
             <label id="timer-label" for="timer">Time Left:</label>
-            <progress id="timer" value="100" max="100">5 secs</progress>
+            <progress id="timer" value="100" max="100" class="visually-hidden">5 secs</progress>
         </section>
 
         <section id="game-btns">
@@ -108,7 +107,7 @@
     </footer>
 
     <!-- A Preferences Modal -->
-    <aside class="modal" role="dialog" aria-labelledby="modal-prefs-title">
+    <aside class="modal" aria-labelledby="modal-prefs-title">
         <div class="modal-content">
             <button class="close" aria-label="Close">&times;</button>
             <h2 id="modal-prefs-title">Preferences</h2>
@@ -142,7 +141,7 @@
         </div>
     </aside>
     <!-- A statistics modal -->
-    <aside class="modal" role="dialog" aria-labelledby="modal-stats-title">
+    <aside class="modal" aria-labelledby="modal-stats-title">
         <div class="modal-content">
             <button class="close" aria-label="Close">&times;</button>
             <h2 id="modal-stats-title">Statistics</h2>
@@ -184,7 +183,7 @@
     </aside>
 
     <!-- A modal to appear on first visit explaining the rules of FizzBuzz -->
-    <aside class="modal" role="dialog" aria-labelledby="modal-rules-title" aria-describedby="modal-rules-text">
+    <aside class="modal" aria-labelledby="modal-rules-title" aria-describedby="modal-rules-text">
 
         <!-- Modal content -->
         <div class="modal-content">

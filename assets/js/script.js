@@ -16,7 +16,6 @@ const gameController = {
         gameState.currentNum = 1;
         gameState.currentScore = 0;
         gameView.newGame();
-        gameView.toggleDisable();
     },
     modalClosed: function() {
         if (gameState.isGameOver) {
@@ -80,12 +79,19 @@ const gameView = {
     },
     newGame: function () {
         this.lastAnswer.innerText = "Start counting from 1...";
-        this.btnNum.innerText = gameState.currentNum;
+        this.btnNum.innerText = gameState.currentNum;   
+        this.setBtnsDisabled(false);     
     },
-    toggleDisable: function () {
+    setBtnsDisabled: function (isDisabled) {
         for (let button of this.buttons) {
-            button.disabled = !button.disabled;
+            button.disabled = isDisabled;
         }
+    },
+    gameOver: function () {
+        this.setBtnsDisabled(true);
+        timer.timerDisplay.classList.add("visually-hidden");
+        this.lastAnswer.classList.remove("visually-hidden");
+        this.lastAnswer.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
     }
 }
 
@@ -216,9 +222,9 @@ function handleGameOver() {
         sounds.gameOver.play();
     }
     modalView.addEL()
-    gameView.toggleDisable();
     gameState.isGameOver = true;
-    gameView.lastAnswer.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
+
+    gameView.gameOver();
 
     statsStorage.updateGamesPlayed();
     statsStorage.logHighScore();
@@ -342,7 +348,8 @@ function handleInput(input) {
             sounds.rightAnswer.play();
         }
 
-        gameView.lastAnswer.innerHTML = "👍";
+        gameView.lastAnswer.classList.add("visually-hidden");
+        timer.timerDisplay.classList.remove("visually-hidden");
 
     } else handleGameOver();
 }

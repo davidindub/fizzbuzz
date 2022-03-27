@@ -75,7 +75,7 @@ header, footer {
 
 header {
     border-bottom: var(--color-black) solid 0.3rem;
-    margin-bottom: 2.5rem;
+    margin-bottom: 0.5rem;
     padding: 0.5rem 1.2rem;
 }
 
@@ -86,11 +86,13 @@ header {
     max-width: 600px;
 }
 
-footer {
-    border-top: var(--color-black) solid 0.3rem;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+html, body { height: 100%;}
+
+body > footer {
+  position: sticky;
+  top: 100vh;
+  border-top: var(--color-black) solid 0.3rem;
+  width: 100%;
 }
 
 nav {
@@ -101,7 +103,7 @@ nav {
 nav ul li {
     display: inline;
     list-style: none;
-    padding: 0 0.1rem;
+    padding: 0 0.2rem;
     color: var(--color-black);
 }
 
@@ -147,27 +149,34 @@ hr {
 
 #timer {
     padding: 1rem 0;
-    margin: 1rem auto;
 }
 
 label[for=timer] {
     display: none;
 }
 
-#last-answer-display,
+#game-info,
 .btn-stats {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-size: 1rem;
     background-color: var(--color-header);
     color: var(--color-black);
-    padding: 1rem;
+    padding: 0.8rem;
     margin: 1rem;
     border: var(--color-black) solid 5px;
     border-radius: var(--border-wavy);
     -webkit-border-radius: 0.3rem;
 }
 
-#game-btns {
-    line-height: 1;
+#game-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+    margin: 0 auto 1rem;
+    height: 4rem;
 }
 
 #scoreboard {
@@ -208,15 +217,21 @@ label[for=timer] {
     background-color: var(--color-one);
 }
 
+#game-btns {
+    line-height: 1;
+    width: clamp(310px, 50vw, 450px);
+    margin: auto;
+}
+
 .btn-game {
     font-family: var(--font-headings);
     color: var(--color-black);
-    height: 9rem;
-    width: 9rem;
+    width: 40%;
+    aspect-ratio: 1 / 1;
     font-size: 2.8rem;
     border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
-    margin: 3px;
+    margin: 0.5rem;
     transition: all ease-in-out 0.1s;
 }
 
@@ -283,7 +298,9 @@ label[for=timer] {
     margin: 1rem 0;
 }
 
-/* Preferences Modal */
+/* Preferences Modal
+Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle-switches-3obj
+*/
 .prefs-text {
     font-size: smaller;
 }
@@ -385,11 +402,8 @@ label[for=timer] {
     }
 }
 
-/* Make game buttons slightly smaller on large displays for easier clicking */
 @media screen and (min-width: 1024px) {
     .btn-game {
-        height: 8rem;
-        width: 8rem;
-        font-size: 2.5rem;
+        font-size: 3.5rem;
     }
 }
