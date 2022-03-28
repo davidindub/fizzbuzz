@@ -21,7 +21,11 @@
     <!-- Google Fonts Link -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Style Safari UI to match theme -->
+    <meta name="theme-color" content="#fff">
 
     <title>Fizz Buzz</title>
 </head>
@@ -88,10 +92,10 @@
             <button class="btn-game" data-game-btn="fizzbuzz">Fizz<br>Buzz</button>
             <audio id="sound-game-over" class="visually-hidden">
                 <source src="assets/sounds/game-over.m4a">
-                </audio>
-                <audio id="sound-right-answer" class="visually-hidden">
-                    <source src="assets/sounds/right-answer.m4a">
-                    </audio>
+            </audio>
+            <audio id="sound-right-answer" class="visually-hidden">
+                <source src="assets/sounds/right-answer.m4a">
+            </audio>
         </section>
     </main>
 
@@ -168,11 +172,11 @@
             </table>
             <hr>
             <p>
-            Last Score: <span id="stats-last-score"></span>
+                Last Score: <span id="stats-last-score"></span>
             </p>
             <hr>
             <p>
-            Total Games Played: <span id="stats-games-played"></span>
+                Total Games Played: <span id="stats-games-played"></span>
             </p>
             <hr>
             <div id="stats-btns">
@@ -212,32 +216,32 @@
                 <hr>
                 You can click, tap, or use your keyboard's arrow keys to play:
                 <br><br>
-                <svg xmlns="http://www.w3.org/2000/svg" role="presentation" width="16" height="16"
-                    fill="currentColor" class="bi bi-arrow-up-square" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" role="presentation" width="16" height="16" fill="currentColor"
+                    class="bi bi-arrow-up-square" viewBox="0 0 16 16">
                     <text class="visually-hidden">Up Arrow key to choose</text>
                     <path fill-rule="evenodd"
                         d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 9.5a.5.5 0 0 1-1 0V5.707L5.354 7.854a.5.5 0 1 1-.708-.708l3-3a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 5.707V11.5z" />
                 </svg>
                 Number
                 <br>
-                <svg xmlns="http://www.w3.org/2000/svg" role="presentation" aria-label="left-arrow" width="16" height="16"
-                    fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" role="presentation" aria-label="left-arrow" width="16"
+                    height="16" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
                     <text class="visually-hidden">Left Arrow key to choose</text>
                     <path fill-rule="evenodd"
                         d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z" />
                 </svg>
                 Fizz
                 <br>
-                <svg xmlns="http://www.w3.org/2000/svg" role="presentation" aria-label="right-arrow" width="16" height="16"
-                    fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" role="presentation" aria-label="right-arrow" width="16"
+                    height="16" fill="currentColor" class="bi bi-arrow-right-square" viewBox="0 0 16 16">
                     <text class="visually-hidden">Right Arrow key to choose</text>
                     <path fill-rule="evenodd"
                         d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm4.5 5.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z" />
                 </svg>
                 Buzz
                 <br>
-                <svg xmlns="http://www.w3.org/2000/svg" role="presentation" aria-label="down-arrow" width="16" height="16"
-                    fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
+                <svg xmlns="http://www.w3.org/2000/svg" role="presentation" aria-label="down-arrow" width="16"
+                    height="16" fill="currentColor" class="bi bi-arrow-down-square" viewBox="0 0 16 16">
                     <text class="visually-hidden">Down Arrow key to choose</text>
                     <path fill-rule="evenodd"
                         d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm8.5 2.5a.5.5 0 0 0-1 0v5.793L5.354 8.146a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l3-3a.5.5 0 0 0-.708-.708L8.5 10.293V4.5z" />

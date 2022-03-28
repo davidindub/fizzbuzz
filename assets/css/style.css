@@ -242,7 +242,8 @@ label[for=timer] {
     font-family: var(--font-headings);
     color: var(--color-black);
     height: 20vh;
-    aspect-ratio: 1 / 1;
+    width: 20vh;
+    /* aspect-ratio: 1 / 1; */
     font-size: 2rem;
     border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
@@ -427,8 +428,8 @@ Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle
     }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1920px) {
     .btn-game {
-        font-size: 3.5rem;
+        font-size: 4.5rem;
     }
 }

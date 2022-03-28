@@ -147,6 +147,7 @@ const sounds = {
 /** Dark Mode */
 const themeController = {
     root: document.querySelector(":root"),
+    themeMetaTag: document.querySelector('meta[name="theme-color"]'),
     checkUserOSPref: function () {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
             localStorage.setItem("darkMode", true);
@@ -156,12 +157,15 @@ const themeController = {
         this.update();
     },
     update: function () {
+        console.log(this.themeMetaTag);
         if (localStorage.getItem("darkMode") === "true") {
             prefsView.btnDarkMode.checked = true;
             this.root.id = "dark";
+            this.themeMetaTag.content = "#121212"
         } else {
             prefsView.btnDarkMode.checked = false;
             this.root.removeAttribute("id");
+            this.themeMetaTag.content = "#fff"
         }
     }
 }
