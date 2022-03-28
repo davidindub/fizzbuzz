@@ -24,7 +24,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <!-- Style Safari UI to match theme -->
+    <!-- Style mobile browsers UI to match theme -->
     <meta name="theme-color" content="#fff">
 
     <title>Fizz Buzz</title>
@@ -77,7 +77,7 @@
     <main>
 
         <section class="game-info">
-            <span id="game-info-text">Start counting from 1...</span>
+            <span id="game-info-text"  aria-live="assertive">Start counting from 1...</span>
             <label id="timer-label" for="timer">Time Left:</label>
             <progress id="timer" value="100" max="100" class="visually-hidden">5 secs</progress>
         </section>

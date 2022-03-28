@@ -6,10 +6,12 @@ const gameState = {
     isHardMode: false,
     isTimerOn: true,
     isSoundOn: true,
+    isDarkMode: false,
     currentScore: 0,
     currentNum: 1
 }
 
+/** Controller for overall game logic */
 const gameController = {
     newGame: function () {
         gameState.isGameOver = false;
@@ -17,11 +19,93 @@ const gameController = {
         gameState.currentScore = 0;
         gameView.newGame();
     },
-    modalClosed: function() {
+    modalClosed: function () {
         if (gameState.isGameOver) {
             this.newGame();
         }
+    },
+    handleInput: function (input) {
+
+        // Start the timer if timer is toggled on
+        if (input === 1 && gameState.isTimerOn) {
+            timer.start();
+
+            // Disable the preferences modal while playing
+            modalView.disablePrefsClick();
+        };
+
+        if (this.isInputCorrect(input)) {
+
+            /** If the input matches the expected result
+             * Increase the number by one, or use a random number under 1000 for Hard Mode */
+
+            if (!gameState.isHardMode) {
+                gameState.currentNum += 1;
+            } else {
+                let randomNum = Math.floor(Math.random() * 999);
+                gameState.currentNum = randomNum;
+            };
+
+            /** Restart the Timer if timer is toggled on */
+            if (gameState.isTimerOn) {
+                timer.reset();
+            }
+
+            /** Increase the Score by 1, Update the game area display */
+            gameState.currentScore += 1;
+            gameView.update()
+
+            // Play the correct answer sound
+            if (gameState.isSoundOn) {
+                sounds.rightAnswer.currentTime = 0;
+                sounds.rightAnswer.play();
+            }
+
+            gameView.hideGameInfoText();
+            timer.show();
+
+        } else this.handleGameOver();
+    },
+
+    /** Checks if the input matches the expected result */
+    isInputCorrect: function (input) {
+        if (input === this.checkNumber(gameState.currentNum)) {
+            return true;
+        } else return false;
+    },
+
+    /** Checks whether a number is a fizz, buzz, or fizzbuzz, otherwise returns the number */
+    checkNumber: function (num) {
+        if (typeof num != "number") return TypeError("Expects a number");
+
+        num = parseInt(num);
+        if (num % 15 === 0) return "fizzbuzz";
+        if (num % 5 === 0) return "buzz";
+        if (num % 3 === 0) return "fizz";
+        else return num;
+    },
+
+    /** Handles a game over */
+    handleGameOver: function() {
+    if (timer.secs !== 0) {
+        timer.timeup();
     }
+    if (gameState.isSoundOn) {
+        sounds.gameOver.play();
+    }
+    modalView.addEL()
+    gameState.isGameOver = true;
+
+    gameView.gameOver();
+
+    statsStorage.updateGamesPlayed();
+    statsStorage.logHighScore();
+
+    // Stats modal appears after 1.5 second
+    setTimeout(() => {
+        modalView.showStats();
+    }, 1500)
+}
 
 }
 
@@ -51,6 +135,10 @@ const prefsView = {
     btnDarkMode: document.querySelector("#prefs-dark-mode"),
     btnTimer: document.querySelector("#prefs-timer"),
     btnSounds: document.querySelector("#prefs-sounds"),
+    update: function () {
+        this.btnSounds.checked = gameState.isSoundOn;
+        this.btnDarkMode.checked = gameState.isDarkMode;
+    }
 }
 
 const localStorageController = {
@@ -84,8 +172,14 @@ const gameView = {
     newGame: function () {
         this.gameInfoText.innerText = "Start counting from 1...";
         this.gameInfo.classList.remove("game-over");
-        this.btnNum.innerText = gameState.currentNum;   
-        this.setBtnsDisabled(false);     
+        this.btnNum.innerText = gameState.currentNum;
+        this.setBtnsDisabled(false);
+    },
+    hideGameInfoText: function () {
+        gameView.gameInfoText.classList.add("visually-hidden");
+    },
+    showGameInfoText: function () {
+        gameView.gameInfoText.classList.remove("visually-hidden");
     },
     setBtnsDisabled: function (isDisabled) {
         for (let button of this.buttons) {
@@ -94,8 +188,8 @@ const gameView = {
     },
     gameOver: function () {
         this.setBtnsDisabled(true);
-        timer.timerDisplay.classList.add("visually-hidden");
-        this.gameInfoText.classList.remove("visually-hidden");
+        timer.hide();
+        this.showGameInfoText();
         this.gameInfo.classList.add("game-over");
         this.gameInfoText.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
     }
@@ -132,16 +226,7 @@ const modalView = {
 
 const sounds = {
     gameOver: document.querySelector("#sound-game-over"),
-    rightAnswer: document.querySelector("#sound-right-answer"),
-    update: function () {
-        if (localStorage.getItem("isSoundOn") === "true") {
-            prefsView.btnSounds.checked = true;
-            gameState.isSoundOn = true;
-        } else {
-            prefsView.btnSounds.checked = false;
-            gameState.isSoundOn = false;
-        }
-    }
+    rightAnswer: document.querySelector("#sound-right-answer")
 }
 
 /** Dark Mode */
@@ -157,7 +242,6 @@ const themeController = {
         this.update();
     },
     update: function () {
-        console.log(this.themeMetaTag);
         if (localStorage.getItem("darkMode") === "true") {
             prefsView.btnDarkMode.checked = true;
             this.root.id = "dark";
@@ -184,7 +268,7 @@ class Timer {
             this.secs -= 200;
 
             if (this.secs === 0) {
-                handleGameOver();
+                gameController.handleGameOver();
                 this.timeup();
             }
 
@@ -201,48 +285,28 @@ class Timer {
         this.secs = 5000;
         this.timerDisplay.value = 100;
     }
+
+    hide() {
+        this.timerDisplay.classList.add("visually-hidden");
+    }
+
+    show() {
+        this.timerDisplay.classList.remove("visually-hidden");
+    }
 }
 
 /** Game Set Up */
 modalView.addEL();
 themeController.update();
-sounds.update();
+loadStateFromLocalStorage();
+prefsView.update();
 statsView.update();
 gameView.update();
 let timer = new Timer();
 
-
-/** Checks whether a number is a fizz, buzz, or fizzbuzz, otherwise returns the number */
-function checkNumber(num) {
-    if (typeof num != "number") return TypeError("Expects a number");
-
-    num = parseInt(num);
-    if (num % 15 === 0) return "fizzbuzz";
-    if (num % 5 === 0) return "buzz";
-    if (num % 3 === 0) return "fizz";
-    else return num;
-}
-
-/** Handles a game over */
-function handleGameOver() {
-    if (timer.secs !== 0) {
-        timer.timeup();
-    }
-    if (gameState.isSoundOn) {
-        sounds.gameOver.play();
-    }
-    modalView.addEL()
-    gameState.isGameOver = true;
-
-    gameView.gameOver();
-
-    statsStorage.updateGamesPlayed();
-    statsStorage.logHighScore();
-
-    // Stats modal appears after 1.5 second
-    setTimeout(() => {
-        modalView.showStats();
-    }, 1500)
+function loadStateFromLocalStorage() {
+        gameState.isSoundOn = (localStorage.getItem("isSoundOn") === "true");
+        gameState.isDarkMode = (localStorage.getItem("darkMode") === "true");
 }
 
 /** Handles Stats in Local Storage */
@@ -285,9 +349,9 @@ const statsStorage = {
 /** Handles clicks on the game buttons */
 function handleClick() {
     if (this.dataset.gameBtn === "number") {
-        handleInput(gameState.currentNum);
+        gameController.handleInput(gameState.currentNum);
     } else {
-        handleInput(this.dataset.gameBtn);
+        gameController.handleInput(this.dataset.gameBtn);
     }
 }
 
@@ -299,71 +363,21 @@ function handleKeyPress(event) {
     if (gameState.isGameOver) return;
     switch (event.code) {
         case "ArrowLeft":
-            handleInput("fizz");
+            gameController.handleInput("fizz");
+            gameView.buttons[1].classList.add("key-down");
             break;
         case "ArrowRight":
-            handleInput("buzz");
+            gameController.handleInput("buzz");
             break;
         case "ArrowUp":
-            handleInput(gameState.currentNum);
+            gameController.handleInput(gameState.currentNum);
             break;
         case "ArrowDown":
-            handleInput("fizzbuzz");
+            gameController.handleInput("fizzbuzz");
             break;
         default:
             return
     }
-}
-
-/** Checks if the input matches the expected result */
-function isInputCorrect(input) {
-    if (input === checkNumber(gameState.currentNum)) {
-        return true;
-    } else return false;
-}
-
-/** Handles game input */
-function handleInput(input) {
-
-    // Start the timer if timer is toggled on
-    if (input === 1 && gameState.isTimerOn) {
-        timer.start();
-
-        // Disable the preferences modal while playing
-        modalView.disablePrefsClick();
-    };
-
-    if (isInputCorrect(input)) {
-
-        /** If the input matches the expected result
-         * Increase the number by one, or use a random number under 1000 for Hard Mode */
-
-        if (!gameState.isHardMode) {
-            gameState.currentNum += 1;
-        } else {
-            let randomNum = Math.floor(Math.random() * 999);
-            gameState.currentNum = randomNum;
-        };
-
-        /** Restart the Timer if timer is toggled on */
-        if (gameState.isTimerOn) {
-            timer.reset();
-        }
-
-        /** Increase the Score by 1, Update the game area display */
-        gameState.currentScore += 1;
-        gameView.update()
-
-        // Play the correct answer sound
-        if (gameState.isSoundOn) {
-            sounds.rightAnswer.currentTime = 0;
-            sounds.rightAnswer.play();
-        }
-
-        gameView.gameInfoText.classList.add("visually-hidden");
-        timer.timerDisplay.classList.remove("visually-hidden");
-
-    } else handleGameOver();
 }
 
 /** Add click event listeners for game buttons and key presses */

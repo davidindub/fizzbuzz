@@ -156,6 +156,10 @@ label[for=timer] {
     display: none;
 }
 
+progress {
+    accent-color: var(--color-two);
+  }
+
 .game-info,
 .btn-stats {
     display: flex;
@@ -167,8 +171,7 @@ label[for=timer] {
     padding: 0.8rem 2rem;
     margin: 1rem;
     border: var(--color-black) solid 5px;
-    border-radius: var(--border-wavy);
-    -webkit-border-radius: 0.3rem;
+    border-radius: 0.4rem;
 }
 
 .game-info {
@@ -248,14 +251,14 @@ label[for=timer] {
     border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
     margin: 0.2rem;
-    transition: all ease-in-out 0.2s;
+    transition: all ease-in-out 0.1s;
 }
 
 .btn-game:hover {
     border: var(--color-black) dashed 0.4rem;
 }
 
-.btn-game:active {
+.btn-game:active, .key-down {
     transform: scale(0.90); 
 }
 
