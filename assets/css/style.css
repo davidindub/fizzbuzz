@@ -394,14 +394,13 @@ Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle
     float: right;
     font-size: 3rem;
     font-weight: bold;
-    transition: var(--transition-hover);
     background-color: inherit;
     border: none;
 }
 
 .close:hover,
 .close:focus {
-    color: var(--color-black);
+    color: var(--color-one);
     text-decoration: none;
     cursor: pointer;
 }
