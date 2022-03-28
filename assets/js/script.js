@@ -24,15 +24,26 @@ const gameController = {
             this.newGame();
         }
     },
+    onGameStarted: function () {
+        /** Disable the preferences modal while playing */
+        modalView.disablePrefsClick();
+
+        /** Start the timer if timer is toggled on */
+        if (gameState.isTimerOn) {
+            gameView.hideGameInfoText();
+            timer.show();
+
+            timer.start();
+        } else {
+            gameView.timerOff();
+        }
+    },
     handleInput: function (input) {
 
-        // Start the timer if timer is toggled on
-        if (input === 1 && gameState.isTimerOn) {
-            timer.start();
-
-            // Disable the preferences modal while playing
-            modalView.disablePrefsClick();
-        };
+        /** On starting a new game... */
+        if (input === 1) {
+            this.onGameStarted();
+        }
 
         if (this.isInputCorrect(input)) {
 
@@ -46,11 +57,6 @@ const gameController = {
                 gameState.currentNum = randomNum;
             };
 
-            /** Restart the Timer if timer is toggled on */
-            if (gameState.isTimerOn) {
-                timer.reset();
-            }
-
             /** Increase the Score by 1, Update the game area display */
             gameState.currentScore += 1;
             gameView.update()
@@ -61,8 +67,10 @@ const gameController = {
                 sounds.rightAnswer.play();
             }
 
-            gameView.hideGameInfoText();
-            timer.show();
+            /** Restart the Timer */
+            if (gameState.isTimerOn) {
+                timer.reset();
+            }
 
         } else this.handleGameOver();
     },
@@ -86,26 +94,29 @@ const gameController = {
     },
 
     /** Handles a game over */
-    handleGameOver: function() {
-    if (timer.secs !== 0) {
-        timer.timeup();
+    handleGameOver: function () {
+        if (timer.secs !== 0) {
+            timer.timeup();
+        }
+        if (gameState.isSoundOn) {
+            sounds.gameOver.play();
+        }
+        modalView.addEL()
+        gameState.isGameOver = true;
+
+        gameView.gameOver();
+
+        localStorageController.updateGamesPlayed();
+        localStorageController.logHighScore();
+
+        statsView.update();
+
+
+        // Stats modal appears after 1.5 second
+        setTimeout(() => {
+            modalView.showStats();
+        }, 1500)
     }
-    if (gameState.isSoundOn) {
-        sounds.gameOver.play();
-    }
-    modalView.addEL()
-    gameState.isGameOver = true;
-
-    gameView.gameOver();
-
-    statsStorage.updateGamesPlayed();
-    statsStorage.logHighScore();
-
-    // Stats modal appears after 1.5 second
-    setTimeout(() => {
-        modalView.showStats();
-    }, 1500)
-}
 
 }
 
@@ -141,7 +152,7 @@ const prefsView = {
     }
 }
 
-/** Updates settings in localstorage from Game State */
+/** Updates Localstorage from Game State */
 const localStorageController = {
     updateFromGameState: function () {
         if (gameState.isDarkMode) {
@@ -154,7 +165,37 @@ const localStorageController = {
         } else {
             localStorage.setItem("isSoundOn", "false")
         }
-        
+    },
+    logHighScore: function () {
+        let finalScore = gameState.currentScore;
+        let today = new Date();
+
+        if (!gameState.isHardMode) {
+            if (finalScore > localStorage.getItem("highscore")) {
+                localStorage.setItem("highscore", finalScore);
+                localStorage.setItem("highscoreDate", today.toLocaleDateString('en-GB'));
+            }
+        } else if (finalScore > localStorage.getItem("highscoreHardMode")) {
+            localStorage.setItem("highscoreHardMode", finalScore);
+            localStorage.setItem("highscoreDateHardMode", today.toLocaleDateString('en-GB'));
+        }
+
+        statsView.update();
+    },
+    resetStats: function () {
+        localStorage.setItem("highscore", 0);
+        localStorage.setItem("highscoreDate", "-");
+        localStorage.setItem("highscoreHardMode", 0);
+        localStorage.setItem("highscoreDateHardMode", "-");
+        localStorage.setItem("gamesPlayed", 0);
+        localStorage.setItem("latestScore", 0);
+    },
+    updateGamesPlayed: function () {
+        let gamesPlayed = localStorage.getItem("gamesPlayed");
+        gamesPlayed ? gamesPlayed = parseInt(gamesPlayed) : localStorage.setItem("gamesPlayed", 0);
+        gamesPlayed += 1;
+        localStorage.setItem("gamesPlayed", gamesPlayed);
+        localStorage.setItem("latestScore", gameState.currentScore);
     }
 }
 
@@ -172,6 +213,9 @@ const gameView = {
         this.gameInfo.classList.remove("game-over");
         this.btnNum.innerText = gameState.currentNum;
         this.setBtnsDisabled(false);
+    },
+    timerOff: function () {
+        this.gameInfoText.innerText = "Take Your Time…";
     },
     hideGameInfoText: function () {
         gameView.gameInfoText.classList.add("visually-hidden");
@@ -291,55 +335,9 @@ class Timer {
     }
 }
 
-/** Game Set Up */
-modalView.addEL();
-themeController.update();
-loadStateFromLocalStorage();
-prefsView.update();
-statsView.update();
-gameView.update();
-let timer = new Timer();
-
 function loadStateFromLocalStorage() {
-        gameState.isSoundOn = (localStorage.getItem("isSoundOn") === "true");
-        gameState.isDarkMode = (localStorage.getItem("isDarkMode") === "true");
-}
-
-/** Handles Stats in Local Storage */
-const statsStorage = {
-    logHighScore: function () {
-        let finalScore = gameState.currentScore;
-        let today = new Date();
-
-        if (!gameState.isHardMode) {
-            if (finalScore > localStorage.getItem("highscore")) {
-                localStorage.setItem("highscore", finalScore);
-                localStorage.setItem("highscoreDate", today.toLocaleDateString('en-GB'));
-            }
-        } else if (finalScore > localStorage.getItem("highscoreHardMode")) {
-            localStorage.setItem("highscoreHardMode", finalScore);
-            localStorage.setItem("highscoreDateHardMode", today.toLocaleDateString('en-GB'));
-        }
-
-        statsView.update();
-    },
-    resetStats: function () {
-        localStorage.setItem("highscore", 0);
-        localStorage.setItem("highscoreDate", "-");
-        localStorage.setItem("highscoreHardMode", 0);
-        localStorage.setItem("highscoreDateHardMode", "-");
-        localStorage.setItem("gamesPlayed", 0);
-        localStorage.setItem("latestScore", 0);
-    },
-    updateGamesPlayed: function () {
-        let gamesPlayed = localStorage.getItem("gamesPlayed");
-        gamesPlayed ? gamesPlayed = parseInt(gamesPlayed) : localStorage.setItem("gamesPlayed", 0);
-        gamesPlayed += 1;
-        localStorage.setItem("gamesPlayed", gamesPlayed);
-        localStorage.setItem("latestScore", gameState.currentScore);
-
-        statsView.update();
-    }
+    gameState.isSoundOn = (localStorage.getItem("isSoundOn") === "true");
+    gameState.isDarkMode = (localStorage.getItem("isDarkMode") === "true");
 }
 
 /** Handles clicks on the game buttons */
@@ -360,7 +358,6 @@ function handleKeyPress(event) {
     switch (event.code) {
         case "ArrowLeft":
             gameController.handleInput("fizz");
-            gameView.buttons[1].classList.add("key-down");
             break;
         case "ArrowRight":
             gameController.handleInput("buzz");
@@ -404,8 +401,8 @@ for (let prefToggle of prefsView.toggles) {
                 if (gameState.isSoundOn) {
                     sounds.rightAnswer.play();
                 }
-            default:
-                break;
+                default:
+                    break;
         }
         localStorageController.updateFromGameState();
     })
@@ -431,7 +428,7 @@ document.querySelector("#btn-share").addEventListener("click", () => {
 
 /** Preferences Modal - Clear Stats in localstorage */
 statsView.clearStats.addEventListener("click", () => {
-    statsStorage.resetStats();
+    localStorageController.resetStats();
     statsView.update();
 })
 
@@ -441,7 +438,7 @@ statsView.clearStats.addEventListener("click", () => {
 /** Check if user is a first time visitor, if so show rules and check for system dark mode preference */
 window.addEventListener("load", () => {
     if (localStorage.length === 0) {
-        statsStorage.resetStats();
+        localStorageController.resetStats();
         statsView.update();
         modalView.modals[2].style.display = "block";
     }
@@ -468,3 +465,20 @@ for (let modal of modalView.modals) {
         }
     })
 };
+
+
+/** Game Set Up */
+
+loadStateFromLocalStorage();
+
+modalView.addEL();
+
+themeController.update();
+
+prefsView.update();
+
+statsView.update();
+
+let timer = new Timer();
+
+gameView.update();
