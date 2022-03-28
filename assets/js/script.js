@@ -141,22 +141,20 @@ const prefsView = {
     }
 }
 
+/** Updates settings in localstorage from Game State */
 const localStorageController = {
-    darkMode: function () {
-        if (prefsView.btnDarkMode.checked === true) {
-            localStorage.setItem("darkMode", true);
+    updateFromGameState: function () {
+        if (gameState.isDarkMode) {
+            localStorage.setItem("isDarkMode", "true")
         } else {
-            localStorage.setItem("darkMode", false);
+            localStorage.setItem("isDarkMode", "false")
         }
-        themeController.update();
-    },
-    soundEffects: function () {
-        if (prefsView.btnSounds.checked === true) {
-            sounds.rightAnswer.play();
-            localStorage.setItem("isSoundOn", true);
+        if (gameState.isSoundOn) {
+            localStorage.setItem("isSoundOn", "true")
         } else {
-            localStorage.setItem("isSoundOn", false);
+            localStorage.setItem("isSoundOn", "false")
         }
+        
     }
 }
 
@@ -235,19 +233,17 @@ const themeController = {
     themeMetaTag: document.querySelector('meta[name="theme-color"]'),
     checkUserOSPref: function () {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            localStorage.setItem("darkMode", true);
+            localStorage.setItem("isDarkMode", true);
         } else {
-            localStorage.setItem("darkMode", false);
+            localStorage.setItem("isDarkMode", false);
         }
         this.update();
     },
     update: function () {
-        if (localStorage.getItem("darkMode") === "true") {
-            prefsView.btnDarkMode.checked = true;
+        if (gameState.isDarkMode) {
             this.root.id = "dark";
             this.themeMetaTag.content = "#121212"
         } else {
-            prefsView.btnDarkMode.checked = false;
             this.root.removeAttribute("id");
             this.themeMetaTag.content = "#fff"
         }
@@ -306,7 +302,7 @@ let timer = new Timer();
 
 function loadStateFromLocalStorage() {
         gameState.isSoundOn = (localStorage.getItem("isSoundOn") === "true");
-        gameState.isDarkMode = (localStorage.getItem("darkMode") === "true");
+        gameState.isDarkMode = (localStorage.getItem("isDarkMode") === "true");
 }
 
 /** Handles Stats in Local Storage */
@@ -393,20 +389,25 @@ for (let prefToggle of prefsView.toggles) {
     prefToggle.addEventListener("change", (e) => {
         switch (e.target.id) {
             case "prefs-hard-mode":
-                gameState.isHardMode = !gameState.isHardMode;
+                gameState.isHardMode = e.target.checked;
                 break;
             case "prefs-dark-mode":
-                localStorageController.darkMode();
+                gameState.isDarkMode = e.target.checked;
+                themeController.update();
                 break;
             case "prefs-timer":
-                gameState.isTimerOn = !gameState.isTimerOn;
+                gameState.isTimerOn = e.target.checked;
                 break;
             case "prefs-sounds":
-                localStorageController.soundEffects();
-                gameState.isSoundOn = !gameState.isSoundOn;
+                gameState.isSoundOn = e.target.checked;
+
+                if (gameState.isSoundOn) {
+                    sounds.rightAnswer.play();
+                }
             default:
                 break;
         }
+        localStorageController.updateFromGameState();
     })
 }
 
@@ -444,7 +445,7 @@ window.addEventListener("load", () => {
         statsView.update();
         modalView.modals[2].style.display = "block";
     }
-    if (localStorage.getItem("darkMode") === null) {
+    if (localStorage.getItem("isDarkMode") === null) {
         themeController.checkUserOSPref();
     }
 }, {
