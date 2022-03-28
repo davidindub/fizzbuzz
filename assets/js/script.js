@@ -64,6 +64,7 @@ const localStorageController = {
     },
     soundEffects: function () {
         if (prefsView.btnSounds.checked === true) {
+            sounds.rightAnswer.play();
             localStorage.setItem("isSoundOn", true);
         } else {
             localStorage.setItem("isSoundOn", false);
@@ -75,12 +76,14 @@ const localStorageController = {
 const gameView = {
     buttons: document.querySelectorAll(".btn-game"),
     btnNum: document.querySelector("#btn-num"),
-    lastAnswer: document.querySelector("#last-answer-display"),
+    gameInfo: document.querySelector(".game-info"),
+    gameInfoText: document.querySelector("#game-info-text"),
     update: function () {
         this.btnNum.innerText = gameState.currentNum;
     },
     newGame: function () {
-        this.lastAnswer.innerText = "Start counting from 1...";
+        this.gameInfoText.innerText = "Start counting from 1...";
+        this.gameInfo.classList.remove("game-over");
         this.btnNum.innerText = gameState.currentNum;   
         this.setBtnsDisabled(false);     
     },
@@ -92,9 +95,9 @@ const gameView = {
     gameOver: function () {
         this.setBtnsDisabled(true);
         timer.timerDisplay.classList.add("visually-hidden");
-        this.lastAnswer.classList.remove("visually-hidden");
-        document.getElementById("game-info").classList.add("game-over");
-        this.lastAnswer.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
+        this.gameInfoText.classList.remove("visually-hidden");
+        this.gameInfo.classList.add("game-over");
+        this.gameInfoText.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
     }
 }
 
@@ -353,7 +356,7 @@ function handleInput(input) {
             sounds.rightAnswer.play();
         }
 
-        gameView.lastAnswer.classList.add("visually-hidden");
+        gameView.gameInfoText.classList.add("visually-hidden");
         timer.timerDisplay.classList.remove("visually-hidden");
 
     } else handleGameOver();

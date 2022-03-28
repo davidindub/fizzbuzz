@@ -7,6 +7,7 @@
     --color-three: rgb(242, 221, 129);
     --color-four: rgb(101, 188, 183);
     --color-black: rgb(43, 47, 47);
+    --color-grey: rgb(208, 208, 208);
     --transition-hover: all ease-in-out 0.3s;
     --transition-theme: color 1s ease, background-color 1s ease;
     --border-wavy: 255px 15px 225px 15px/15px 225px 15px 255px;
@@ -130,7 +131,7 @@ h1 {
     cursor: default;
 }
 
-p, #last-answer-display {
+p, #game-info-text {
     font-size: 0.9rem
 }
 
@@ -155,7 +156,7 @@ label[for=timer] {
     display: none;
 }
 
-#game-info,
+.game-info,
 .btn-stats {
     display: flex;
     justify-content: center;
@@ -170,26 +171,26 @@ label[for=timer] {
     -webkit-border-radius: 0.3rem;
 }
 
-#game-info {
+.game-info {
     display: flex;
     justify-content: center;
     align-items: center;
     width: fit-content;
     margin: 0 auto 1rem;
     height: 4rem;
-    transition: ;
 }
 
 .game-over {
-    animation: horizontal-shaking 0.35s 1;
+    animation: horizontal-shaking 0.35s 2;
+    background-color: var(--color-one);
 }
 
 /* Shake animation for a game over from https://unused-css.com/blog/css-shake-animation/ */
 @keyframes horizontal-shaking {
     0% { transform: translateX(0) }
-    25% { transform: translateX(5px) }
-    50% { transform: translateX(-5px) }
-    75% { transform: translateX(5px) }
+    25% { transform: translateX(0.3rem) }
+    50% { transform: translateX(-0.3rem) }
+    75% { transform: translateX(0.3rem) }
     100% { transform: translateX(0) }
    }
 
@@ -233,7 +234,7 @@ label[for=timer] {
 
 #game-btns {
     line-height: 1;
-    height: min(400px, 70vh)
+    height: min(400px, 70vh);
     margin: auto;
 }
 
@@ -246,12 +247,15 @@ label[for=timer] {
     border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
     margin: 0.2rem;
-    transition: all ease-in-out 0.1s;
+    transition: all ease-in-out 0.2s;
 }
 
 .btn-game:hover {
     border: var(--color-black) dashed 0.4rem;
-    transform: scale(0.95); 
+}
+
+.btn-game:active {
+    transform: scale(0.90); 
 }
 
 .btn-game[data-game-btn="number"] {
@@ -346,7 +350,7 @@ Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle
     display: block;
     margin: 0 0.2;
     transition: all 100ms cubic-bezier(0.4, 0.0, 0.2, 1);
-    background: rgb(208, 208, 208);
+    background: var(--color-grey);
 }
 
 .prefs-label .prefs-toggle::before {
@@ -381,7 +385,8 @@ Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle
 
 /* Modal Close Button */
 .close {
-    color: #aaa;
+    color: var(--color-grey);
+    background-color: transparent;
     float: right;
     font-size: 3rem;
     font-weight: bold;
@@ -404,7 +409,7 @@ Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle
 }
 
 @media screen and (min-width: 425px) {
-    p, #last-answer-display {
+    p, #game-info-text {
         font-size: 1rem;
     }
 
