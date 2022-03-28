@@ -31,7 +31,8 @@ const statsView = {
     regularDate: document.querySelector("#scoreboard").rows[1].cells[2],
     hardScore: document.querySelector("#scoreboard").rows[2].cells[1],
     hardDate: document.querySelector("#scoreboard").rows[2].cells[2],
-    gamesPlayed: document.querySelector("#games-played-display"),
+    gamesPlayed: document.querySelector("#stats-games-played"),
+    lastScore: document.querySelector("#stats-last-score"),
     clearStats: document.querySelector("#btn-clear-stats"),
     update: function () {
         this.regularScore.innerText = `${localStorage.getItem("highscore")}`;
@@ -39,6 +40,7 @@ const statsView = {
         this.hardScore.innerText = `${localStorage.getItem("highscoreHardMode")}`;
         this.hardDate.innerText = `${localStorage.getItem("highscoreDateHardMode")}`;
         this.gamesPlayed.innerText = `${localStorage.getItem("gamesPlayed")}`;
+        this.lastScore.innerText = `${localStorage.getItem("latestScore")}`
     }
 }
 
@@ -91,6 +93,7 @@ const gameView = {
         this.setBtnsDisabled(true);
         timer.timerDisplay.classList.add("visually-hidden");
         this.lastAnswer.classList.remove("visually-hidden");
+        document.getElementById("game-info").classList.add("game-over");
         this.lastAnswer.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
     }
 }
@@ -259,12 +262,14 @@ const statsStorage = {
         localStorage.setItem("highscoreHardMode", 0);
         localStorage.setItem("highscoreDateHardMode", "-");
         localStorage.setItem("gamesPlayed", 0);
+        localStorage.setItem("latestScore", 0);
     },
     updateGamesPlayed: function () {
         let gamesPlayed = localStorage.getItem("gamesPlayed");
         gamesPlayed ? gamesPlayed = parseInt(gamesPlayed) : localStorage.setItem("gamesPlayed", 0);
         gamesPlayed += 1;
         localStorage.setItem("gamesPlayed", gamesPlayed);
+        localStorage.setItem("latestScore", gameState.currentScore);
 
         statsView.update();
     }
@@ -414,8 +419,9 @@ statsView.clearStats.addEventListener("click", () => {
 /** Check if user is a first time visitor, if so show rules and check for system dark mode preference */
 window.addEventListener("load", () => {
     if (localStorage.length === 0) {
-        modalView.modals[2].style.display = "block";
         statsStorage.resetStats();
+        statsView.update();
+        modalView.modals[2].style.display = "block";
     }
     if (localStorage.getItem("darkMode") === null) {
         themeController.checkUserOSPref();

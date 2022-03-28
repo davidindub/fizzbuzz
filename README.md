@@ -65,6 +65,15 @@ I sketched my wireframes on an iPad using Concepts as I had recently completed t
   - Statistics
   - How to Play
 
+The navigation bar includes three icons which pop up modals. The links are disabled while a game is in progress as you cannot change settings such as difficulty or the timer mid game.
+
+I used inline SVGs for icons in the project both in the navigation bar and the How to Play modal.
+
+I recently watched [Seren Davies](https://github.com/ninjanails)' talk [Death to Icon Fonts](https://www.youtube.com/watch?v=9xXBYcWgCHA) where I learned of the issues that icon fonts can cause for accessibility. I researched the best way to use inline SVG icons, including descriptions where appropriate for screen readers. By using SVGs the icons don't break if a user chooses to use a custom font such as [Dyslexie](https://www.dyslexiefont.com/).
+
+See also:
+- [Inline SVG vs Icon Fonts - CSS Tricks](https://css-tricks.com/icon-fonts-vs-svg/)
+- [SVG, Icon Fonts, and Accessibility: A Case Study - 24 Accessibility](https://www.24a11y.com/2017/svg-icon-fonts-accessibility-case-study/)
 ***
 
 __Game Area__
@@ -78,6 +87,8 @@ __Modal__
 
 - The game preferences, highscores and rules can all be found in modals overlayed ontop of the game, to keep a simple single page layout.
 
+- The modals can be closed at any time by clicking outside the modal, clicking or tabbing to the × buttons, or pressing the Esc key.
+
 - The HTML [`<dialog>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) doesn't have wide enough support yet to use (Safari only started supporting it in a new release while I was building this project), so I adapted a modal from [W3Schools](https://www.w3schools.com/howto/howto_css_modals.asp) to have three different modals and improved accessibility and used newer JS features than the example modal.
 
 ***
@@ -85,8 +96,9 @@ __Modal__
 __Accessibility__
 
   - Keyboard controls are available so the game can be played without using a mouse on computers and modals can be closed with the Esc key.
-  - `aria-live` is used to annouce the number on screen when playing the game, allowing be played using a screen reader.
+  - `aria-live` is used to annouce the number on screen when playing the game, allowing be played using a screen reader, especially important when hard mode as numbers are non-sequential.
   - [WebAIM Contrast Checker](https://webaim.org/resources/contrastchecker/) was used to test the text and background colours.
+  - There is audio and visual feedback for correct responses/game.
   - The game's timer can be turned off in system preferences for those who wish.
   - All SVG images are appropriately labelled for screen reader use.
   - The game was tested using the VoiceOver screen reader on macOS.
@@ -98,9 +110,20 @@ __Favicon__
 ![The favicon for the project](/assets/images/favicon/apple-touch-icon.png)
   - A favicon and icon for iOS/Android home screen bookmarks is included with the project's logo.
 
-__Dark Mode & Timer__
+  ***
 
-- The user can choose a hard mode with random numbers under 1000, and toggle on and off the timer to change the game's difficulty. These preferences are rest to FizzBuzz standard rules on each visit.
+__Sound Effects__
+
+- Sound effects give audio feedback for correct answers and on game over.
+
+__Hard Mode__
+
+- The user can choose a hard mode with random numbers under 1000.
+
+__Timer__
+
+- By default the user has 5 seconds for each response. The user can toggle on and off the timer to change the game's difficulty. The difficuly and timer preferences are rest to FizzBuzz standard rules on each visit.
+- The timer uses the HTML5 `<progress>` element to display the remaining time to the user.
 
 __Dark Mode__
 
@@ -142,8 +165,6 @@ __Meta Data for Social Media__
 - [GitPod](https://gitpod.io/) as a cloud based IDE.
 - [Bootstrap Icons](https://icons.getbootstrap.com/) for icons used in the project.
 - [Google Fonts](https://fonts.google.com/) for the two fonts used on the project.
-- [Eagle](https://en.eagle.cool/) for organising my images locally.
-- [Pixelmator Pro](https://www.pixelmator.com/pro/) for resizing and converting images.
 - [favicon.io](https://favicon.io/favicon-generator/) to make a favicon for site.
 - [Meta Tags](https://metatags.io/) to prepare the Meta tags for social media share previews.
 - [Polypane](https://polypane.app/) for testing responsiveness on different viewports at the same time.
@@ -182,14 +203,15 @@ Alternatively, if using Gitpod, you can click below to create your own workspace
 ### Content 
 
 - [Wikipedia](https://en.wikipedia.org/wiki/Fizz_buzz) for the entry on the rules of Fizz Buzz.
-- I used [Dribble](https://dribbble.com/) to research designs to pick my color palette.
 - I used the [MDN Web Docs](https://developer.mozilla.org/en-US/) for help with data attributes in HTML.
 - I read [W3 Schools](https://www.w3schools.com/howto/howto_css_modals.asp/) for information on how to make tool tips and modals, and adapted code from their examples.
 - I used a blog post, [Accessibility first: toggle switches](https://dev.to/link2twenty/accessibility-first-toggle-switches-3obj) for help making accessible toggle buttons for the preferences modal.
+- The shaking animation on a game over comes from [Unused CSS](https://unused-css.com/blog/css-shake-animation/).
 - For the game's timer I reworked some code I wrote for the project [Calma](https://github.com/GJSayers/calma) from a recent Hackathon I participated in.
 
 ### Media
 
+- Sound Effects are from [mixkit.co](https://mixkit.co/free-sound-effects/)
 
 ### Acknowledgements
 

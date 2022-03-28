@@ -88,7 +88,7 @@ header {
 
 html, body { height: 100%;}
 
-body > footer {
+footer {
   position: sticky;
   top: 100vh;
   border-top: var(--color-black) solid 0.3rem;
@@ -130,7 +130,7 @@ h1 {
     cursor: default;
 }
 
-p {
+p, #last-answer-display {
     font-size: 0.9rem
 }
 
@@ -163,7 +163,7 @@ label[for=timer] {
     font-size: 1rem;
     background-color: var(--color-header);
     color: var(--color-black);
-    padding: 0.8rem;
+    padding: 0.8rem 2rem;
     margin: 1rem;
     border: var(--color-black) solid 5px;
     border-radius: var(--border-wavy);
@@ -177,7 +177,21 @@ label[for=timer] {
     width: fit-content;
     margin: 0 auto 1rem;
     height: 4rem;
+    transition: ;
 }
+
+.game-over {
+    animation: horizontal-shaking 0.35s 1;
+}
+
+/* Shake animation for a game over from https://unused-css.com/blog/css-shake-animation/ */
+@keyframes horizontal-shaking {
+    0% { transform: translateX(0) }
+    25% { transform: translateX(5px) }
+    50% { transform: translateX(-5px) }
+    75% { transform: translateX(5px) }
+    100% { transform: translateX(0) }
+   }
 
 #scoreboard {
     font-size: 0.7rem;
@@ -219,24 +233,25 @@ label[for=timer] {
 
 #game-btns {
     line-height: 1;
-    width: clamp(310px, 50vw, 450px);
+    height: min(400px, 70vh)
     margin: auto;
 }
 
 .btn-game {
     font-family: var(--font-headings);
     color: var(--color-black);
-    width: 40%;
+    height: 20vh;
     aspect-ratio: 1 / 1;
-    font-size: 2.8rem;
+    font-size: 2rem;
     border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
-    margin: 0.5rem;
+    margin: 0.2rem;
     transition: all ease-in-out 0.1s;
 }
 
 .btn-game:hover {
     border: var(--color-black) dashed 0.4rem;
+    transform: scale(0.95); 
 }
 
 .btn-game[data-game-btn="number"] {
@@ -389,8 +404,13 @@ Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle
 }
 
 @media screen and (min-width: 425px) {
-    p {
+    p, #last-answer-display {
         font-size: 1rem;
+    }
+
+    .btn-game {
+        font-size: 2.8rem;
+        margin: 0.5rem;
     }
 
     #scoreboard {
