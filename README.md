@@ -180,8 +180,19 @@ __Timer__
 
 __Dark Mode__
 
+<details>
+<summary>
+Light and Dark Mode displayed in Safari for iOS
+</summary>
+
+![](documentation/images/devices-both-themes.png)
+
+</details>
+
+
 - The first time the user visits the site, their OS system preference for Dark Mode is checked, and the game will display appropriately.
 - The user can switch between Light and Dark Mode in the Preferences Modal, and their preference will be stored for their next visit so the game can load their preferred theme.
+- The browser's UI is colored to match the theme if applicable (Chrome on Android, Safari on iOS and macOS).
 
 __Statistics__
 
