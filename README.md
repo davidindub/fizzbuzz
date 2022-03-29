@@ -5,6 +5,26 @@
 
 [Link to Live Site](https://www.davidindub.com/fizzbuzz)
 
+- [FizzBuzz](#fizzbuzz)
+  * [Introduction](#introduction)
+  * [Rules](#rules)
+  * [User Stories](#user-stories)
+  * [UX](#ux)
+    + [Colour Scheme](#colour-scheme)
+    + [Typography](#typography)
+    + [Wireframes](#wireframes)
+  * [Features](#features)
+    + [Existing Features](#existing-features)
+    + [Features Left to Implement](#features-left-to-implement)
+  * [Technologies Used](#technologies-used)
+  * [Testing](#testing)
+  * [Deployment](#deployment)
+    + [Local Deployment](#local-deployment)
+  * [Credits](#credits)
+    + [Content](#content)
+    + [Media](#media)
+    + [Acknowledgements](#acknowledgements)
+
 
 ## Introduction
 
@@ -102,6 +122,21 @@ __Modal__
 - The modals can be closed at any time by clicking outside the modal, clicking or tabbing to the × buttons, or pressing the Esc key.
 
 - The HTML [`<dialog>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) doesn't have wide enough support yet to use (Safari only started supporting it in a new release while I was building this project), so I adapted a modal from [W3Schools](https://www.w3schools.com/howto/howto_css_modals.asp) to have three different modals and improved accessibility and used newer JS features than the example modal.
+
+
+<details>
+<summary>
+Screenshots of the Preferences, Statistics, and How to Play Modals
+</summary>
+
+![](documentation/images/screenshot-modal-prefs.jpeg)
+
+![](documentation/images/screenshot-modal-stats.jpeg)
+
+![](documentation/images/screenshot-modal-howtoplay.jpeg)
+
+</details>
+
 
 ***
 
