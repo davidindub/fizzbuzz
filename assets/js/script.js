@@ -280,10 +280,12 @@ const themeController = {
     themeMetaTag: document.querySelector('meta[name="theme-color"]'),
     checkUserOSPref: function () {
         if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            localStorage.setItem("isDarkMode", true);
+            gameState.isDarkMode = true;
         } else {
             localStorage.setItem("isDarkMode", false);
         }
+        localStorageController.updateFromGameState();
+        prefsView.update();
         this.update();
     },
     update: function () {
