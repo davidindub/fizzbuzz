@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="Play Fizz Buzz game in your browser">
+    <meta name="description" content="Play Fizz Buzz in your browser, including a challenging hard mode!">
     <meta name="keywords" content="Maths, Games, Numbers, FizzBuzz">
     <meta name="author" content="David Kelly">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -24,7 +24,21 @@
     <link href="https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <!-- Style mobile browsers UI to match theme -->
+    <!-- Meta Tags for Social Media Shares -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.davidindub.com/fizzbuzz">
+    <meta property="og:title" content="Fizz Buzz">
+    <meta property="og:description" content="Play Fizz Buzz in your browser, including a challenging hard mode!">
+    <meta property="og:image"
+        content="assets/images/social-share-thumb.png">
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://www.davidindub.com/fizzbuzz">
+    <meta property="twitter:title" content="Fizz Buzz">
+    <meta property="twitter:description" content="Play Fizz Buzz in your browser, including a challenging hard mode!">
+    <meta property="twitter:image"
+        content="assets/images/social-share-thumb.png">
+
+    <!-- Style Safari desktop/mobile and Chrome mobile UI to match theme -->
     <meta name="theme-color" content="#fff">
 
     <title>Fizz Buzz</title>
@@ -77,7 +91,7 @@
     <main>
 
         <section class="game-info">
-            <span id="game-info-text"  aria-live="assertive">Start counting from 1...</span>
+            <span id="game-info-text" aria-live="assertive">Start counting from 1...</span>
             <label id="timer-label" for="timer">Time Left:</label>
             <progress id="timer" value="100" max="100" class="visually-hidden">5 secs</progress>
         </section>
