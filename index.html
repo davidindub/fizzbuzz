@@ -29,14 +29,12 @@
     <meta property="og:url" content="https://www.davidindub.com/fizzbuzz">
     <meta property="og:title" content="Fizz Buzz">
     <meta property="og:description" content="Play Fizz Buzz in your browser, including a challenging hard mode!">
-    <meta property="og:image"
-        content="assets/images/social-share-thumb.png">
+    <meta property="og:image" content="assets/images/social-share-thumb.png">
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://www.davidindub.com/fizzbuzz">
     <meta property="twitter:title" content="Fizz Buzz">
     <meta property="twitter:description" content="Play Fizz Buzz in your browser, including a challenging hard mode!">
-    <meta property="twitter:image"
-        content="assets/images/social-share-thumb.png">
+    <meta property="twitter:image" content="assets/images/social-share-thumb.png">
 
     <!-- Style Safari desktop/mobile and Chrome mobile UI to match theme -->
     <meta name="theme-color" content="#fff">
@@ -92,8 +90,7 @@
 
         <section class="game-info">
             <span id="game-info-text" aria-live="assertive">Start counting from 1...</span>
-            <label id="timer-label" for="timer">Time Left:</label>
-            <progress id="timer" value="100" max="100" class="visually-hidden">5 secs</progress>
+            <progress id="timer" value="100" max="100" class="visually-hidden"></progress>
         </section>
 
         <section id="game-btns">
@@ -113,6 +110,7 @@
         </section>
     </main>
 
+    <!-- Footer -->
     <footer>
         <p class="prefs-text">
             &copy; David Kelly 2022. View on <a href="https://github.com/davidindub/fizzbuzz" target="_blank"
@@ -124,7 +122,9 @@
                 </svg> GitHub</a>.
     </footer>
 
-    <!-- A Preferences Modal -->
+    <!-- Modals -->
+
+    <!-- Preferences Modal -->
     <aside class="modal" aria-labelledby="modal-prefs-title">
         <div class="modal-content">
             <button class="close" aria-label="Close">&times;</button>
@@ -227,6 +227,10 @@
             <p>You only have five seconds to answer!
                 <br>
                 In Hard Mode numbers are non-sequential.
+                <br>
+                <br>
+                You can read more about FizzBuzz on <a href="https://en.wikipedia.org/wiki/Fizz_buzz" target="_blank"
+                rel="noopener" aria-label="Wikipedia entry for Fizz Buzz (opens in a new tab)">Wikipedia</a>.
                 <hr>
                 You can click, tap, or use your keyboard's arrow keys to play:
                 <br><br>
