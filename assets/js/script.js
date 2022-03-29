@@ -228,6 +228,9 @@ const gameView = {
             button.disabled = isDisabled;
         }
     },
+    keyPress: function (input) {
+        document.querySelector(`[data-game-btn="${input}"]`).classList.add("key-down");
+    },
     gameOver: function () {
         this.setBtnsDisabled(true);
         timer.hide();
@@ -358,15 +361,19 @@ function handleKeyPress(event) {
     switch (event.code) {
         case "ArrowLeft":
             gameController.handleInput("fizz");
+            gameView.keyPress("fizz");
             break;
         case "ArrowRight":
             gameController.handleInput("buzz");
+            gameView.keyPress("buzz");
             break;
         case "ArrowUp":
             gameController.handleInput(gameState.currentNum);
+            gameView.keyPress("number");
             break;
         case "ArrowDown":
             gameController.handleInput("fizzbuzz");
+            gameView.keyPress("fizzbuzz");
             break;
         default:
             return;
@@ -380,6 +387,11 @@ for (let button of gameView.buttons) {
 
 /** Event Listener for Key presses  */
 document.addEventListener("keydown", handleKeyPress);
+document.addEventListener("keyup", function() {
+    for (let button of gameView.buttons) {
+        button.classList.remove("key-down");
+    }
+});
 
 /** Event Listeners for Preferences Modal */
 for (let prefToggle of prefsView.toggles) {
