@@ -9,7 +9,7 @@ const gameState = {
     isDarkMode: false,
     currentScore: 0,
     currentNum: 1
-}
+};
 
 /** Controller for overall game logic */
 const gameController = {
@@ -55,11 +55,11 @@ const gameController = {
             } else {
                 let randomNum = Math.floor(Math.random() * 999);
                 gameState.currentNum = randomNum;
-            };
+            }
 
             /** Increase the Score by 1, Update the game area display */
             gameState.currentScore += 1;
-            gameView.update()
+            gameView.update();
 
             // Play the correct answer sound
             if (gameState.isSoundOn) {
@@ -101,7 +101,7 @@ const gameController = {
         if (gameState.isSoundOn) {
             sounds.gameOver.play();
         }
-        modalView.addEL()
+        modalView.addEL();
         gameState.isGameOver = true;
 
         gameView.gameOver();
@@ -115,10 +115,10 @@ const gameController = {
         // Stats modal appears after 1.5 second
         setTimeout(() => {
             modalView.showStats();
-        }, 1500)
+        }, 1500);
     }
 
-}
+};
 
 /** Statistics Modal Elements */
 const statsView = {
@@ -131,13 +131,13 @@ const statsView = {
     clearStats: document.querySelector("#btn-clear-stats"),
     update: function () {
         this.regularScore.innerText = `${localStorage.getItem("highscore")}`;
-        this.regularDate.innerText = `${localStorage.getItem("highscoreDate")}`
+        this.regularDate.innerText = `${localStorage.getItem("highscoreDate")}`;
         this.hardScore.innerText = `${localStorage.getItem("highscoreHardMode")}`;
         this.hardDate.innerText = `${localStorage.getItem("highscoreDateHardMode")}`;
         this.gamesPlayed.innerText = `${localStorage.getItem("gamesPlayed")}`;
-        this.lastScore.innerText = `${localStorage.getItem("latestScore")}`
+        this.lastScore.innerText = `${localStorage.getItem("latestScore")}`;
     }
-}
+};
 
 /** Preferences Modal Elements */
 const prefsView = {
@@ -150,20 +150,20 @@ const prefsView = {
         this.btnSounds.checked = gameState.isSoundOn;
         this.btnDarkMode.checked = gameState.isDarkMode;
     }
-}
+};
 
 /** Updates Localstorage from Game State */
 const localStorageController = {
     updateFromGameState: function () {
         if (gameState.isDarkMode) {
-            localStorage.setItem("isDarkMode", "true")
+            localStorage.setItem("isDarkMode", "true");
         } else {
-            localStorage.setItem("isDarkMode", "false")
+            localStorage.setItem("isDarkMode", "false");
         }
         if (gameState.isSoundOn) {
-            localStorage.setItem("isSoundOn", "true")
+            localStorage.setItem("isSoundOn", "true");
         } else {
-            localStorage.setItem("isSoundOn", "false")
+            localStorage.setItem("isSoundOn", "false");
         }
     },
     logHighScore: function () {
@@ -192,12 +192,12 @@ const localStorageController = {
     },
     updateGamesPlayed: function () {
         let gamesPlayed = localStorage.getItem("gamesPlayed");
-        gamesPlayed ? gamesPlayed = parseInt(gamesPlayed) : localStorage.setItem("gamesPlayed", 0);
+        gamesPlayed = parseInt(gamesPlayed);
         gamesPlayed += 1;
         localStorage.setItem("gamesPlayed", gamesPlayed);
         localStorage.setItem("latestScore", gameState.currentScore);
     }
-}
+};
 
 /** Game Area */
 const gameView = {
@@ -235,7 +235,7 @@ const gameView = {
         this.gameInfo.classList.add("game-over");
         this.gameInfoText.innerText = `Game Over! Your score was ${gameState.currentScore}.`;
     }
-}
+};
 
 /** Handles Modals */
 const modalView = {
@@ -246,7 +246,7 @@ const modalView = {
         for (let navItem of this.navItems) {
             navItem.addEventListener("click", this.launchModal);
             navItem.classList.remove("nav-item-disabled");
-        };
+        }
     },
     disablePrefsClick: function () {
         this.navItems[0].removeEventListener("click", this.launchModal);
@@ -264,12 +264,12 @@ const modalView = {
     launchModal: function () {
         modalView.modals[this.dataset.link].style.display = "block";
     }
-}
+};
 
 const sounds = {
     gameOver: document.querySelector("#sound-game-over"),
     rightAnswer: document.querySelector("#sound-right-answer")
-}
+};
 
 /** Dark Mode */
 const themeController = {
@@ -286,13 +286,13 @@ const themeController = {
     update: function () {
         if (gameState.isDarkMode) {
             this.root.id = "dark";
-            this.themeMetaTag.content = "#121212"
+            this.themeMetaTag.content = "#121212";
         } else {
             this.root.removeAttribute("id");
-            this.themeMetaTag.content = "#fff"
+            this.themeMetaTag.content = "#fff";
         }
     }
-}
+};
 
 /** Timer Class */
 class Timer {
@@ -369,12 +369,12 @@ function handleKeyPress(event) {
             gameController.handleInput("fizzbuzz");
             break;
         default:
-            return
+            return;
     }
 }
 
 /** Add click event listeners for game buttons and key presses */
-for (button of gameView.buttons) {
+for (let button of gameView.buttons) {
     button.addEventListener("click", handleClick);
 }
 
@@ -401,11 +401,12 @@ for (let prefToggle of prefsView.toggles) {
                 if (gameState.isSoundOn) {
                     sounds.rightAnswer.play();
                 }
-                default:
-                    break;
+                break;
+            default:
+                break;
         }
         localStorageController.updateFromGameState();
-    })
+    });
 }
 
 /** Preferences Modal - Share Button for Highscores */
@@ -416,21 +417,20 @@ document.querySelector("#btn-share").addEventListener("click", () => {
         `My highscore is ${localStorage.getItem("highscore")}, and ${localStorage.getItem("highscoreHardMode")} in Hard Mode on FizzBuzz! Play at https://www.davidindub.com/fizzbuzz/`;
 
     // Copies the high score to users clipboard
-    document.querySelector("#btn-share").innerHTML = `Copied to clipboard!`
+    document.querySelector("#btn-share").innerHTML = `Copied to clipboard!`;
     navigator.clipboard.writeText(shareMsg);
 
     // Revert back to previous text after 1.5 sec
     setTimeout(() => {
         document.querySelector("#btn-share").innerHTML = shareButtonText;
-    }, 1500)
-
-})
+    }, 1500);
+});
 
 /** Preferences Modal - Clear Stats in localstorage */
 statsView.clearStats.addEventListener("click", () => {
     localStorageController.resetStats();
     statsView.update();
-})
+});
 
 
 // Modals
@@ -454,8 +454,8 @@ Reset Game State when user closes the stats modal after a game over */
 for (let closeBtn of modalView.closeBtns) {
     closeBtn.addEventListener("click", () => {
         modalView.hideAll();
-    })
-};
+    });
+}
 
 // Close modal when the user clicks anywhere outside of the modal
 for (let modal of modalView.modals) {
@@ -463,8 +463,8 @@ for (let modal of modalView.modals) {
         if (e.target.classList.contains("modal")) {
             modalView.hideAll();
         }
-    })
-};
+    });
+}
 
 
 /** Game Set Up */

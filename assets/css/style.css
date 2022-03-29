@@ -418,7 +418,6 @@ Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle
     float: right;
     font-size: 3rem;
     font-weight: bold;
-    background-color: inherit;
     border: none;
 }
 
