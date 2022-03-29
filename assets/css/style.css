@@ -61,13 +61,16 @@ input,
 button,
 textarea,
 select,
-nav a {
+nav a,
+a {
     font: inherit;
     color: var(--color-black);
     text-decoration: none;
+    transition: var(--transition-hover);
 }
 
-header, footer {
+header,
+footer {
     background-color: var(--color-header);
     color: var(--color-black);
     transition: var(--transition-theme);
@@ -87,13 +90,16 @@ header {
     max-width: 600px;
 }
 
-html, body { height: 100%;}
+html,
+body {
+    height: 100%;
+}
 
 footer {
-  position: sticky;
-  top: 100vh;
-  border-top: var(--color-black) solid 0.3rem;
-  width: 100%;
+    position: sticky;
+    top: 100vh;
+    border-top: var(--color-black) solid 0.3rem;
+    width: 100%;
 }
 
 nav {
@@ -108,15 +114,17 @@ nav ul li {
     color: var(--color-black);
 }
 
+/* credit: https://stackoverflow.com/questions/34715367/hiding-content-accessibly-now-that-clip-is-deprecated */
 .visually-hidden {
-    clip: rect(0 0 0 0);
-    clip-path: inset(50%);
-    height: 1px;
-    overflow: hidden;
     position: absolute;
-    white-space: nowrap;
+    height: 1px;
     width: 1px;
-  }
+    clip: rect(1px 1px 1px 1px);
+    clip: rect(1px, 1px, 1px, 1px);
+    clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+    -webkit-clip-path: polygon(0px 0px, 0px 0px, 0px 0px, 0px 0px);
+    overflow: hidden !important;
+}
 
 /* Disabled nav items while game in progress */
 .nav-item-disabled {
@@ -131,13 +139,13 @@ h1 {
     cursor: default;
 }
 
-p, #game-info-text {
+p,
+#game-info-text {
     font-size: 0.9rem
 }
 
-a {
-    text-decoration: none;
-    color: inherit;
+.modal-content a {
+    text-decoration: underline;
 }
 
 a:hover {
@@ -158,7 +166,7 @@ label[for=timer] {
 
 progress {
     accent-color: var(--color-two);
-  }
+}
 
 .game-info,
 .btn-stats {
@@ -190,12 +198,26 @@ progress {
 
 /* Shake animation for a game over from https://unused-css.com/blog/css-shake-animation/ */
 @keyframes horizontal-shaking {
-    0% { transform: translateX(0) }
-    25% { transform: translateX(0.3rem) }
-    50% { transform: translateX(-0.3rem) }
-    75% { transform: translateX(0.3rem) }
-    100% { transform: translateX(0) }
-   }
+    0% {
+        transform: translateX(0)
+    }
+
+    25% {
+        transform: translateX(0.3rem)
+    }
+
+    50% {
+        transform: translateX(-0.3rem)
+    }
+
+    75% {
+        transform: translateX(0.3rem)
+    }
+
+    100% {
+        transform: translateX(0)
+    }
+}
 
 #scoreboard {
     font-size: 0.7rem;
@@ -227,11 +249,13 @@ progress {
     margin: 0 0.5rem;
 }
 
-#btn-share:hover, #btn-share:focus {
+#btn-share:hover,
+#btn-share:focus {
     background-color: var(--color-two);
 }
 
-#btn-clear-stats:hover, #btn-clear-stats:focus {
+#btn-clear-stats:hover,
+#btn-clear-stats:focus {
     background-color: var(--color-one);
 }
 
@@ -246,7 +270,6 @@ progress {
     color: var(--color-black);
     height: 20vh;
     width: 20vh;
-    /* aspect-ratio: 1 / 1; */
     font-size: 2rem;
     border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
@@ -258,8 +281,9 @@ progress {
     border: var(--color-black) dashed 0.4rem;
 }
 
-.btn-game:active, .key-down {
-    transform: scale(0.90); 
+.btn-game:active,
+.key-down {
+    transform: scale(0.90);
 }
 
 .btn-game[data-game-btn="number"] {
@@ -352,7 +376,7 @@ Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle
 .prefs-label .prefs-toggle::after {
     content: '';
     display: block;
-    margin: 0 0.2;
+    margin: 0 0.2rem;
     transition: all 100ms cubic-bezier(0.4, 0.0, 0.2, 1);
     background: var(--color-grey);
 }
@@ -412,7 +436,9 @@ Toggle stying adapted from https://dev.to/link2twenty/accessibility-first-toggle
 }
 
 @media screen and (min-width: 425px) {
-    p, #game-info-text {
+
+    p,
+    #game-info-text {
         font-size: 1rem;
     }
 
