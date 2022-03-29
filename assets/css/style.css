@@ -139,11 +139,6 @@ h1 {
     cursor: default;
 }
 
-p,
-#game-info-text {
-    font-size: 0.9rem
-}
-
 .modal-content a {
     text-decoration: underline;
 }
@@ -220,10 +215,9 @@ progress {
 }
 
 #scoreboard {
-    font-size: 0.7rem;
     border: 3px solid var(--color-black);
     table-layout: fixed;
-    padding: 0.2rem;
+    padding: 0.1rem;
     text-align: center;
     width: 100%;
     border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
@@ -268,8 +262,8 @@ progress {
 .btn-game {
     font-family: var(--font-headings);
     color: var(--color-black);
-    height: 20vh;
-    width: 20vh;
+    height: 18vh;
+    width: 18vh;
     font-size: 2rem;
     border: var(--color-black) solid 0.3rem;
     border-radius: var(--border-wavy);
@@ -330,7 +324,7 @@ progress {
     text-align: left;
     border-radius: var(--border-wavy);
     border: var(--color-black) solid 5px;
-    width: 80%;
+    width: 95%;
     max-width: 500px;
     transition: var(--transition-theme);
 }
