@@ -31,10 +31,11 @@
 - I want to be able to share my high score with a friend
 - I want to be able to play the game with my keyboard instead of clicking
 - As I use dark mode user, I want the game to recognise my preference.
-- As I have visual difficulties, I would like a high contrast mode.
 
 ## UX  
 
+![](documentation/images/wireframe-1.jpeg)![](documentation/images/wireframe-2.jpeg)
+![](documentation/images/wireframe-game-area.jpg)
  As I sketched out my wireframes, I liked the idea of the game having a hand drawn look with bold lines and soft colours. I was also reminded of the game [Snipperclips](https://www.nintendo.com/store/products/snipperclips-cut-it-out-together-switch/) and its friendly paper-like style.
 
 ### Colour Scheme
@@ -44,12 +45,12 @@
 
 I based the colour scheme on the primary colours - Blue (Fizz) + Yellow (Buzz) = Green (FizzBuzz).
 
-For Dark Mode the yellow colour was adjusted the differently the the others to maintain readability with grey text.
+For Dark Mode the colours were adjusted to maintain readability with grey text.
  
 
 ### Typography
 
-I used a blocky display font [Bungee](https://fonts.google.com/specimen/Bungee?query=bungee) for the logo, headings and game buttons, and a sans-serif font [Roboto](https://fonts.google.com/specimen/Roboto) for the rest of the text. Both fonts were freely available from Google Fonts.
+I used a friendly rounded font [Concert One](https://fonts.google.com/specimen/Concert+One) for the logo, headings and game buttons, and a sans-serif font [Roboto](https://fonts.google.com/specimen/Roboto) for the rest of the text. Both fonts were freely available from Google Fonts.
 
 ### Wireframes
 
@@ -78,7 +79,7 @@ See also:
 
 __Game Area__
 
- - There are four buttons for the potential options in the game. These can be tapped or clicked, or the keyboard's arrow keys can be used in the same layout as the buttons to play. The buttons are large on smaller screens to make them easy to tap, and slightly smaller on larger screens where the user may be using a mouse to click.
+ - There are four buttons for the potential options in the game. These can be tapped or clicked, or the keyboard's arrow keys can be used in the same layout as the buttons to play. The buttons scale so the game is easy to play on all screen sizes.
 
 
 ***
@@ -115,10 +116,12 @@ __Favicon__
 __Sound Effects__
 
 - Sound effects give audio feedback for correct answers and on game over.
+- Sound effects can be toggled on and off in the preferences modal, and there is audio confirmation when turned on.
+- The users preference will be stored for their next visit.
 
 __Hard Mode__
 
-- The user can choose a hard mode with random numbers under 1000.
+- The user can choose a hard mode with non sequential (random) numbers under 1000.
 
 __Timer__
 
@@ -134,15 +137,15 @@ __Statistics__
 
 - High Scores are saved for both regular and hard mode, as well as the date they were set on.
 - The total number of games played is also recorded.
-
 - I noted the popularity of users sharing their score on web games such as Wordle, so I implemented a similar simple way to share scores.
 - The Share Scores button copies the user's highscores to their clipboard so they can share it with a friend in the app of their choice.
-
 - The stats are stored in the users localstorage, and can be reset by clicking the Clear All Stats button.
 
-__Meta Data for Social Media__
+__Meta Data__
 
   - Metadata was included in the `<head>` of each page to include a thumbnail of the site when shared on social media, and improve SEO.
+  - Theme color metadata was included to theme the browser UI in Chrome (Android) and Safari (iOS and macOS) to match the selected theme.
+  - `user-scalable=0` was included in the viewport metadata to prevent the page from zooming when buttons are tapped playing the game on mobile.
 
 ***
 
@@ -207,6 +210,7 @@ Alternatively, if using Gitpod, you can click below to create your own workspace
 - I read [W3 Schools](https://www.w3schools.com/howto/howto_css_modals.asp/) for information on how to make tool tips and modals, and adapted code from their examples.
 - I used a blog post, [Accessibility first: toggle switches](https://dev.to/link2twenty/accessibility-first-toggle-switches-3obj) for help making accessible toggle buttons for the preferences modal.
 - The shaking animation on a game over comes from [Unused CSS](https://unused-css.com/blog/css-shake-animation/).
+- The Stack Overflow post '[Hiding content accessibly now that clip is deprecated?](https://stackoverflow.com/questions/34715367/hiding-content-accessibly-now-that-clip-is-deprecated)' for help visually hiding elements.
 - For the game's timer I reworked some code I wrote for the project [Calma](https://github.com/GJSayers/calma) from a recent Hackathon I participated in.
 
 ### Media
