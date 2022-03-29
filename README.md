@@ -37,7 +37,7 @@
 - The user counts upwards from 1.
 - If the number is divisible by **3** they must select **"Fizz"**
 - If the number is divisible by **5** they must select **"Buzz"**
-- If the number is divisible by **15** they must select **"FizzBuzz"**
+- If the number is divisible by **3 and 5**  they must select **"FizzBuzz"**
 - You only have 5 Seconds to answer each time, so think quick!
 
 <details>
@@ -123,6 +123,10 @@ __Modal__
 
 - The HTML [`<dialog>` element](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog) doesn't have wide enough support yet to use (Safari only started supporting it in a new release while I was building this project), so I adapted a modal from [W3Schools](https://www.w3schools.com/howto/howto_css_modals.asp) to have three different modals and improved accessibility and used newer JS features than the example modal.
 
+See also:
+
+[WebKit - Introducing the Dialog Elemement](https://webkit.org/blog/12209/introducing-the-dialog-element/) (Feb 2022)
+
 
 <details>
 <summary>
@@ -163,7 +167,7 @@ __Sound Effects__
 
 - Sound effects give audio feedback for correct answers and on game over.
 - Sound effects can be toggled on and off in the preferences modal, and there is audio confirmation when turned on.
-- The users preference will be stored for their next visit.
+- The user's preference will be stored for their next visit.
 
 __Hard Mode__
 
@@ -171,7 +175,7 @@ __Hard Mode__
 
 __Timer__
 
-- By default the user has 5 seconds for each response. The user can toggle on and off the timer to change the game's difficulty. The difficuly and timer preferences are rest to FizzBuzz standard rules on each visit.
+- By default the user has 5 seconds for each response. The user can toggle on and off the timer to change the game's difficulty. The difficuly and timer preferences are reset to FizzBuzz standard rules on each visit.
 - The timer uses the HTML5 `<progress>` element to display the remaining time to the user.
 
 __Dark Mode__
@@ -208,13 +212,13 @@ __Meta Data__
 - [JavaScript](https://en.wikipedia.org/wiki/JavaScript) for interactivity and client side game logic.
 - [Window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) for storing users preferences and highscores between visits.
 
-  - __CSS Variables__ were used to store the color pallete and fonts used, and then referenced in the styles. This improved readability and could be useful in future for changing colors, for example building a dark mode.
+  - __CSS Variables__ were used to store the color pallete and fonts used, and then referenced in the styles. This improved readability and could be useful in future for changing colors, for example building a high contrast mode.
 
 - [Git](https://git-scm.com/) for version control.
 - [GitHub](https://github.com/) for storing the repository online during development.
 - GitHub Projects was invaluable throughout the project and helped me keep track of things to do and bugs to fix - you can see [the project's board here](https://github.com/users/davidindub/projects/2).
 - [GitPod](https://gitpod.io/) as a cloud based IDE.
-- [Bootstrap Icons](https://icons.getbootstrap.com/) for icons used in the project.
+- [Bootstrap Icons](https://icons.getbootstrap.com/) for SVG icons used in the project.
 - [Google Fonts](https://fonts.google.com/) for the two fonts used on the project.
 - [favicon.io](https://favicon.io/favicon-generator/) to make a favicon for site.
 - [Meta Tags](https://metatags.io/) to prepare the Meta tags for social media share previews.

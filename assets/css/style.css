@@ -271,7 +271,7 @@ progress {
     transition: all ease-in-out 0.1s;
 }
 
-.btn-game:hover {
+.btn-game:hover, .key-down {
     border: var(--color-black) dashed 0.4rem;
 }
 
