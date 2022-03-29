@@ -39,7 +39,7 @@ I tested the website on four different operating systems on four different types
 ### Accessibility
 
 - No errors were detected using the [WAVE Web Accessibility Evaluation Tool](https://wave.webaim.org/report#/https://www.davidindub.com/fizzbuzz/).
-- Two alerts were displayed due to the `audio` elements not having visible controls - however the game's audio can easily be turned on and off in the Preferences modal and is turned off by default.
+- Two alerts were displayed due to the `audio` elements not having visible controls - however the game's audio can easily be turned on and off in the Preferences modal and is off by default.
 
 
   <details>
@@ -55,24 +55,44 @@ I tested the website on four different operating systems on four different types
 - HTML
 
   - No errors were returned when passing through the official [W3C validator](https://validator.w3.org/nu/?doc=https%3A%2F%2Fwww.davidindub.com%2Fplant-cafe%2F).
+  - There was one warning about the metatag which prevents the page from zooming in when the buttons are tapped on mobile. Zoom is still available by pinching. There is two warning about the sections elements lacking headers which aren't applicable to the game area.
 
+  <details>
+  <summary>HTML Validator Results</summary>
+
+  ![](documentation/images/testing/testing-html-validator.jpeg)
+
+  </details>
+
+***
 
 - CSS
 
   - No errors were found when passing through the official [W3C CSS Validation Service](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww.davidindub.com%2Fplant-cafe%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en).
 
+
     [![](https://jigsaw.w3.org/css-validator/images/vcss)](https://jigsaw.w3.org/css-validator/validator?uri=https%3A%2F%2Fwww.davidindub.com%2Fplant-cafe%2F&profile=css3svg&usermedium=all&warning=1&vextwarning=&lang=en)
+
+
+  <details>
+  <summary>CSS Validator Results</summary>
+
+    ![](documentation/images/testing/testing-css-validator.jpeg)
+
+  </details>
+
+***
 
 - JavaScript
 
 - No errors where found when passing through the [JSHint](https://jshint.com/) validator.
 
-<details>
-<summary>JSHint Validator Results</summary>
+  <details>
+  <summary>JSHint Validator Results</summary>
 
-![](documentation/images/testing/testing-js-hint.jpeg)
+  ![](documentation/images/testing/testing-js-hint.jpeg)
 
-</details>
+  </details>
 
 
 ***
@@ -123,26 +143,65 @@ Lighthouse Test Results
 
 ### User Story Tests
 
-- As a parent, I want a simple friendly game so my child can practice division.
+> As a parent, I want a simple friendly game so my child can practice division.
 
-![](documentation/images/testing/testing-user-story-1.gif)
+  ![](documentation/images/testing/testing-user-story-1.gif)
 
 
-- As a maths enthusiast, I want a more difficult game to challenge myself.
+  1. On visiting the page, we read the rules of the game and there is also a link to Wikipedia to learn more.
+  2. We close the modal and begin to play.
+  3. After a game over, I click the preferences pane and see that I can change the setting to turn off the timer for an easier game.
 
-![](documentation/images/testing/testing-user-story-2.gif)
+  **Result:** Pass ✅
 
-- I want to be able to share my high score with a friend
 
-![](documentation/images/testing/testing-user-story-3.gif)
 
-- I want to be able to play the game with my keyboard instead of clicking
+> As a maths enthusiast, I want a more difficult game to challenge myself.
 
-![](documentation/images/testing/testing-user-story-4.gif)
+  ![](documentation/images/testing/testing-user-story-2.gif)
 
-- As I use dark mode user, I want the game to recognise my preference.
+  1. On visiting the site first I see the Hard Mode mentioned in the rules.
+  2. I click the cog icon for preferences and turn on Hard Mode.
+  3. Now I can play a more challenging game with random numbers.
 
-![](documentation/images/testing/testing-user-story-5.gif)
+  **Result:** Pass ✅
+
+
+
+> I want to be able to share my high score with a friend
+
+  ![](documentation/images/testing/testing-user-story-3.gif)
+
+  1. At the end of a game, or by clicking the Statistics modal, there is a button with the option to Share Scores.
+  2. When I click this I see the message "Copied to Clipboard!"
+  3. I can then paste the text into a message to send to my friend.
+
+  **Result:** Pass ✅
+
+
+
+> I want to be able to play the game with my keyboard instead of clicking
+
+  ![](documentation/images/testing/testing-user-story-4.gif)
+
+  1. On visiting the site on my computer I see in the modal that appears that keyboard controls are available.
+  2. I press Esc to close the modal, and begin to play the game.
+  3. The keys are mapped to the same layout as the buttons on screen, and there is visual feedback when I press them.
+  4. I can now play the game without using a mouse.
+
+  **Result:** Pass ✅
+
+
+
+> As I use dark mode user, I want the game to recognise my preference.
+
+  ![](documentation/images/testing/testing-user-story-5.gif)
+
+  1. I have Dark Mode enabled on my computer, and on visiting the site for the first time it recognises this and loads in a Dark Theme.
+  2. Later I decide to try the Light theme in the preferences pane.
+  3. The next time I visit the game it loads my last used preference (Light).
+
+  **Result:** Pass ✅
 
 
 ***
@@ -156,4 +215,4 @@ When using Safari, certain `border-radius` styles causes a grey box to appear in
 
 ### Unfixed Bugs
 
-Safari on mobile sometimes clips the sound effects when the buttons are tapped in quick succession.
+❗️ Safari on mobile sometimes clips the sound effects when the buttons are tapped in quick succession.

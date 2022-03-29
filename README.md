@@ -1,6 +1,8 @@
 
 # FizzBuzz
 
+![](documentation/images/devices-mock-up.png)
+
 [Link to Live Site](https://www.davidindub.com/fizzbuzz)
 
 
@@ -34,8 +36,6 @@
 
 ## UX  
 
-![](documentation/images/wireframe-1.jpeg)![](documentation/images/wireframe-2.jpeg)
-![](documentation/images/wireframe-game-area.jpg)
  As I sketched out my wireframes, I liked the idea of the game having a hand drawn look with bold lines and soft colours. I was also reminded of the game [Snipperclips](https://www.nintendo.com/store/products/snipperclips-cut-it-out-together-switch/) and its friendly paper-like style.
 
 ### Colour Scheme
@@ -55,6 +55,17 @@ I used a friendly rounded font [Concert One](https://fonts.google.com/specimen/C
 ### Wireframes
 
 I sketched my wireframes on an iPad using Concepts as I had recently completed the Udemy course [Sketching for UX Designers](https://www.udemy.com/share/101Zi03@dvXU0Ao_hYLw14VYm-w9uAFuMOpq-Xw2zw-m4U8GxK5v_ac9Qo-mX_OvZVINv60EgQ==/)
+
+<details>
+<summary>
+Wireframe Images
+</summary>
+
+![](documentation/images/wireframe-1.jpeg)![](documentation/images/wireframe-2.jpeg)
+
+![](documentation/images/wireframe-game-area.jpg)
+
+</details>
 
 ## Features 
 
@@ -80,7 +91,7 @@ See also:
 __Game Area__
 
  - There are four buttons for the potential options in the game. These can be tapped or clicked, or the keyboard's arrow keys can be used in the same layout as the buttons to play. The buttons scale so the game is easy to play on all screen sizes.
-
+ 
 
 ***
 
@@ -159,6 +170,8 @@ __Meta Data__
 
 - [HTML](https://en.wikipedia.org/wiki/HTML) for the content of the pages, which are all static .html files. I used semantic elements where available to help assistive technologies and improve SEO.
 - [CSS](https://en.wikipedia.org/wiki/CSS) for styling the pages and creating the responsive design.
+- [JavaScript](https://en.wikipedia.org/wiki/JavaScript) for interactivity and client side game logic.
+- [Window.localStorage](https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage) for storing users preferences and highscores between visits.
 
   - __CSS Variables__ were used to store the color pallete and fonts used, and then referenced in the styles. This improved readability and could be useful in future for changing colors, for example building a dark mode.
 
@@ -174,8 +187,9 @@ __Meta Data__
 - [Google Chrome](https://www.google.com/intl/en_ie/chrome/), [Mozilla Firefox](https://www.mozilla.org/en-US/firefox/new/) and [Safari](https://www.apple.com/safari/) for testing on macOS Monterey, Windows 10, iOS 15, iPadOS 15 and Android 10.
 - [Concepts](https://concepts.app/en/) for sketching on an iPad.
 
-
 ## Testing 
+
+Please visit [TESTING.md](TESTING.md) for detailed testing and bugs discovered.
 
 ## Deployment
 
@@ -216,6 +230,7 @@ Alternatively, if using Gitpod, you can click below to create your own workspace
 ### Media
 
 - Sound Effects are from [mixkit.co](https://mixkit.co/free-sound-effects/)
+- Device Mockup created from [Device Frames](https://deviceframes.com/).
 
 ### Acknowledgements
 
